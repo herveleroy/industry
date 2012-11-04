@@ -1,0 +1,16 @@
+.row
+  .three.columns
+    %h1
+      = link_to (image_tag "home/logo.png"), root_path
+
+  .nine.columns
+    %br
+    %ul.link-list.right
+      %li.prefix-nav
+        = link_to "Se connecter", "#"
+
+      %span= link_to image_tag("home/twitter.png", :alt => "Follow on Twitter", :style => "max-width: 36px !important;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;"), "https://twitter.com/SpotAPartner" , :target => "_blank"
+      %span= link_to image_tag("home/facebook.png", :alt => "Friend of Facebook", :style => "max-width: 36px !important;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;"), "https://www.facebook.com/spot.apartner" , :target => "_blank"
+      %span= link_to image_tag("home/linkedIn.png", :alt => "Friend of Facebook", :style => "max-width: 36px !important;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;"), "http://www.linkedin.com/company/spot-a-partner" , :target => "_blank"
+
+
