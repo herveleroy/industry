@@ -16,6 +16,8 @@
 	<title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
 	<!-- Included CSS Files -->
+
+	<%= stylesheet_link_tag 'http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css' %>
 	<%= stylesheet_link_tag    "application" %>
 
 	<!-- Included JS Files  -->
@@ -24,8 +26,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<%= render 'layouts/header_home' %>
-	 <%= yield %>
-  	<%= render 'layouts/footer_home' %>
+	<%= render 'layouts/header' %>
+	<div class="row">
+    		<div class="twelve columns">
+    		<p class="notice"><%= notice %></p>
+       	<p class="alert"><%= alert %></p>
+	 		<%= yield %>
+	 	</div>
+	 </div>
+  	<%= render 'layouts/footer' %>
 </body>
 </html>

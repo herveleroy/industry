@@ -7,11 +7,13 @@ gem 'rails', '3.2.8'
 
 gem 'mysql2', '>= 0.3.11'
 gem 'haml'
+gem "haml-rails"
 gem 'will_paginate'
 gem 'devise'
 gem 'rails3-jquery-autocomplete'
 gem 'simple_form'
 gem 'best_in_place'
+gem 'thumbs_up'
 
 
 
