@@ -11,15 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121104185054) do
+ActiveRecord::Schema.define(:version => 20130201230341) do
+
+  create_table "entities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "ideas", :force => true do |t|
     t.string   "title"
     t.string   "description"
     t.integer  "author_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.integer  "cached_votes_total", :default => 0
+    t.integer  "cached_votes_score", :default => 0
+    t.integer  "cached_votes_up",    :default => 0
+    t.integer  "cached_votes_down",  :default => 0
   end
+
+  add_index "ideas", ["cached_votes_down"], :name => "index_ideas_on_cached_votes_down"
+  add_index "ideas", ["cached_votes_score"], :name => "index_ideas_on_cached_votes_score"
+  add_index "ideas", ["cached_votes_total"], :name => "index_ideas_on_cached_votes_total"
+  add_index "ideas", ["cached_votes_up"], :name => "index_ideas_on_cached_votes_up"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -34,23 +49,28 @@ ActiveRecord::Schema.define(:version => 20121104185054) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "entity"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "votes", :force => true do |t|
-    t.boolean  "vote",          :default => false, :null => false
-    t.integer  "voteable_id",                      :null => false
-    t.string   "voteable_type",                    :null => false
+    t.integer  "votable_id"
+    t.string   "votable_type"
     t.integer  "voter_id"
     t.string   "voter_type"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.boolean  "vote_flag"
+    t.string   "vote_scope"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
-  add_index "votes", ["voteable_id", "voteable_type"], :name => "index_votes_on_voteable_id_and_voteable_type"
-  add_index "votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], :name => "fk_one_vote_per_user_per_entity", :unique => true
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], :name => "index_votes_on_votable_id_and_votable_type_and_vote_scope"
+  add_index "votes", ["votable_id", "votable_type"], :name => "index_votes_on_votable_id_and_votable_type"
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], :name => "index_votes_on_voter_id_and_voter_type_and_vote_scope"
   add_index "votes", ["voter_id", "voter_type"], :name => "index_votes_on_voter_id_and_voter_type"
 
 end

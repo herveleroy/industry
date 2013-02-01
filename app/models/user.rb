@@ -7,7 +7,13 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
+  attr_accessible :firstname, :lastname, :entity_id
   acts_as_voter
-  has_karma(:ideas, :as => :submitter, :weight => 0.5)
+  belongs_to :entity
+  has_many :ideas, :dependent => :destroy
+  validates_presence_of :firstname, :lastname, :email, :entity_id
+
+  def fullname
+    "#{firstname} #{lastname}"
+  end
 end

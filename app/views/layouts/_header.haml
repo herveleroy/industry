@@ -1,17 +1,19 @@
 .row
   .three.columns
-    %h1
-      = link_to (image_tag "home/logo.png"), root_path
-
+    %h1= link_to image_tag("home/ecdys.png"), root_path
   .nine.columns
-    %br
-    %ul.link-list.right
-      %li.prefix-nav
-        = link_to "Se connecter", "#"
+    %ul{:class => "nav-bar right"}
+      %li= link_to "Accueil", root_path
+      - if current_user
+        %li= link_to "Mon profil", edit_user_registration_path(current_user)
+        %li= link_to "Evaluation", "#"
 
-      %span= link_to image_tag("home/twitter.png", :alt => "Follow on Twitter", :style => "max-width: 36px !important;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;"), "https://twitter.com/SpotAPartner" , :target => "_blank"
-      %span= link_to image_tag("home/facebook.png", :alt => "Friend of Facebook", :style => "max-width: 36px !important;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;"), "https://www.facebook.com/spot.apartner" , :target => "_blank"
-      %span= link_to image_tag("home/linkedIn.png", :alt => "Friend of Facebook", :style => "max-width: 36px !important;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;"), "http://www.linkedin.com/company/spot-a-partner" , :target => "_blank"
-  %hr
+      %li
+        - if user_signed_in?
+          = link_to 'Se déconnecter', destroy_user_session_path, :method => :delete
+        - else
+          = link_to 'Se connecter', new_user_session_path
+
+
 
 

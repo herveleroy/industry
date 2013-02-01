@@ -1,0 +1,32 @@
+.row
+  .height.columns
+    .panel.callout.radius
+      %h2.letterpress S'enregistrer
+
+      = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+        = f.error_notification
+
+        .form-inputs
+          .row
+            .six.columns
+              = f.input :firstname, :placeholder => "Prénom", :label => "Prénom"
+            .six.columns
+              = f.input :lastname, :placeholder => "Nom", :label => "Nom"
+          .row
+            .six.columns
+              = f.input :email, :placeholder => "Email", :required => true, :autofocus => true
+            .six.columns
+              = f.association :entity
+          .row
+            .six.columns
+              = f.input :password, :required => true, :label => "Mot de passe"
+            .six.columns
+              = f.input :password_confirmation, :required => true, :label => "Confirmation du mot de passe"
+
+          .row
+            .twelve.columns
+              .form-actions
+                = f.button :submit, "Valider", :class => "button"
+
+
+      = render "devise/shared/links"

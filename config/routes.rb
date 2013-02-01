@@ -1,4 +1,6 @@
 Ideotron::Application.routes.draw do
+  resources :entities
+
   devise_for :users
 
   resources :ideas
