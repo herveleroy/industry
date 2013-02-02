@@ -1,0 +1,6 @@
+$ ->
+  $("#mytags").tagit
+    availableTags: <%= Idea.tag_counts.map(&:name).to_json.html_safe %> ,
+    singleField: true,
+    singleFieldNode: $('#tag_list')
+

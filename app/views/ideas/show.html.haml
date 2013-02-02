@@ -1,15 +1,28 @@
 %p#notice= notice
 
-%p
-  %b Title:
-  = @idea.title
-%p
-  %b Description:
-  = @idea.description
-%p
-  %b Author:
-  = @idea.author_id
+.row
+  .twelve.columns
+    .panel.radius
 
-= link_to 'Edit', edit_idea_path(@idea)
-\|
-= link_to 'Back', ideas_path
+      %h3.letterpress
+        = @idea.title
+      .row
+        .two.columns
+          = image_tag @idea.user.avatar.url(:medium)
+          %p
+            %b Auteur:
+            = @idea.user.fullname
+        .ten.columns
+          %p
+            %b Description:
+            = @idea.description
+          %br
+          %ul.tagit
+            - @idea.tag_list.each do |tag|
+              %li.tag= link_to tag, "#"
+
+.row
+  .twelve.columns
+    = link_to 'Editer', edit_idea_path(@idea)
+    \|
+    = link_to 'Retour à la liste', ideas_path

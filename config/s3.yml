@@ -1,0 +1,7 @@
+# config/s3.yml
+development:
+  access_key_id: "AKIAINBU3EF6ERIFIRJQ"
+  secret_access_key: "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"
+production:
+  access_key_id: "AKIAINBU3EF6ERIFIRJQ"
+  secret_access_key: "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"

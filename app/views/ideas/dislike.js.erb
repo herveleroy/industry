@@ -1,0 +1,3 @@
+$('#idea_<%= @idea.id %>').next().find("span.count").text("<%= @count.to_s %>");
+<%= add_gritter("Votre vote a bien été pris en compte" , :sticky => false , :title => "confiance" , :class_name => "gritter-light", :image => :success); %>
+

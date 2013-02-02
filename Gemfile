@@ -15,6 +15,10 @@ gem 'rails3-jquery-autocomplete'
 gem 'simple_form'
 gem 'best_in_place'
 gem 'acts_as_votable'
+gem 'acts-as-taggable-on', '~> 2.3.1'
+gem "paperclip", "~> 3.0"
+gem "aws-sdk"
+gem 'gritter'
 
 
 
@@ -29,6 +33,7 @@ group :assets do
   gem 'compass-rails', '~> 1.0.3'
   gem 'zurb-foundation', '~> 3.0.9'
   gem 'foundation-icons-sass-rails'
+  gem 'sassy-buttons'
 
 
 

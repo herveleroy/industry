@@ -33,8 +33,9 @@
 
 // Button Settings
 
-// $buttonRadius: 3px;
-// $btnBase: 10px;
+$buttonRadius: 6px;
+$btnBase: 10px;
+
 
 // $tinyBtnBase: $btnBase - 5;
 // $smallBtnBase: $btnBase - 3;
@@ -74,4 +75,4 @@
 // $tapToCloseFontColor: #888;
 // $tooltipFontSizeScreenSmall: 14;
 // $tooltipBackgroundOpacityScreenSmall: 0.85;
-
+@import 'foundation';

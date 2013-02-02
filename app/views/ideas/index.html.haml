@@ -1,23 +1,10 @@
-%h1 Listing ideas
+%h3.letterpress Liste des oeufs
 
-%table
-  %tr
-    %th Title
-    %th Description
-    %th Author
-    %th
-    %th
-    %th
-
-  - @ideas.each do |idea|
-    %tr
-      %td= idea.title
-      %td= idea.description
-      %td= idea.author_id
-      %td= link_to 'Show', idea
-      %td= link_to 'Edit', edit_idea_path(idea)
-      %td= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' }
+- @ideas.each do |idea|
+  = render :partial => '/shared/idea', :object => idea
 
 %br
-
-= link_to 'New Idea', new_idea_path
+.apple_pagination
+  = will_paginate @ideas, { :previous_label => 'Avant', :next_label => 'Après'}
+%br
+= link_to 'Nouvel oeuf', new_idea_path

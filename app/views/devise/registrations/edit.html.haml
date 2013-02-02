@@ -7,9 +7,11 @@
 
       .form-inputs
         .row
-          .six.columns
+          .four.columns
+            = f.input :avatar
+          .four.columns
             = f.input :firstname, :placeholder => "Prénom", :label => "Prénom"
-          .six.columns
+          .four.columns
             = f.input :lastname, :label => "Nom"
         .row
           .six.columns

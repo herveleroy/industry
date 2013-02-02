@@ -1,0 +1,23 @@
+.row
+  .twelve.columns
+    .panel.radius.idea
+      %h3.letterpress
+        = idea.title
+        - like_class = current_user.voted_up_on?(idea) ? "like" : ""
+        .like_button{:id => "idea_" + idea.id.to_s}
+          %span.count= idea.likes.size
+          %span= link_to "❤", like_idea_path(idea.id), :remote => true, :class => like_class
+      .row
+        .two.columns
+          = image_tag idea.user.avatar.url(:medium)
+          %p
+            %b Auteur:
+            = idea.user.fullname
+        .ten.columns
+          %p
+            %b Description:
+            = idea.description
+          %br
+          %ul.tagit
+            - idea.tag_list.each do |tag|
+              %li.tag= link_to tag, "#"

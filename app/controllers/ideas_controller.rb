@@ -1,8 +1,11 @@
 class IdeasController < ApplicationController
+
+  autocomplete :tag, :name
+
   # GET /ideas
   # GET /ideas.json
   def index
-    @ideas = Idea.all
+    @ideas = Idea.paginate(:page => params[:page]).order('created_at DESC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,6 +44,7 @@ class IdeasController < ApplicationController
   # POST /ideas.json
   def create
     @idea = Idea.new(params[:idea])
+    @idea.author_id = current_user.id
 
     respond_to do |format|
       if @idea.save
@@ -80,4 +84,17 @@ class IdeasController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def like
+    @idea = Idea.find(params[:id])
+    if current_user.voted_up_on? @idea
+      current_user.dislikes @idea
+      @like = false
+    else
+      current_user.likes @idea
+      @like = true
+    end
+    @count = @idea.likes.size
+  end
+
 end

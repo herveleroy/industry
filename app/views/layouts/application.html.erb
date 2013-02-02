@@ -5,35 +5,35 @@
 <!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-	<meta charset="utf-8" />
+  <meta charset="utf-8" />
 
-	<!-- Uncomment to make IE8 render like IE7 -->
-	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+  <!-- Uncomment to make IE8 render like IE7 -->
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
 
-	<!-- Set the viewport width to device width for mobile -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+  <title><%= "#{@page_title} | ECDYS IMI" %></title>
+    <title><%= @page_title %> | ECDYS - IMI</title>
 
-	<!-- Included CSS Files -->
+  <!-- Included CSS Files -->
+  <%= stylesheet_link_tag    "application" %>
+      <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Abel|Signika+Negative' %>
 
-	<%= stylesheet_link_tag 'http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css' %>
-	<%= stylesheet_link_tag    "application" %>
-
-	<!-- Included JS Files  -->
-	<%= javascript_include_tag "application" %>
+  <!-- Included JS Files  -->
+  <%= javascript_include_tag "application" %>
 
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<%= render 'layouts/header' %>
-	<div class="row">
-    		<div class="twelve columns">
-    		<p class="notice"><%= notice %></p>
-       	<p class="alert"><%= alert %></p>
-	 		<%= yield %>
-	 	</div>
-	 </div>
-  	<%= render 'layouts/footer' %>
+  <%= render 'layouts/header' %>
+  <div class="row">
+    <div class="twelve columns">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
+  </div>
+  <%= render 'layouts/footer' %>
 </body>
 </html>
