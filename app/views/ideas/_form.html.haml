@@ -1,14 +1,15 @@
-= simple_form_for @idea do |f|
-  - if @idea.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@idea.errors.count, "error")} prohibited this idea from being saved:"
-      %ul
-        - @idea.errors.full_messages.each do |msg|
-          %li= msg
+.panel.radius
+  = simple_form_for @idea do |f|
+    - if @idea.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@idea.errors.count, "error")} prohibited this idea from being saved:"
+        %ul
+          - @idea.errors.full_messages.each do |msg|
+            %li= msg
 
-  = f.input :title, :label => 'Titre'
-  = f.input :description, :label => 'Description', :as => :text, :input_html => { :cols => 50, :rows => 3 }
-  = f.hidden_field :tag_list, id:"tag_list"
-  %ul#mytags
-  .form-actions
-    = f.submit 'Enregistrer', :class => "radius button"
+    = f.input :title, :label => 'Titre'
+    = f.input :description, :label => 'Description', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.hidden_field :tag_list, id:"tag_list"
+    %ul#mytags
+    .form-actions
+      = f.submit 'Enregistrer', :class => "radius button"

@@ -9,6 +9,9 @@ ul.tagit li {
     float: left;
     margin: 2px 5px 2px 0;
 }
+ul.tagit li a {
+    color: #FFF;
+}
 ul.tagit li.tagit-choice {
     position: relative;
     line-height: inherit;
