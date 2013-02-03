@@ -43,7 +43,7 @@ set :shell, '/bin/bash'
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
 after "deploy:update_code", "db:symlink",  "deploy:migrate"
-run "cd #{release_path}; rake assets:precompile RAILS_ENV=production "
+
 
 
 # if you're still using the script/reaper helper you will need
