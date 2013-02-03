@@ -46,5 +46,10 @@ group :development do
   gem 'capistrano-ext'
   gem 'rvm-capistrano'
 end
+
+group :production do
+ gem 'therubyracer'
+ gem 'execjs'
+end
 # To use debugger
 # gem 'debugger'
