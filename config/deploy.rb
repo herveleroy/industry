@@ -7,6 +7,7 @@ set :applicationdir, "/var/www/ideotron"
 set :password, "nextone"
 set :deploy_to, "/var/www/ideotron" # path where your code will be deployed
 set :use_sudo, true
+
 default_run_options[:pty] = true
 
 set :application, "ideotron"

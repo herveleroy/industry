@@ -19,10 +19,7 @@ gem 'acts-as-taggable-on', '~> 2.3.1'
 gem "paperclip", "~> 3.0"
 gem "aws-sdk"
 gem 'gritter'
-
-
-
-
+gem 'jquery-rails'
 
 
 # Gems used only for assets and not required
@@ -35,27 +32,19 @@ group :assets do
   gem 'foundation-icons-sass-rails'
   gem 'sassy-buttons'
 
-
-
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
+group :development do
+  gem 'rspec-rails'
+  gem 'annotate', '2.5.0'
+  # Deploy with Capistrano
+  gem 'capistrano', '2.13.5'
+  gem 'capistrano-ext'
+  gem 'rvm-capistrano'
+end
 # To use debugger
 # gem 'debugger'
