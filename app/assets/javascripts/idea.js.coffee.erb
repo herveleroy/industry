@@ -8,5 +8,10 @@ $ ->
 
   $("a.toggle_comment").click ->
     $("form").hide()
-    $(this).parent().parent().find("form:first").show()
+    element = $(this).parent().parent().find("form:first")
+    element.show()
+    top_element = element.parent().parent()
+    $('html, body').animate({
+         scrollTop: top_element.offset().top
+     }, 1200);
 
