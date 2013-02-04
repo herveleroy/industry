@@ -20,9 +20,24 @@
           %ul.tagit
             - @idea.tag_list.each do |tag|
               %li.tag= link_to tag, "#"
+          %ul
+            - @all_comments.each do |node|
+              = render node, :idea => @idea
+      .row
+        .twelve.columns
+          = link_to 'Editer', edit_idea_path(@idea)
+          \|
+          = link_to 'Retour à la liste', ideas_path
+          \|
+          = link_to 'Ajouter un commentaire', "#", :class => "toggle_comment"
 
-.row
-  .twelve.columns
-    = link_to 'Editer', edit_idea_path(@idea)
-    \|
-    = link_to 'Retour à la liste', ideas_path
+          .idea
+            = simple_form_for @comment, :html => {:class => "new_comment"}, :remote => true do |f|
+              = hidden_field_tag("commentable", @idea.class.name)
+              = hidden_field_tag("type", 1)
+              = hidden_field_tag("id", @idea.id)
+              = f.input :body, :label => false, :placeholder => "Votre message ..."
+              .form-actions
+              = f.submit 'Enregistrer', :class => "radius button"
+
+

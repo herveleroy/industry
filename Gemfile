@@ -20,6 +20,7 @@ gem "paperclip", "~> 3.0"
 gem "aws-sdk"
 gem 'gritter'
 gem 'jquery-rails'
+gem 'acts_as_commentable_with_threading'
 
 
 # Gems used only for assets and not required

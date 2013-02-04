@@ -4,3 +4,9 @@ $ ->
     singleField: true,
     singleFieldNode: $('#tag_list')
 
+  $(".new_comment").hide()
+
+  $("a.toggle_comment").click ->
+    $("form").hide()
+    $(this).parent().parent().find("form:first").show()
+

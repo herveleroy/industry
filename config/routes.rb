@@ -6,7 +6,11 @@ Ideotron::Application.routes.draw do
   resources :ideas do
     get :like, on: :member
     get :dislike, on: :member
+    resources :comments
   end
+
+  resources :comments
+
 
   root :to => 'welcome#index'
 

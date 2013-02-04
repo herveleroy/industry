@@ -1,0 +1,14 @@
+= simple_form_for @comment do |f|
+  - if @comment.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@entity.errors.count, "error")} prohibited this comment from being saved:"
+      %ul
+        - @comment.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.input :title, :label => 'Titre'
+    = f.input :body, :label => 'Commentaire'
+    = f.input :subject, :label => 'Sujet'
+  .actions
+    = f.submit 'Save'

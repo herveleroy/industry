@@ -3,7 +3,7 @@
     .panel.radius.idea
       .object_state= image_tag "eggs_small.png"
       %h3.title.letterpress
-        = idea.title
+        = link_to idea.title, idea
         - like_class = current_user.voted_up_on?(idea) ? "like" : ""
         .like_button{:id => "idea_" + idea.id.to_s}
           %span.count= idea.likes.size
@@ -26,4 +26,6 @@
       .row
         .twelve.columns
           = link_to 'Editer', edit_idea_path(idea)
+          \|
+          = link_to 'Commenter', new_idea_comment_path(idea)
 
