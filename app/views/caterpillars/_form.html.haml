@@ -1,0 +1,16 @@
+.panel.radius
+  = simple_form_for @caterpillar do |f|
+    - if @caterpillar.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@caterpillar.errors.count, "error")} prohibited this caterpillar from being saved:"
+        %ul
+          - @caterpillar.errors.full_messages.each do |msg|
+            %li= msg
+
+    = f.input :title, :label => 'Titre'
+    = f.input :description, :label => 'Description', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.input :application, :label => 'Application', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.hidden_field :tag_list, id:"tag_list"
+    %ul#mytags
+    .form-actions
+      = f.submit 'Enregistrer', :class => "radius button"

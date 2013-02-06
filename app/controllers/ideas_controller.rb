@@ -17,8 +17,12 @@ class IdeasController < ApplicationController
   # GET /ideas/1.json
   def show
     @idea = Idea.find(params[:id])
-    @comment = Comment.new
     @all_comments = @idea.root_comments
+    search_string = @idea.tag_list.join(" ")
+    @similar_ideas = Idea.search( search_string, :match_mode => :all)
+    @knowledges = @idea.knowledges
+
+
 
     respond_to do |format|
       format.html # show.html.erb
@@ -97,6 +101,11 @@ class IdeasController < ApplicationController
       @like = true
     end
     @count = @idea.likes.size
+  end
+
+  def add_knowledges
+    @idea = Idea.find(params[:id])
+    @idea.knowledges<< Knowledge.find(params[:knowledge_id])
   end
 
 end

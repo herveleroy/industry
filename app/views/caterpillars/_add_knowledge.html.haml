@@ -1,0 +1,12 @@
+= form_tag( {:controller => 'knowledges', :action => 'search'}, :method => 'get', :remote => true) do
+  = text_field_tag :search, params[:search], :id => 'search_field'
+  = submit_tag "Rechercher", :name => nil, :class => "radius button"
+  = link_to_function "Clear", "$('search_field').clear()"
+%p Résultats
+#search_results
+  = form_tag add_knowledges_caterpillars_path, :method => :post, :remote => true do
+    = hidden_field_tag("id", @caterpillar.id)
+    %ul
+    = submit_tag "Associer les savoir sélectionnés", :class => "radius button"
+
+

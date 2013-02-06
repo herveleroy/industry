@@ -7,11 +7,13 @@
       - if current_user
         %li= link_to "Mon profil", edit_user_registration_path(current_user)
         %li.has-flyout
-          = link_to "Oeufs", "#"
+          = link_to "Métamorphose", "#"
           = link_to "", "#", :class => "flyout-toggle"
           %ul.flyout
-            %li= link_to "Nouvel oeuf", new_idea_path
             %li= link_to "Liste des oeufs", ideas_path
+            %li= link_to "Liste des chenilles", caterpillars_path
+            %li= link_to "Liste des chrysalides", "#"
+            %li= link_to "Liste des papillons", "#"
 
 
       %li

@@ -1,16 +1,13 @@
-class Idea < ActiveRecord::Base
-  attr_accessible :author_id, :description, :title, :tag_list
-  belongs_to :user, :foreign_key => 'author_id'
+class Knowledge < ActiveRecord::Base
+  attr_accessible :author, :description, :title
   has_many :ideas_knowledges
-  has_many :knowledges, :through => :ideas_knowledges do
+  has_many :ideas, :through => :ideas_knowledges do
     def <<(new_item)
-      super( Array(new_item) - proxy_association.owner.knowledges)
+      super( Array(new_item) - proxy_association.owner.ideas)
     end
   end
 
-  acts_as_votable
   acts_as_taggable
-  acts_as_commentable
 
   define_index do
     indexes title

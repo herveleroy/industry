@@ -14,11 +14,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title><%= "#{@page_title} | ECDYS IMI" %></title>
-    <title><%= @page_title %> | ECDYS - IMI</title>
-
+  <%= include_gon %>
   <!-- Included CSS Files -->
   <%= stylesheet_link_tag    "application" %>
-      <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Abel|Signika+Negative' %>
+  <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Abel|Signika+Negative' %>
 
   <!-- Included JS Files  -->
   <%= javascript_include_tag "application" %>

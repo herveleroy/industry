@@ -7,11 +7,20 @@ $ ->
   $(".new_comment").hide()
 
   $("a.toggle_comment").click ->
+    $("#comments").show()
     $("form").hide()
     element = $(this).parent().parent().find("form:first")
     element.show()
     top_element = element.parent().parent()
-    $('html, body').animate({
+    $('html, body').animate
          scrollTop: top_element.offset().top
-     }, 1200);
+        , 1200
+
+  $("a.unfold_comments").click ->
+    $("#comments").toggle()
+    if $(this).text().substr(0,2) != "Re"
+      $(this).text("Replier les commentaires")
+    else
+      $(this).text("Déplier les commentaires")
+
 

@@ -6,34 +6,34 @@
       .two.columns
         .object_state
           %span= image_tag "eggs_small.png"
-          %span Oeuf
+          %span Chenille
         .space
-        %p= image_tag @idea.user.avatar.url(:medium)
+        %p= image_tag @caterpillar.user.avatar.url(:medium)
         %p
           %b Auteur:
-          = @idea.user.fullname
+          = @caterpillar.user.fullname
       .seven.columns
         %h4.letterpress
-          = @idea.title
+          = @caterpillar.title
         %hr
-          %p
-            %b Description:
-            = @idea.description
+        %p
+          %b Description:
+          = @caterpillar.description
         %hr
         %ul.tagit
-          - @idea.tag_list.each do |tag|
+          - @caterpillar.tag_list.each do |tag|
             %li.tag= link_to tag, "#"
       .three.columns
-        - like_class = current_user.voted_up_on?(@idea) ? "like" : ""
-        .like_button{:id => "idea_" + @idea.id.to_s}
-          %span.count= @idea.likes.size
-          %span= link_to "❤", like_idea_path(@idea.id), :remote => true, :class => like_class
+        - like_class = current_user.voted_up_on?(@caterpillar) ? "like" : ""
+        .like_button{:id => "caterpillar_" + @caterpillar.id.to_s}
+          %span.count= @caterpillar.likes.size
+          %span= link_to "❤", like_caterpillar_path(@caterpillar.id), :remote => true, :class => like_class
         %p.letterpress
-          %b Idées cousines
-        - if @similar_ideas
-          - @similar_ideas.each do |idea|
-            - unless idea == @idea
-              %li= link_to idea.title, idea_path(idea)
+          %b Chenilles cousines
+        - if @similar_caterpillars
+          - @similar_caterpillars.each do |caterpillar|
+            - unless caterpillar == @caterpillar
+              %li= link_to caterpillar.title, caterpillar_path(caterpillar)
         %hr
         %ul.accordion
           %li.active
@@ -64,25 +64,25 @@
         .twelve.columns
           %p= link_to "Déplier les commentaires", "#", :class => "unfold_comments"
           #comments
-            .idea
+            .caterpillar
             - @comment = Comment.new
             = simple_form_for @comment, :html => {:class => "new_comment"}, :remote => true do |f|
-              = hidden_field_tag("commentable", @idea.class.name)
+              = hidden_field_tag("commentable", @caterpillar.class.name)
               = hidden_field_tag("type", 1)
-              = hidden_field_tag("id", @idea.id)
+              = hidden_field_tag("id", @caterpillar.id)
               = f.input :body, :label => false, :placeholder => "Votre message ..."
               .form-actions
                 = f.submit 'Enregistrer', :class => "radius button"
 
             %ul
               - @all_comments.each do |node|
-                = render node, :idea => @idea
+                = render node, :idea => @caterpillar
           %hr
-          = link_to 'Editer', edit_idea_path(@idea)
+          = link_to 'Editer', edit_caterpillar_path(@caterpillar)
           \|
-          = link_to 'Nouvel oeuf', new_idea_path
+          = link_to 'Nouvel oeuf', new_caterpillar_path
           \|
-          = link_to 'Retour à la liste', ideas_path
+          = link_to 'Retour à la liste', caterpillars_path
           \|
           = link_to 'Ajouter un commentaire', "#", :class => "toggle_comment"
           \|
@@ -91,8 +91,8 @@
           = link_to 'Associer une chenille', "#", :class => "toggle_comment", "data-reveal-id" => "myModal2"
 
 #add_knowledge{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
-  %h4.letterpress Associer un savoir à cette idée
-  = render :partial => 'add_knowledge', :locals => { :idea => @idea }
+  %h4.letterpress Associer un savoir à cette chenille
+  = render :partial => 'add_knowledge', :locals => { :caterpillar => @caterpillar }
   %a.close-reveal-modal &#215;
 
 

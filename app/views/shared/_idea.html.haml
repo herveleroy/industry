@@ -5,9 +5,9 @@
       %h3.title.letterpress
         = link_to idea.title, idea
         - like_class = current_user.voted_up_on?(idea) ? "like" : ""
-        .like_button{:id => "idea_" + idea.id.to_s}
-          %span.count= idea.likes.size
-          %span= link_to "❤", like_idea_path(idea.id), :remote => true, :class => like_class
+      .like_button{:id => "idea_" + idea.id.to_s}
+        %span.count= idea.likes.size
+        %span= link_to "❤", like_idea_path(idea.id), :remote => true, :class => like_class
       .row
         .two.columns
           = image_tag idea.user.avatar.url(:medium)

@@ -11,7 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130203132309) do
+ActiveRecord::Schema.define(:version => 20130206223008) do
+
+  create_table "caterpillars", :force => true do |t|
+    t.string   "title"
+    t.integer  "author_id"
+    t.text     "description"
+    t.text     "application"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "delta",       :default => true, :null => false
+  end
+
+  create_table "caterpillars_knowledges", :force => true do |t|
+    t.integer  "caterpillar_id"
+    t.integer  "knowledge_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "caterpillars_knowledges", ["caterpillar_id"], :name => "index_caterpillars_knowledges_on_caterpillar_id"
+  add_index "caterpillars_knowledges", ["knowledge_id"], :name => "index_caterpillars_knowledges_on_knowledge_id"
 
   create_table "comments", :force => true do |t|
     t.integer  "commentable_id",   :default => 0
@@ -40,18 +60,38 @@ ActiveRecord::Schema.define(:version => 20130203132309) do
     t.string   "title"
     t.string   "description"
     t.integer  "author_id"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.integer  "cached_votes_total", :default => 0
     t.integer  "cached_votes_score", :default => 0
     t.integer  "cached_votes_up",    :default => 0
     t.integer  "cached_votes_down",  :default => 0
+    t.boolean  "delta",              :default => true, :null => false
   end
 
   add_index "ideas", ["cached_votes_down"], :name => "index_ideas_on_cached_votes_down"
   add_index "ideas", ["cached_votes_score"], :name => "index_ideas_on_cached_votes_score"
   add_index "ideas", ["cached_votes_total"], :name => "index_ideas_on_cached_votes_total"
   add_index "ideas", ["cached_votes_up"], :name => "index_ideas_on_cached_votes_up"
+
+  create_table "ideas_knowledges", :force => true do |t|
+    t.integer  "idea_id"
+    t.integer  "knowledge_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "ideas_knowledges", ["idea_id"], :name => "index_ideas_knowledges_on_idea_id"
+  add_index "ideas_knowledges", ["knowledge_id"], :name => "index_ideas_knowledges_on_knowledge_id"
+
+  create_table "knowledges", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "author"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "delta",       :default => true, :null => false
+  end
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

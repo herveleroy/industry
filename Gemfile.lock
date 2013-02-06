@@ -87,6 +87,9 @@ GEM
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
     fssm (0.2.9)
+    gon (4.0.2)
+      actionpack (>= 2.3.0)
+      json
     gritter (1.0.2)
     haml (3.1.7)
     haml-rails (0.3.5)
@@ -161,6 +164,7 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     ref (1.0.2)
+    riddle (1.5.4)
     rspec-core (2.12.2)
     rspec-expectations (2.12.1)
       diff-lcs (~> 1.1.3)
@@ -194,6 +198,10 @@ GEM
     therubyracer (0.11.2)
       libv8 (~> 3.11.8.12)
       ref
+    thinking-sphinx (2.0.13)
+      activerecord (>= 3.0.3)
+      builder (>= 2.1.2)
+      riddle (>= 1.5.3)
     thor (0.16.0)
     tilt (1.3.3)
     treetop (1.4.12)
@@ -230,6 +238,7 @@ DEPENDENCIES
   devise
   execjs
   foundation-icons-sass-rails
+  gon
   gritter
   haml
   haml-rails
@@ -245,6 +254,7 @@ DEPENDENCIES
   sassy-buttons
   simple_form
   therubyracer
+  thinking-sphinx (= 2.0.13)
   uglifier (>= 1.0.3)
   will_paginate
   zurb-foundation (~> 3.0.9)
