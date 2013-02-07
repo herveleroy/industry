@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130206223008) do
+ActiveRecord::Schema.define(:version => 20130207124136) do
 
   create_table "caterpillars", :force => true do |t|
     t.string   "title"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20130206223008) do
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
     t.boolean  "delta",       :default => true, :null => false
+    t.string   "state"
   end
 
   create_table "caterpillars_knowledges", :force => true do |t|
@@ -108,6 +109,17 @@ ActiveRecord::Schema.define(:version => 20130206223008) do
 
   create_table "tags", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "tasks", :force => true do |t|
+    t.string   "name"
+    t.integer  "owner_id"
+    t.date     "due_date"
+    t.boolean  "completed"
+    t.integer  "taskable_id"
+    t.string   "taskable_type"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "users", :force => true do |t|

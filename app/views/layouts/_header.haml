@@ -6,6 +6,8 @@
       %li= link_to "Accueil", root_path
       - if current_user
         %li= link_to "Mon profil", edit_user_registration_path(current_user)
+        %li= link_to "Savoirs", knowledges_path
+        %li= link_to "Actions", "#"
         %li.has-flyout
           = link_to "Métamorphose", "#"
           = link_to "", "#", :class => "flyout-toggle"

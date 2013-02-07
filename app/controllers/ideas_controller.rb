@@ -21,6 +21,7 @@ class IdeasController < ApplicationController
     search_string = @idea.tag_list.join(" ")
     @similar_ideas = Idea.search( search_string, :match_mode => :all)
     @knowledges = @idea.knowledges
+    @comments_count = @all_comments.size
 
 
 

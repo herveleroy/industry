@@ -1,5 +1,6 @@
 class Caterpillar < ActiveRecord::Base
   attr_accessible :application, :author_id, :description, :title, :tag_list
+  attr_accessible :state
   belongs_to :user, :foreign_key => 'author_id'
   has_many :caterpillars_knowledges
   has_many :knowledges, :through => :caterpillars_knowledges do
@@ -26,6 +27,46 @@ class Caterpillar < ActiveRecord::Base
       tag_names:        10
     }
     set_property :delta => true
+  end
+
+  # scope :pending, where({ state: :pending })
+  # scope :selected, where({ state: :selected })
+  # scope :validated, where({ state: :validated })
+  # scope :rejected, where({ state: :rejected })
+
+  state_machine :state, :initial => :pending do
+
+    state :pending
+    state :selected
+    state :validated
+    state :rejected
+
+    event :do_select do
+      transition [:pending , :rejected]=> :selected
+    end
+
+    event :do_validate do
+      transition [:pending, :selected] => :validated
+    end
+
+    event :do_reject do
+      transition [:pending] => :rejected
+    end
+
+  end
+
+  def mark_as_selected
+    write_attribute :read_at, Time.now
+  end
+
+  def mark_as_validated
+    write_attribute :accepted, true
+    write_attribute :accepted_at, Time.now
+  end
+
+  def mark_as_rejected
+    write_attribute :accepted, false
+    write_attribute :accepted_at, Time.now
   end
 
 end

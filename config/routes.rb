@@ -1,6 +1,8 @@
 Ideotron::Application.routes.draw do
 
 
+  resources :tasks
+
   resources :knowledges
 
   get "/search_knowledges", to: 'knowledges#search', as: :search_knowledges
