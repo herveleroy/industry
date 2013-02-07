@@ -59,6 +59,7 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
+    chronic (0.9.0)
     chunky_png (1.2.6)
     cocaine (0.4.2)
     coffee-rails (3.2.2)
@@ -87,9 +88,6 @@ GEM
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
     fssm (0.2.9)
-    gon (4.0.2)
-      actionpack (>= 2.3.0)
-      json
     gritter (1.0.2)
     haml (3.1.7)
     haml-rails (0.3.5)
@@ -214,6 +212,9 @@ GEM
     uuidtools (2.1.3)
     warden (1.2.1)
       rack (>= 1.0)
+    whenever (0.8.2)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
     will_paginate (3.0.3)
     zurb-foundation (3.0.9)
       compass (>= 0.12.2)
@@ -238,7 +239,6 @@ DEPENDENCIES
   devise
   execjs
   foundation-icons-sass-rails
-  gon
   gritter
   haml
   haml-rails
@@ -256,5 +256,6 @@ DEPENDENCIES
   therubyracer
   thinking-sphinx (= 2.0.13)
   uglifier (>= 1.0.3)
+  whenever
   will_paginate
   zurb-foundation (~> 3.0.9)

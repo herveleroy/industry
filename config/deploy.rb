@@ -33,6 +33,11 @@ set :copy_strategy, :export
 # Add RVM's lib directory to the load path.
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 
+
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"
+
+
 # Load RVM's capistrano plugin.
 require "rvm/capistrano"
 

@@ -22,7 +22,7 @@ gem 'gritter'
 gem 'jquery-rails'
 gem 'acts_as_commentable_with_threading'
 gem 'thinking-sphinx', '2.0.13'
-gem 'gon'
+gem 'whenever', :require => false
 
 
 # Gems used only for assets and not required
