@@ -47,7 +47,8 @@ set :shell, '/bin/bash'
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
-after "deploy:update_code", "db:symlink",  "deploy:migrate"
+after "deploy:update_code", "db:symlink",  "sphinx:symlink", "assets:precompile", "deploy:migrate", "sphinx:rebuild"
+
 
 
 
@@ -57,6 +58,19 @@ namespace :db do
   desc "Make symlink for database yaml"
   task :symlink do
     run "ln -nfs #{shared_path}/database.yml #{release_path}/config/database.yml"
+  end
+end
+
+namespace :sphinx do
+  desc "Make the symlink to the sphinx dir"
+  task :symlink do
+    #run "ln -nfs #{shared_path}/sphinx #{release_path}/db/sphinx"
+  end
+
+  desc "Rebuild configuration and indexes"
+  task :rebuild do
+    run "cd #{release_path} && RAILS_ENV=#{rails_env} rake ts:config"
+    run "cd #{release_path} && RAILS_ENV=#{rails_env} rake ts:rebuild"
   end
 end
 
