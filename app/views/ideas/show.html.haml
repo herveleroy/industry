@@ -62,7 +62,7 @@
 
       .row
         .twelve.columns
-          %p= link_to "Déplier les commentaires", "#", :class => "unfold_comments"
+          %p= link_to "Déplier les #{pluralize(@comments_count, "commentaire", "commentaires")}", "#", :class => "unfold_comments"
           #comments
             .idea
             - @comment = Comment.new
@@ -81,6 +81,8 @@
           = link_to 'Editer', edit_idea_path(@idea)
           \|
           = link_to 'Nouvel oeuf', new_idea_path
+          \|
+          = link_to 'Supprimer l\'oeuf', @idea, method: :delete, data: { confirm: 'Etes-vous certain de vouloir supprimer cet oeuf ?' }
           \|
           = link_to 'Retour à la liste', ideas_path
           \|

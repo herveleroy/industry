@@ -10,6 +10,7 @@
     = f.input :title, :label => 'Titre'
     = f.input :description, :label => 'Description', :as => :text, :input_html => { :cols => 50, :rows => 3 }
     = f.hidden_field :tag_list, id:"tag_list"
+    %label Mots clés
     %ul#mytags
     .form-actions
       = f.submit 'Enregistrer', :class => "radius button"

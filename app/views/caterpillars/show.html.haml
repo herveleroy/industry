@@ -62,7 +62,7 @@
 
       .row
         .twelve.columns
-          %p= link_to "Déplier les commentaires", "#", :class => "unfold_comments"
+          %p= link_to "Déplier les #{pluralize(@comments_count, "commentaire", "commentaires")}", "#", :class => "unfold_comments"
           #comments
             .caterpillar
             - @comment = Comment.new
@@ -81,6 +81,8 @@
           = link_to 'Editer', edit_caterpillar_path(@caterpillar)
           \|
           = link_to 'Nouvel oeuf', new_caterpillar_path
+          \|
+          = link_to 'Supprimer la chenille', @caterpillar, method: :delete, data: { confirm: 'Etes-vous certain de vouloir supprimer cette chenille ?' }
           \|
           = link_to 'Retour à la liste', caterpillars_path
           \|

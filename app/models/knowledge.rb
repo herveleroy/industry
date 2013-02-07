@@ -1,5 +1,5 @@
 class Knowledge < ActiveRecord::Base
-  attr_accessible :author, :description, :title
+  attr_accessible :author, :description, :title, :tag_list
   has_many :ideas_knowledges
   has_many :ideas, :through => :ideas_knowledges do
     def <<(new_item)

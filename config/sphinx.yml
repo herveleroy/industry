@@ -1,7 +1,7 @@
 common: &default_settings
   searchd_binary_name: searchd
   indexer_binary_name: indexer
-  min_word_len:  1
+  min_word_len:  2
   enable_star: true
   morphology: libstemmer_french
   charset_table: "0..9, a..z, _, A..Z->a..z, U+00C0->a, U+00C1->a,
