@@ -1,15 +1,18 @@
 %p#notice= notice
 
 %p
-  %b Title:
+  %b Titre:
   = @knowledge.title
 %p
   %b Description:
   = @knowledge.description
 %p
-  %b Author:
-  = @knowledge.authorNfullname
+  %b Auteur:
+  = @knowledge.author
+%p
+  %b Rédacteur:
+  = @knowledge.user.fullname if @knowledge.user
 
-= link_to 'Edit', edit_knowledge_path(@knowledge)
+= link_to 'Editer le savoir', edit_knowledge_path(@knowledge)
 \|
-= link_to 'Back', knowledges_path
+= link_to 'Retour à la liste des savoirs', knowledges_path

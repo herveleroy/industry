@@ -9,6 +9,7 @@
 
     = f.input :title, :label => 'Titre'
     = f.input :description, :label => 'Description', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.association :user, label_method: :fullname, :label => 'Rédacteur'
     = f.hidden_field :tag_list, id:"tag_list"
     %label Mots clés
     %ul#mytags
