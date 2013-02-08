@@ -6,7 +6,7 @@
       .two.columns
         .object_state
           %span= image_tag "eggs_small.png"
-          %span Oeuf
+          %span= "Oeuf #{@idea.id}"
         .space
         %p= image_tag @idea.user.avatar.url(:medium)
         %p

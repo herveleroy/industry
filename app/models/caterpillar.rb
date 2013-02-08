@@ -63,18 +63,5 @@ class Caterpillar < ActiveRecord::Base
 
   end
 
-  def mark_as_selected
-    write_attribute :read_at, Time.now
-  end
-
-  def mark_as_validated
-    write_attribute :accepted, true
-    write_attribute :accepted_at, Time.now
-  end
-
-  def mark_as_rejected
-    write_attribute :accepted, false
-    write_attribute :accepted_at, Time.now
-  end
 
 end

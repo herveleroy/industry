@@ -1,10 +1,13 @@
 %h3.letterpress Liste des oeufs
+.row
+  .twelve.columns
+    #container
+      - @ideas.each do |idea|
+        = render :partial => '/shared/idea', :object => idea
 
-- @ideas.each do |idea|
-  = render :partial => '/shared/idea', :object => idea
-
-%br
-.apple_pagination
-  = will_paginate @ideas, { :previous_label => 'Avant', :next_label => 'Après'}
-%br
-= link_to 'Nouvel oeuf', new_idea_path
+    .clear
+    %br
+    .apple_pagination_b
+      = will_paginate @ideas, { :previous_label => 'Avant', :next_label => 'Après'}
+    %br
+    = link_to 'Nouvel oeuf', new_idea_path

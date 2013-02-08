@@ -6,5 +6,6 @@
 //= require tag-it
 //= require gritter
 //= require cocoon
+//= require isotope
 //= require_tree .
 

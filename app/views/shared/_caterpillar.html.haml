@@ -1,33 +1,14 @@
-.row
-  .twelve.columns
-    .panel.radius.idea
-      .object_state= image_tag "caterpillar_small.png"
-      %h3.title.letterpress
-        = link_to caterpillar.title, caterpillar
-        - like_class = current_user.voted_up_on?(caterpillar) ? "like" : ""
-      .like_button{:id => "caterpillar_" + caterpillar.id.to_s}
-        %span.count= caterpillar.likes.size
-        %span= link_to "❤", like_caterpillar_path(caterpillar.id), :remote => true, :class => like_class
-      .row
-        .two.columns
-          = image_tag caterpillar.user.avatar.url(:medium)
-          %p
-            %b Auteur:
-            = caterpillar.user.fullname
-        .ten.columns
-          %p
-            %b Description:
-            = caterpillar.description
-          %br
-          %p
-            %b Application:
-            = caterpillar.application
-          %br
-          %ul.tagit
-            - caterpillar.tag_list.each do |tag|
-              %li.tag= link_to tag, "#"
+.panel.radius.idea.element
+  .object_state= image_tag "caterpillar_small.png"
+  %h5.title.letterpress
+    = link_to caterpillar.title, caterpillar
+    - like_class = current_user.voted_up_on?(caterpillar) ? "like" : ""
+  .like_button{:id => "caterpillar_" + caterpillar.id.to_s}
+    %span.count= caterpillar.likes.size
+    %span= link_to "❤", like_caterpillar_path(caterpillar.id), :remote => true, :class => like_class
+  .description
+    = truncate(caterpillar.description, :length => 127)
+  - @comments_count = caterpillar.root_comments.size
+  .comments= pluralize(@comments_count, "commentaire", "commentaires")
 
-      .row
-        .twelve.columns
-          = link_to 'Editer', edit_caterpillar_path(caterpillar)
 

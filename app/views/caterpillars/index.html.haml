@@ -1,10 +1,14 @@
 %h3.letterpress Liste des chenilles
+.row
+  .twelve.columns
+    #container
 
-- @caterpillars.each do |caterpillar|
-  = render :partial => '/shared/caterpillar', :object => caterpillar
+      - @caterpillars.each do |caterpillar|
+        = render :partial => '/shared/caterpillar', :object => caterpillar
 
-%br
-.apple_pagination
-  = will_paginate @caterpillars, { :previous_label => 'Avant', :next_label => 'Après'}
-%br
-= link_to 'Nouvelle chenille', new_caterpillar_path
+    .clear
+    %br
+    .apple_pagination_b
+      = will_paginate @caterpillars, { :previous_label => 'Avant', :next_label => 'Après'}
+    %br
+    = link_to 'Nouvelle chenille', new_caterpillar_path
