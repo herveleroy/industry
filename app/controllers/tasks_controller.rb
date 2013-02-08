@@ -1,6 +1,12 @@
 class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
+  before_filter :set_title
+
+  def set_title
+    @page_title = "Plan d'action"
+  end
+
   def index
     @tasks = Task.all
 

@@ -2,6 +2,12 @@ class IdeasController < ApplicationController
 
   autocomplete :tag, :name
 
+   before_filter :set_title
+
+  def set_title
+    @page_title = "Oeufs"
+  end
+
   # GET /ideas
   # GET /ideas.json
   def index

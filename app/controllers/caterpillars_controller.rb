@@ -2,6 +2,12 @@ class CaterpillarsController < ApplicationController
 
   autocomplete :tag, :name
 
+  before_filter :set_title
+
+  def set_title
+    @page_title = "Chenilles"
+  end
+
   # GET /caterpillars
   # GET /caterpillars.json
   def index
@@ -16,6 +22,7 @@ class CaterpillarsController < ApplicationController
   # GET /caterpillars/1
   # GET /caterpillars/1.json
   def show
+    @page_title = "Chenille"
     @caterpillar = Caterpillar.find(params[:id])
     @all_comments = @caterpillar.root_comments
     search_string = @caterpillar.tag_list.join(" ")
