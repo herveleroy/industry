@@ -44,7 +44,6 @@
                 - @knowledges.each do |k|
                   %li= link_to k.title, knowledge_path(k)
 
-
           %li
             .title
               %h5 Chenilles
@@ -61,7 +60,7 @@
                 - unless @documents.nil?
                   - @documents.each do |k|
                     %li
-                      %span= image_tag(extension_of k.upload.url(:icon))
+                      / %span= image_tag(extension_of k.upload.url(:icon))
                       %span= link_to k.name, k.upload.url(:original, false)
 
       .row
