@@ -1,6 +1,9 @@
 class Knowledge < ActiveRecord::Base
-  attr_accessible :author, :description, :title, :tag_list, :user_id
+  attr_accessible :author, :description, :title, :tag_list, :user_id, :documents_attributes
   belongs_to :user
+
+  has_many :documents, as: :attachable, :dependent => :destroy
+  accepts_nested_attributes_for :documents, :reject_if => :all_blank, :allow_destroy => true
   has_many :ideas_knowledges
   has_many :ideas, :through => :ideas_knowledges do
     def <<(new_item)

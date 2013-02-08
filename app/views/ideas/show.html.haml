@@ -12,7 +12,7 @@
         %p
           %b Auteur:
           = @idea.user.fullname
-      .seven.columns
+      .six.columns
         %h4.letterpress
           = @idea.title
         %hr
@@ -23,7 +23,7 @@
         %ul.tagit
           - @idea.tag_list.each do |tag|
             %li.tag= link_to tag, "#"
-      .three.columns
+      .four.columns
         - like_class = current_user.voted_up_on?(@idea) ? "like" : ""
         .like_button{:id => "idea_" + @idea.id.to_s}
           %span.count= @idea.likes.size
@@ -42,7 +42,7 @@
             .content
               %ul.knowledge_entries
                 - @knowledges.each do |k|
-                  %li= k.title
+                  %li= link_to k.title, knowledge_path(k)
 
 
           %li
@@ -50,15 +50,17 @@
               %h5 Chenilles
             .content
               %ul.caterpillar_entries
-                %li Chenille A
-                %li Chenille B
-                %li Chenille A
-                %li Chenille B
-                %li Chenille A
-                %li Chenille B
-                %li Chenille A
-                %li Chenille B
-
+                - @caterpillars.each do |c|
+                  %li= link_to c.title, caterpillar_path(c)
+          %li
+            .title
+              %h5 Documents
+            .content
+              %ul.documents_entries
+                - @documents.each do |k|
+                  %li
+                    %span= image_tag(extension_of k.upload.url(:icon))
+                    %span= link_to k.name, k.upload.url(:original, false)
 
       .row
         .twelve.columns
@@ -88,17 +90,19 @@
           \|
           = link_to 'Ajouter un commentaire', "#", :class => "toggle_comment"
           \|
-          = link_to 'Associer un savoir', "#", "data-reveal-id" => "add_knowledge"
+          = link_to 'Associer un savoir', "#", "data-reveal-id" => "add_knowledges"
           \|
-          = link_to 'Associer une chenille', "#", :class => "toggle_comment", "data-reveal-id" => "myModal2"
+          = link_to 'Associer une chenille', "#", "data-reveal-id" => "add_caterpillars"
+          %hr
 
-#add_knowledge{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
-  %h4.letterpress Associer un savoir à cette idée
-  = render :partial => 'add_knowledge', :locals => { :idea => @idea }
+
+#add_knowledges{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+  %h4.letterpress Associer un savoir à cet oeuf
+  = render :partial => 'add_knowledges_modal', :locals => { :idea => @idea }
   %a.close-reveal-modal &#215;
 
-
-
-
-
+#add_caterpillars{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+  %h4.letterpress Associer une chenille à cet oeuf
+  = render :partial => 'add_caterpillars_modal', :locals => { :idea => @idea }
+  %a.close-reveal-modal &#215;
 

@@ -1,18 +1,26 @@
 %p#notice= notice
+.row
+  .twelve.columns
+    .panel.radius.idea
+      %h4.letterpress= @knowledge.title
+      %p
+        %b Description:
+        = @knowledge.description
+      %p
+        %b Auteur:
+        = @knowledge.author
+      %p
+        %b Rédacteur:
+        = @knowledge.user.fullname if @knowledge.user
+      %p
+        %b Documents associés (cliquer sur le lien pour télécharger le document):
+        - @documents.each do |doc|
 
-%p
-  %b Titre:
-  = @knowledge.title
-%p
-  %b Description:
-  = @knowledge.description
-%p
-  %b Auteur:
-  = @knowledge.author
-%p
-  %b Rédacteur:
-  = @knowledge.user.fullname if @knowledge.user
+          %li
+            %span= image_tag(extension_of doc.upload.url(:icon))
+            %span= link_to doc.name, doc.upload.url(:original, false)
 
-= link_to 'Editer le savoir', edit_knowledge_path(@knowledge)
-\|
-= link_to 'Retour à la liste des savoirs', knowledges_path
+
+      = link_to 'Editer le savoir', edit_knowledge_path(@knowledge)
+      \|
+      = link_to 'Retour à la liste des savoirs', knowledges_path

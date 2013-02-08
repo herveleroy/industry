@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130207162546) do
+ActiveRecord::Schema.define(:version => 20130208145819) do
 
   create_table "caterpillars", :force => true do |t|
     t.string   "title"
@@ -51,6 +51,18 @@ ActiveRecord::Schema.define(:version => 20130207162546) do
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
+  create_table "documents", :force => true do |t|
+    t.string   "name"
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "upload_updated_at"
+  end
+
   create_table "entities", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -74,6 +86,16 @@ ActiveRecord::Schema.define(:version => 20130207162546) do
   add_index "ideas", ["cached_votes_score"], :name => "index_ideas_on_cached_votes_score"
   add_index "ideas", ["cached_votes_total"], :name => "index_ideas_on_cached_votes_total"
   add_index "ideas", ["cached_votes_up"], :name => "index_ideas_on_cached_votes_up"
+
+  create_table "ideas_caterpillars", :force => true do |t|
+    t.integer  "idea_id"
+    t.integer  "caterpillar_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "ideas_caterpillars", ["caterpillar_id"], :name => "index_ideas_caterpillars_on_caterpillar_id"
+  add_index "ideas_caterpillars", ["idea_id"], :name => "index_ideas_caterpillars_on_idea_id"
 
   create_table "ideas_knowledges", :force => true do |t|
     t.integer  "idea_id"
@@ -121,6 +143,17 @@ ActiveRecord::Schema.define(:version => 20130207162546) do
     t.string   "taskable_type"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "uploads", :force => true do |t|
+    t.string   "name"
+    t.integer  "uploadable"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "upload_updated_at"
   end
 
   create_table "users", :force => true do |t|

@@ -1,0 +1,11 @@
+.nested-fields
+  .row
+    .four.columns
+      = f.input :upload, label: false
+    .four.columns
+      = f.input :name, label: false, :placeholder => "Titre du document"
+    .four.columns
+      = link_to_remove_association "Supprimer le document", f, :class => "small alert button"
+
+
+

@@ -1,10 +1,10 @@
-%h1 Listing knowledges
+%h3.letterpress Liste des savoirs
 
 %table
   %tr
-    %th Title
+    %th Titre
     %th Description
-    %th Author
+    %th Auteur
     %th
     %th
     %th
@@ -14,10 +14,10 @@
       %td= knowledge.title
       %td= knowledge.description
       %td= knowledge.author
-      %td= link_to 'Show', knowledge
-      %td= link_to 'Edit', edit_knowledge_path(knowledge)
-      %td= link_to 'Destroy', knowledge, method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to 'Afficher', knowledge
+      %td= link_to 'Editer', edit_knowledge_path(knowledge)
+      %td= link_to 'Supprimer', knowledge, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
-= link_to 'New Knowledge', new_knowledge_path
+= link_to 'Nouveau savoir', new_knowledge_path

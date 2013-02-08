@@ -21,7 +21,11 @@ class IdeasController < ApplicationController
     search_string = @idea.tag_list.join(" ")
     @similar_ideas = Idea.search( search_string, :match_mode => :all)
     @knowledges = @idea.knowledges
+    @caterpillars = @idea.caterpillars
     @comments_count = @all_comments.size
+    @knowledges.each do |k|
+      @documents = @documents.nil? ? k.documents : @documents << k.documents
+    end
 
 
 
@@ -106,7 +110,12 @@ class IdeasController < ApplicationController
 
   def add_knowledges
     @idea = Idea.find(params[:id])
-    @idea.knowledges<< Knowledge.find(params[:knowledge_id])
+    @idea.knowledges << Knowledge.find(params[:knowledge_id])
+  end
+
+  def add_caterpillars
+    @idea = Idea.find(params[:id])
+    @idea.caterpillars << Caterpillar.find(params[:caterpillar_id])
   end
 
 end

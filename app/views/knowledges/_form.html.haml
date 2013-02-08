@@ -8,11 +8,20 @@
             %li= msg
 
     = f.input :title, :label => 'Titre'
-    = f.input :description, :label => 'Description', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.input :author, :label => 'Auteur'
+    = f.input :description, :label => 'Description', :as => :text, :input_html => { :cols => 50, :rows => 6 }
     = f.association :user, label_method: :fullname, :label => 'Rédacteur'
     = f.hidden_field :tag_list, id:"tag_list"
     %label Mots clés
     %ul#mytags
+    %div.section#f_documents
+      %h5.letterpress Documents
+      %ul#documents.documents
+        = f.simple_fields_for :documents do |document|
+          = render 'document_fields', :f => document
+        .links
+          = link_to_add_association 'Ajouter un nouveau document', f, :documents
+
     .form-actions
       = f.submit 'Enregistrer', :class => "radius button"
 

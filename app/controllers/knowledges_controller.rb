@@ -14,6 +14,7 @@ class KnowledgesController < ApplicationController
   # GET /knowledges/1.json
   def show
     @knowledge = Knowledge.find(params[:id])
+    @documents = @knowledge.documents
 
     respond_to do |format|
       format.html # show.html.erb

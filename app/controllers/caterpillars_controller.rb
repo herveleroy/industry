@@ -101,6 +101,11 @@ class CaterpillarsController < ApplicationController
     @count = @caterpillar.likes.size
   end
 
+  def search
+    search_string = params[:search]
+    @caterpillars = Caterpillar.search(search_string, :match_mode => :any).to_json.html_safe
+  end
+
   def add_knowledges
     @caterpillar = Caterpillar.find(params[:id])
     @caterpillar.knowledges<< Knowledge.find(params[:knowledge_id])

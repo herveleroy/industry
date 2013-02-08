@@ -5,5 +5,6 @@
 //= require autocomplete-rails
 //= require tag-it
 //= require gritter
+//= require cocoon
 //= require_tree .
 
