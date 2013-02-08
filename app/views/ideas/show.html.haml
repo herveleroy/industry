@@ -50,17 +50,19 @@
               %h5 Chenilles
             .content
               %ul.caterpillar_entries
-                - @caterpillars.each do |c|
-                  %li= link_to c.title, caterpillar_path(c)
+                - unless @caterpillars.nil?
+                  - @caterpillars.each do |c|
+                    %li= link_to c.title, caterpillar_path(c)
           %li
             .title
               %h5 Documents
             .content
               %ul.documents_entries
-                - @documents.each do |k|
-                  %li
-                    %span= image_tag(extension_of k.upload.url(:icon))
-                    %span= link_to k.name, k.upload.url(:original, false)
+                - unless @documents.nil?
+                  - @documents.each do |k|
+                    %li
+                      %span= image_tag(extension_of k.upload.url(:icon))
+                      %span= link_to k.name, k.upload.url(:original, false)
 
       .row
         .twelve.columns
