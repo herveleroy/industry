@@ -11,3 +11,9 @@
       = will_paginate @ideas, { :previous_label => 'Avant', :next_label => 'Après'}
     %br
     = link_to 'Nouvel oeuf', new_idea_path
+
+- @ideas.each do |idea|
+  %div{:id => "description_idea_#{idea.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+    %h4.letterpress Description
+    = idea.description
+    %a.close-reveal-modal &#215;

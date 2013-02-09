@@ -12,3 +12,10 @@
       = will_paginate @caterpillars, { :previous_label => 'Avant', :next_label => 'Après'}
     %br
     = link_to 'Nouvelle chenille', new_caterpillar_path
+
+- @caterpillars.each do |caterpillar|
+  %div{:id => "description_caterpillar_#{caterpillar.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+    %h4.letterpress Description
+    = caterpillar.description
+    %a.close-reveal-modal &#215;
+

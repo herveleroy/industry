@@ -1,14 +1,24 @@
 .panel.radius.idea.element
-  .object_state= image_tag "eggs_small.png"
+  .object_state
+    = image_tag "eggs_small.png"
+    %span= idea.id
   %h5.title.letterpress
-    = link_to idea.title, idea
+    = link_to truncate(idea.title, :length => 200), idea
     - like_class = current_user.voted_up_on?(idea) ? "like" : ""
   .like_button{:id => "idea_" + idea.id.to_s}
     %span.count= idea.likes.size
     %span= link_to "❤", like_idea_path(idea.id), :remote => true, :class => like_class
   .description
-    = truncate(idea.description, :length => 127)
+    = link_to truncate(idea.description, :length => 80), "#", "data-reveal-id" => "description_idea_#{idea.id}"
   - @comments_count = idea.root_comments.size
   .comments= pluralize(@comments_count, "commentaire", "commentaires")
+
+
+
+
+
+
+
+
 
 
