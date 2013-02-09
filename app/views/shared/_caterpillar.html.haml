@@ -1,9 +1,9 @@
 .panel.radius.idea.element
   .object_state
-    = image_tag "caterpillar_small.png"
+    = link_to image_tag("caterpillar_small.png"), caterpillar
     %span= caterpillar.id
   %h5.title.letterpress
-    = link_to truncate(caterpillar.title, :length => 200), caterpillar
+    = link_to truncate(caterpillar.title, :length => 200), "#", "data-reveal-id" => "description_caterpillar_#{caterpillar.id}"
     - like_class = current_user.voted_up_on?(caterpillar) ? "like" : ""
   .like_button{:id => "caterpillar_" + caterpillar.id.to_s}
     %span.count= caterpillar.likes.size

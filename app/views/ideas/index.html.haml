@@ -1,10 +1,22 @@
-%h3.letterpress Liste des oeufs
+%h3.letterpress= pluralize(@count, "oeuf trouvé","oeufs trouvés")
 .row
-  .twelve.columns
+  .two.columns
+    = form_tag( {:controller => 'ideas', :action => 'index'}, :method => 'get') do
+      = text_field_tag :search, params[:search], :id => 'search_field', :placeholder => "Rechercher ..."
+      - @tags.each do |tag|
+        %label.tag
+          = check_box_tag 'tags[]', tag, @selected_tags.include?(tag.to_s), :id => "search_tags_#{tag}", :class => "clickable_tag", :style => "display:none;"
+          = Tag.find(tag).name
+      %hr
+      - @selected_tags.each do |tag|
+        - unless @tags.include?(tag.to_i)
+          = hidden_field_tag 'tags[]', tag, :id => "search_tags_#{tag}"
+      = submit_tag "Rechercher", :name => nil, :class => "radius button"
+
+  .ten.columns
     #container
       - @ideas.each do |idea|
         = render :partial => '/shared/idea', :object => idea
-
     .clear
     %br
     .apple_pagination_b
@@ -14,6 +26,8 @@
 
 - @ideas.each do |idea|
   %div{:id => "description_idea_#{idea.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+    %h4.letterpress Idée:
+    %h6= link_to idea.title, idea
     %h4.letterpress Description
     = idea.description
     %a.close-reveal-modal &#215;

@@ -90,6 +90,6 @@ class KnowledgesController < ApplicationController
 
   def search
     search_string = params[:search]
-    @knowledges = Knowledge.search(search_string, :match_mode => :any).to_json.html_safe
+    @knowledges = Knowledge.search(search_string, :match_mode => :all).to_json.html_safe
   end
 end

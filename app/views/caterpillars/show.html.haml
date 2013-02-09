@@ -42,17 +42,26 @@
             .content
               %ul.knowledge_entries
                 - @knowledges.each do |k|
-                  %li= k.title
-
+                  %li= link_to truncate(k.title, :length => 50), k
 
           %li
             .title
-              %h5 Chenilles
+              %h5 Oeufs
             .content
-              %ul.caterpillar_entries
-                %li Chenille A
-                %li Chenille B
-                %li Chenille A
+              %ul.ideas_entries
+                - @ideas.each do |k|
+                  %li= link_to truncate(k.title, :length => 50), k
+
+          %li
+            .title
+              %h5 Documents
+            .content
+              %ul.documents_entries
+                - unless @documents.nil?
+                  - @documents.each do |k|
+                    %li
+                      / %span= image_tag(extension_of k.upload.url(:icon))
+                      %span= link_to truncate(k.name, :length => 30), k.upload.url(:original, false)
 
 
       .row
@@ -73,24 +82,42 @@
               - @all_comments.each do |node|
                 = render node, :idea => @caterpillar
           %hr
-          = link_to 'Editer', edit_caterpillar_path(@caterpillar)
-          \|
-          = link_to 'Nouvel oeuf', new_caterpillar_path
-          \|
-          = link_to 'Supprimer la chenille', @caterpillar, method: :delete, data: { confirm: 'Etes-vous certain de vouloir supprimer cette chenille ?' }
-          \|
-          = link_to 'Retour à la liste', caterpillars_path
-          \|
-          = link_to 'Ajouter un commentaire', "#", :class => "toggle_comment"
-          \|
-          = link_to 'Associer un savoir', "#", "data-reveal-id" => "add_knowledge"
-          \|
-          = link_to 'Associer une chenille', "#", :class => "toggle_comment", "data-reveal-id" => "myModal2"
+          %ul.inline-list
+            %a{:style => "padding-left: 10px"}
+            %i.general.foundicon-edit
+            = link_to 'Editer', edit_caterpillar_path(@caterpillar)
+            %a{:style => "padding-left: 10px"}
+            %i.general.foundicon-add-doc
+            = link_to 'Nouvel oeuf', new_caterpillar_path
+            %a{:style => "padding-left: 10px"}
+            %i.general.foundicon-remove
+            = link_to 'Supprimer la chenille', @caterpillar, method: :delete, data: { confirm: 'Etes-vous certain de vouloir supprimer cette chenille ?' }
+            %a{:style => "padding-left: 10px"}
+            %i.general.foundicon-left-arrow
+            = link_to 'Retour à la liste', caterpillars_path
+            %a{:style => "padding-left: 10px"}
+            \|
+            %a{:style => "padding-left: 10px"}
+            %i.general.foundicon-paper-clip
+            = link_to 'Associer un savoir', "#", "data-reveal-id" => "add_knowledge"
+            %a{:style => "padding-left: 10px"}
+            %i.general.foundicon-plus
+            = link_to 'Associer un oeuf', "#", "data-reveal-id" => "add_idea"
+            \|
+            %a{:style => "padding-left: 10px"}
+            %i.social.foundicon-chat
+            = link_to 'Ajouter un commentaire', "#", :class => "toggle_comment"
 
 #add_knowledge{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
   %h4.letterpress Associer un savoir à cette chenille
   = render :partial => 'add_knowledge', :locals => { :caterpillar => @caterpillar }
   %a.close-reveal-modal &#215;
+
+#add_idea{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+  %h4.letterpress Associer un oeuf à cette chenille
+  = render :partial => 'add_ideas_modal', :locals => { :caterpillar => @caterpillar }
+  %a.close-reveal-modal &#215;
+
 
 
 

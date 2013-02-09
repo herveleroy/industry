@@ -8,7 +8,7 @@
 %p Résultats
 #search_results
   = form_tag add_caterpillars_ideas_path, :method => :post, :remote => true do
-    = hidden_field_tag("id", @idea.id)
+    = hidden_field_tag("id", idea.id)
     %ul
     = submit_tag "Associer les chenilles sélectionnés", :class => "small success radius button"
 

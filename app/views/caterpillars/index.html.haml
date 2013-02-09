@@ -1,6 +1,18 @@
-%h3.letterpress Liste des chenilles
+%h3.letterpress= pluralize(@count, "chenille trouvée","chenilles trouvées")
 .row
-  .twelve.columns
+  .two.columns
+    = form_tag( {:controller => 'caterpillars', :action => 'index'}, :method => 'get') do
+      = text_field_tag :search, params[:search], :id => 'search_field', :placeholder => "Rechercher ..."
+      - @tags.each do |tag|
+        %label.tag
+          = check_box_tag 'tags[]', tag, @selected_tags.include?(tag.to_s), :id => "search_tags_#{tag}", :class => "clickable_tag", :style => "display:none;"
+          = Tag.find(tag).name
+      %hr
+      - @selected_tags.each do |tag|
+        - unless @tags.include?(tag.to_i)
+          = hidden_field_tag 'tags[]', tag, :id => "search_tags_#{tag}"
+      = submit_tag "Rechercher", :name => nil, :class => "radius button"
+  .ten.columns
     #container
 
       - @caterpillars.each do |caterpillar|
@@ -15,6 +27,8 @@
 
 - @caterpillars.each do |caterpillar|
   %div{:id => "description_caterpillar_#{caterpillar.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+    %h4.letterpress Chenille:
+    %h6= link_to caterpillar.title, caterpillar
     %h4.letterpress Description
     = caterpillar.description
     %a.close-reveal-modal &#215;

@@ -11,7 +11,14 @@ class CaterpillarsController < ApplicationController
   # GET /caterpillars
   # GET /caterpillars.json
   def index
-    @caterpillars = Caterpillar.paginate(:page => params[:page]).order('created_at DESC')
+    with = {}
+    search_string = params[:search].blank? ? "" : params[:search]
+    with[:tags] = params[:tags] if params[:tags]
+    @caterpillars = Caterpillar.search search_string, :with => with, :page => params[:page], :per_page => 42, :order => "created_at DESC, @relevance DESC"
+    @facets = Caterpillar.facets search_string, :with => with
+    @tags = @facets[:tags].map{|t| t[0] unless t[0] == 0 }.compact.uniq
+    @selected_tags = params[:tags] || []
+    @count = @caterpillars.count
 
     respond_to do |format|
       format.html # index.html.erb
@@ -28,6 +35,11 @@ class CaterpillarsController < ApplicationController
     search_string = @caterpillar.tag_list.join(" ")
     @similar_caterpillars = Caterpillar.search( search_string, :match_mode => :all)
     @knowledges = @caterpillar.knowledges
+    @comments_count = @all_comments.size
+    @knowledges.each do |k|
+      @documents = @documents.nil? ? k.documents : @documents << k.documents
+    end
+    @ideas = @caterpillar.ideas
 
     respond_to do |format|
       format.html # show.html.erb
@@ -110,11 +122,16 @@ class CaterpillarsController < ApplicationController
 
   def search
     search_string = params[:search]
-    @caterpillars = Caterpillar.search(search_string, :match_mode => :any).to_json.html_safe
+    @caterpillars = Caterpillar.search(search_string, :match_mode => :all).to_json.html_safe
   end
 
   def add_knowledges
     @caterpillar = Caterpillar.find(params[:id])
     @caterpillar.knowledges<< Knowledge.find(params[:knowledge_id])
+  end
+
+  def add_ideas
+    @caterpillar = Caterpillar.find(params[:id])
+    @caterpillar.ideas<< Idea.find(params[:idea_id])
   end
 end

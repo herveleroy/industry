@@ -33,16 +33,17 @@
         - if @similar_ideas
           - @similar_ideas.each do |idea|
             - unless idea == @idea
-              %li= link_to idea.title, idea_path(idea)
+              %li= link_to truncate(idea.title, :length => 50), idea_path(idea)
         %hr
         %ul.accordion
           %li.active
             .title
-              %h5 Savoirs
+              %h5
+                = "Savoirs"
             .content
               %ul.knowledge_entries
                 - @knowledges.each do |k|
-                  %li= link_to k.title, knowledge_path(k)
+                  %li= link_to truncate(k.title, :length => 50), k
 
           %li
             .title
@@ -51,7 +52,7 @@
               %ul.caterpillar_entries
                 - unless @caterpillars.nil?
                   - @caterpillars.each do |c|
-                    %li= link_to c.title, caterpillar_path(c)
+                    %li= link_to truncate(c.title, :length => 50), c
           %li
             .title
               %h5 Documents
@@ -61,7 +62,7 @@
                   - @documents.each do |k|
                     %li
                       / %span= image_tag(extension_of k.upload.url(:icon))
-                      %span= link_to k.name, k.upload.url(:original, false)
+                      %span= link_to truncate(k.name, :length => 50), k.upload.url(:original, false)
 
       .row
         .twelve.columns
@@ -81,20 +82,32 @@
               - @all_comments.each do |node|
                 = render node, :idea => @idea
           %hr
-          = link_to 'Editer', edit_idea_path(@idea)
-          \|
-          = link_to 'Nouvel oeuf', new_idea_path
-          \|
-          = link_to 'Supprimer l\'oeuf', @idea, method: :delete, data: { confirm: 'Etes-vous certain de vouloir supprimer cet oeuf ?' }
-          \|
-          = link_to 'Retour à la liste', ideas_path
-          \|
-          = link_to 'Ajouter un commentaire', "#", :class => "toggle_comment"
-          \|
-          = link_to 'Associer un savoir', "#", "data-reveal-id" => "add_knowledges"
-          \|
-          = link_to 'Associer une chenille', "#", "data-reveal-id" => "add_caterpillars"
-          %hr
+          %ul.inline-list
+            %a{:style => "padding-left: 10px"}
+            %i.general.foundicon-edit
+            = link_to 'Editer', edit_idea_path(@idea)
+            %a{:style => "padding-left: 10px"}
+            %i.general.foundicon-add-doc
+            = link_to 'Nouvel oeuf', new_idea_path
+            %a{:style => "padding-left: 10px"}
+            %i.general.foundicon-remove
+            = link_to 'Supprimer l\'oeuf', @idea, method: :delete, data: { confirm: 'Etes-vous certain de vouloir supprimer cet oeuf ?' }
+            %a{:style => "padding-left: 10px"}
+            %i.general.foundicon-left-arrow
+            = link_to 'Retour à la liste', ideas_path
+            %a{:style => "padding-left: 10px"}
+            \|
+            %a{:style => "padding-left: 10px"}
+            %i.general.foundicon-paper-clip
+            = link_to 'Associer un savoir', "#", "data-reveal-id" => "add_knowledges"
+            %a{:style => "padding-left: 10px"}
+            %i.general.foundicon-plus
+            = link_to 'Associer une chenille', "#", "data-reveal-id" => "add_caterpillars"
+            %a{:style => "padding-left: 10px"}
+            \|
+            %a{:style => "padding-left: 10px"}
+            %i.social.foundicon-chat
+            = link_to 'Ajouter un commentaire', "#", :class => "toggle_comment"
 
 
 #add_knowledges{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
