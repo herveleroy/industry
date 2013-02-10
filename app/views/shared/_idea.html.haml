@@ -1,7 +1,7 @@
 .panel.radius.idea.element
   .object_state
     = link_to image_tag("eggs_small.png"), idea
-    %span= idea.id
+    %span.the_id= idea.id
   %h5.title.letterpress
     = link_to truncate(idea.title, :length => 100), "#", "data-reveal-id" => "description_idea_#{idea.id}"
     - like_class = current_user.voted_up_on?(idea) ? "like" : ""
@@ -12,6 +12,8 @@
     = link_to truncate(idea.description, :length => 60), "#", "data-reveal-id" => "description_idea_#{idea.id}"
   - @comments_count = idea.root_comments.size
   .comments= pluralize(@comments_count, "commentaire", "commentaires")
+  .selected_box
+    = check_box_tag 'idea[]', idea, false, :id => "selected_ideas_#{idea.id}",  :class => "clickable_box"
 
 
 

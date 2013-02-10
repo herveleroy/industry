@@ -31,6 +31,7 @@ Ideotron::Application.routes.draw do
     post :add_knowledges, on: :member
     post :add_caterpillars, on: :member
     post :add_ideas, on: :member
+    post :add_tags, on: :collection
     resources :comments
   end
 

@@ -1,7 +1,7 @@
 .panel.radius.idea.element
   .object_state
     = link_to image_tag("caterpillar_small.png"), caterpillar
-    %span= caterpillar.id
+    %span.the_id= caterpillar.id
     #status{:class => "#{caterpillar.state}"}
   %h5.title.letterpress
     = link_to truncate(caterpillar.title, :length => 200), "#", "data-reveal-id" => "description_caterpillar_#{caterpillar.id}"

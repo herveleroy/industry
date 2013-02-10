@@ -24,12 +24,19 @@
       %h6.letterpress
         %i.general.foundicon-add-doc
         = link_to 'Nouvel oeuf', new_idea_path, :class => "letterpress"
+      %h6.letterpress
+        %i.accessibility.foundicon-key
+        = link_to 'Ajouter un mot clé à la sélection', "#", :class => "letterpress", "data-reveal-id" => "add_tags"
+      %h6.letterpress
+        %i.general.foundicon-tools
+        = link_to 'Muter la sélection en chenille', "#", :class => "letterpress"
 
   .ten.columns
     #container
       - @ideas.each do |idea|
         = render :partial => '/shared/idea', :object => idea
     .clear
+
     %br
     .apple_pagination_b
       = will_paginate @ideas, { :previous_label => 'Avant', :next_label => 'Après'}
@@ -37,8 +44,20 @@
 
 - @ideas.each do |idea|
   %div{:id => "description_idea_#{idea.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
-    %h4.letterpress Idée:
+    %h4.object_state
+      %span= image_tag "eggs_small.png"
+      %span.letterpress= "Oeuf #{idea.id}"
     %h6= link_to idea.title, idea
     %h4.letterpress Description
     = idea.description
+    %hr
+    %ul.inline-list.letterpress
+      %a{:style => "padding-left: 10px"}
+      %i.accessibility.foundicon-glasses
+      = link_to "Voir la fiche et les commentaires", idea
     %a.close-reveal-modal &#215;
+
+#add_tags{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+  %h4.letterpress Ajouter un mot clé à la sélection
+  = render :partial => 'add_tags_modal'
+  %a.close-reveal-modal &#215;

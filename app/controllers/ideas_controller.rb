@@ -144,4 +144,13 @@ class IdeasController < ApplicationController
     @idea.caterpillars << Caterpillar.find(params[:caterpillar_id])
   end
 
+  def add_tags
+    newtag = params[:newtag]
+    @ideas = Idea.find(params[:new_tag_id].split(","))
+    @ideas.each do |idea|
+      idea.tag_list.add(newtag)
+      idea.save
+    end
+  end
+
 end

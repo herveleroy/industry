@@ -1,8 +1,6 @@
 $ ->
   $container = $("#container")
-  # intialize isotope
   $("#container").isotope
-    # options
     itemSelector: ".element"
     layoutMode: "masonry"
 
@@ -30,8 +28,6 @@ $ ->
       $(e).css("background-color", "orange")
     else
       $(e).css("background-color", "#e9e9e9")
-
-
 
 
   button_state_reset = () ->

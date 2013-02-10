@@ -1,0 +1,8 @@
+= form_tag add_tags_ideas_path, :method => :post, :remote => true do
+  = hidden_field_tag( "new_tag_id", "")
+  %label Mots clés
+  = text_field_tag :newtag, "", :id => 'newtag'
+  = submit_tag "Ajouter les mots clés à la sélection", :class => "small success radius button"
+
+
+
