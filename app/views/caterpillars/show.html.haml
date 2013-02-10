@@ -12,8 +12,7 @@
         .space
         %p= image_tag @caterpillar.user.avatar.url(:medium)
         %p
-          %b Auteur:
-          = @caterpillar.user.fullname
+          %b.letterpress= @caterpillar.user.fullname
         %hr
 
         .button-bar
@@ -27,6 +26,7 @@
       .seven.columns
         %h4.letterpress
           = @caterpillar.title
+        %p= I18n.l @caterpillar.created_at
         %hr
         %p
           %b Description:
@@ -82,7 +82,7 @@
 
       .row
         .twelve.columns
-          %p= link_to "Déplier les #{pluralize(@comments_count, "commentaire", "commentaires")}", "#", :class => "unfold_comments"
+          %p= link_to "✄ Déplier les #{pluralize(@comments_count, "commentaire", "commentaires")}", "#", :class => "unfold_comments"
           #comments
             .caterpillar
             - @comment = Comment.new
@@ -94,8 +94,9 @@
               .form-actions
                 = f.submit 'Enregistrer', :class => "radius button"
 
-            %ul
-              - @all_comments.each do |node|
+
+            - @all_comments.each do |node|
+              %ul.comment
                 = render node, :idea => @caterpillar
           %hr
           %ul.inline-list

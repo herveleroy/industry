@@ -10,11 +10,12 @@
         .space
         %p= image_tag @idea.user.avatar.url(:medium)
         %p
-          %b Auteur:
-          = @idea.user.fullname
+          %b.letterpress= @idea.user.fullname
+
       .six.columns
         %h4.letterpress
           = @idea.title
+        %p= I18n.l @idea.created_at
         %hr
           %p
             %b Description:
@@ -66,7 +67,7 @@
 
       .row
         .twelve.columns
-          %p= link_to "Déplier les #{pluralize(@comments_count, "commentaire", "commentaires")}", "#", :class => "unfold_comments"
+          %p= link_to "✄ Déplier les #{pluralize(@comments_count, "commentaire", "commentaires")}", "#", :class => "unfold_comments"
           #comments
             .idea
             - @comment = Comment.new
@@ -78,8 +79,8 @@
               .form-actions
                 = f.submit 'Enregistrer', :class => "radius button"
 
-            %ul
-              - @all_comments.each do |node|
+            - @all_comments.each do |node|
+              %ul.comment
                 = render node, :idea => @idea
           %hr
           %ul.inline-list

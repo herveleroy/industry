@@ -1,19 +1,24 @@
-%li
-  %b= comment.user.fullname + " : "
-  = comment.body
-  %p= link_to 'Répondre', "#", :class => "toggle_comment"
-  .idea
-    - @comment = Comment.new
-    = simple_form_for @comment, :html => {:class => "new_comment"}, :remote => true do |f|
-      = hidden_field_tag("commentable", idea.class.name)
-      = hidden_field_tag("comment_id", comment.id)
-      = hidden_field_tag("type", 2)
-      = hidden_field_tag("id", idea.id)
-      = f.input :body, :label => false, :placeholder => "Votre message ..."
-      .form-actions
-        = f.submit 'Enregistrer', :class => "radius button"
+%ul.comment
+  %li.comment
+    = image_tag comment.user.avatar.url(:icon)
+    %b.name.letterpress= comment.user.fullname
+    %span.timestamp= I18n.l comment.created_at
+    %p.body= comment.body
+    %p
+      %i.social.foundicon-chat{:style => "color: grey;"}
+      = link_to 'Répondre', "#", :class => "toggle_comment"
+    .idea
+      - @comment = Comment.new
+      = simple_form_for @comment, :html => {:class => "new_comment"}, :remote => true do |f|
+        = hidden_field_tag("commentable", idea.class.name)
+        = hidden_field_tag("comment_id", comment.id)
+        = hidden_field_tag("type", 2)
+        = hidden_field_tag("id", idea.id)
+        = f.input :body, :label => false, :placeholder => "Votre message ..."
+        .form-actions
+          = f.submit 'Enregistrer', :class => "radius button"
 
-  - unless comment.children.empty?
-    %ul
-      = render comment.children, :idea => idea
+    - unless comment.children.empty?
+      %ul.comment
+        = render comment.children, :idea => idea
 

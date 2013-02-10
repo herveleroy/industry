@@ -245,6 +245,7 @@ DEPENDENCIES
   gritter
   haml
   haml-rails
+  i18n
   jquery-rails
   mysql2 (>= 0.3.11)
   paperclip (~> 3.0)
