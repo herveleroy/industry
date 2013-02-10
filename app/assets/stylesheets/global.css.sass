@@ -9,16 +9,19 @@ label.highlight
   background-position:  #{$h}px #{$v}px
 
 @mixin selected
-  @include icons(0,-4)
+  @include icons(0,4)
 
 @mixin validated
-  @include icons(0,-46)
+  @include icons(0,-32)
 
 @mixin rejected
-  @include icons(0,-90)
+  @include icons(0,-68)
 
 @mixin pending
-  @include icons(0,-132)
+  @include icons(0,-100)
+
+a.blank
+  color: #FFF
 
 #status
   position: absolute

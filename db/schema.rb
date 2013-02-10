@@ -11,18 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130208145819) do
+ActiveRecord::Schema.define(:version => 20130210105639) do
 
   create_table "caterpillars", :force => true do |t|
     t.string   "title"
     t.integer  "author_id"
     t.text     "description"
     t.text     "application"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "delta",       :default => true, :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "delta",              :default => true, :null => false
     t.string   "state"
+    t.integer  "cached_votes_total", :default => 0
+    t.integer  "cached_votes_score", :default => 0
+    t.integer  "cached_votes_up",    :default => 0
+    t.integer  "cached_votes_down",  :default => 0
   end
+
+  add_index "caterpillars", ["cached_votes_down"], :name => "index_caterpillars_on_cached_votes_down"
+  add_index "caterpillars", ["cached_votes_score"], :name => "index_caterpillars_on_cached_votes_score"
+  add_index "caterpillars", ["cached_votes_total"], :name => "index_caterpillars_on_cached_votes_total"
+  add_index "caterpillars", ["cached_votes_up"], :name => "index_caterpillars_on_cached_votes_up"
 
   create_table "caterpillars_knowledges", :force => true do |t|
     t.integer  "caterpillar_id"

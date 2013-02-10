@@ -25,9 +25,12 @@ class Caterpillar < ActiveRecord::Base
     indexes title
     indexes description
     indexes application
+    indexes state
     indexes taggings.tag.name, as: :tag_names
     has taggings.tag_id, :facet => true, as: 'tags'
     has created_at, :sort => true
+    has cached_votes_score
+    has state, :as => :object_state
     set_property field_weights: {
       title:             10,
       description:       2,

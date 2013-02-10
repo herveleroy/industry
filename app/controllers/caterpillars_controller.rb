@@ -1,3 +1,4 @@
+# encoding: utf-8
 class CaterpillarsController < ApplicationController
 
   autocomplete :tag, :name
@@ -11,14 +12,30 @@ class CaterpillarsController < ApplicationController
   # GET /caterpillars
   # GET /caterpillars.json
   def index
+
     with = {}
+    conditions = {}
+    sort_mode = params[:sorting].blank? ? "@relevance DESC" : "#{params[:sorting]} DESC"
     search_string = params[:search].blank? ? "" : params[:search]
     with[:tags] = params[:tags] if params[:tags]
-    @caterpillars = Caterpillar.search search_string, :with => with, :page => params[:page], :per_page => 42, :order => "created_at DESC, @relevance DESC"
+    conditions[:object_state] = params[:state] if !params[:state].blank?
+    logger.debug "=================== #{with}"
+    logger.debug "=================== #{conditions}"
+    if conditions.blank?
+      @caterpillars = Caterpillar.search search_string, :with => with,  :page => params[:page], :per_page => 42, :order => sort_mode
+    else
+       @caterpillars = Caterpillar.search search_string, :with => with, :conditions => conditions, :page => params[:page], :per_page => 42, :order => sort_mode, :match_mode => :any
+    end
     @facets = Caterpillar.facets search_string, :with => with
     @tags = @facets[:tags].map{|t| t[0] unless t[0] == 0 }.compact.uniq
     @selected_tags = params[:tags] || []
     @count = @caterpillars.count
+    @sort_mode  = case params[:sorting]
+      when "@relevance"  then "pertinence"
+      when "created_at"  then "date de création"
+      when "cached_votes_score"  then "score"
+      else  ""
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -139,10 +156,14 @@ class CaterpillarsController < ApplicationController
     @caterpillar = Caterpillar.find(params[:id])
     event = params[:event]
     case event
-      when "reject", @caterpillar.do_reject
-      when "select", @caterpillar.do_select
-      when "validate", @caterpillar.do_validate
-      when "pause", @caterpillar.do_pause
+      when "reject"
+        @caterpillar.do_reject
+      when "select"
+        @caterpillar.do_select
+      when "validate"
+        @caterpillar.do_validate
+      when "pause"
+        @caterpillar.do_pause
     end
     @event = @caterpillar.state
 

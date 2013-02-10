@@ -31,7 +31,11 @@
         %p
           %b Description:
           = @caterpillar.description
+        %p
+          %b Application:
+          = @caterpillar.application
         %hr
+
         %ul.tagit
           - @caterpillar.tag_list.each do |tag|
             %li.tag= link_to tag, "#"

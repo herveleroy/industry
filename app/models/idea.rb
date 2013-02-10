@@ -26,6 +26,7 @@ class Idea < ActiveRecord::Base
     indexes taggings.tag.name, as: :tag_names
     has taggings.tag_id, :facet => true, as: 'tags'
     has created_at, :sort => true
+    has cached_votes_score
     set_property field_weights: {
       title:             10,
       description:       2,
