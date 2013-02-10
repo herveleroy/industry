@@ -2,6 +2,9 @@
 .row
   .twelve.columns
     .panel.radius.idea
+      .object_state
+        %span= image_tag "knowledge_small.png"
+        %span= "Savoir #{@knowledge.id}"
       %h4.letterpress= @knowledge.title
       %p
         %b Description:
@@ -12,6 +15,10 @@
       %p
         %b Rédacteur:
         = @knowledge.user.fullname if @knowledge.user
+      %hr
+      %ul.tagit
+        - @knowledge.tag_list.each do |tag|
+          %li.tag= link_to tag, "#"
       %p
         %b Documents associés (cliquer sur le lien pour télécharger le document):
         - @documents.each do |doc|
