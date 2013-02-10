@@ -1,3 +1,4 @@
+# encoding: utf-8
 class KnowledgesController < ApplicationController
 
   before_filter :set_title
@@ -8,7 +9,21 @@ class KnowledgesController < ApplicationController
   # GET /knowledges
   # GET /knowledges.json
   def index
-    @knowledges = Knowledge.all
+    with = {}
+    sort_mode = params[:sorting].blank? ? "@relevance DESC" : "#{params[:sorting]} DESC"
+    search_string = params[:search].blank? ? "" : params[:search]
+    with[:tags] = params[:tags] if params[:tags]
+    @knowledges = Knowledge.search search_string, :with => with, :page => params[:page], :per_page => 42, :order => sort_mode
+    @facets = Knowledge.facets search_string, :with => with
+    @tags = @facets[:tags].map{|t| t[0] unless t[0] == 0 }.compact.uniq
+    @selected_tags = params[:tags] || []
+    @count = @knowledges.count
+    @sort_mode  = case params[:sorting]
+      when "@relevance"  then "pertinence"
+      when "created_at"  then "date de création"
+      when "cached_votes_score"  then "score"
+      else  ""
+    end
 
     respond_to do |format|
       format.html # index.html.erb

@@ -49,7 +49,7 @@
         - if @similar_caterpillars
           - @similar_caterpillars.each do |caterpillar|
             - unless caterpillar == @caterpillar
-              %li= link_to caterpillar.title, caterpillar_path(caterpillar)
+              %li= link_to caterpillar.title,  "#", "data-reveal-id" => "description_caterpillar"
         %hr
         %ul.accordion
           %li.active
@@ -132,6 +132,15 @@
 #add_idea{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
   %h4.letterpress Associer un oeuf à cette chenille
   = render :partial => 'add_ideas_modal', :locals => { :caterpillar => @caterpillar }
+  %a.close-reveal-modal &#215;
+
+#description_caterpillar{:class => "reveal-modal [expand, xlarge, large, medium, small]"}
+  %h4.letterpress Chenille:
+  %h6= link_to @caterpillar.title, @caterpillar
+  %h4.letterpress Description
+  = @caterpillar.description
+  %h4.letterpress Application
+  = @caterpillar.application
   %a.close-reveal-modal &#215;
 
 

@@ -16,11 +16,19 @@
         %b Documents associés (cliquer sur le lien pour télécharger le document):
         - @documents.each do |doc|
 
-          %li
-            %span= image_tag(extension_of doc.upload.url(:icon))
+          %li{:style => " list-style: none;"}
+            %span= image_tag(extension_of doc.upload.url(:medium))
             %span= link_to doc.name, doc.upload.url(:original, false)
 
 
-      = link_to 'Editer le savoir', edit_knowledge_path(@knowledge)
-      \|
-      = link_to 'Retour à la liste des savoirs', knowledges_path
+      %ul.inline-list
+        %a{:style => "padding-left: 10px"}
+        %i.general.foundicon-edit
+        = link_to 'Editer le savoir', edit_knowledge_path(@knowledge)
+        %a{:style => "padding-left: 10px"}
+        %i.general.foundicon-remove
+        = link_to 'Supprimer le savoir', @knowledge, method: :delete, data: { confirm: 'Etes-vous certain de vouloir supprimer ce savoir ?' }
+        %a{:style => "padding-left: 10px"}
+        %i.general.foundicon-left-arrow
+        = link_to 'Retour à la liste des savoirs', knowledges_path
+

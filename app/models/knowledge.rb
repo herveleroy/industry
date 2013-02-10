@@ -4,7 +4,7 @@ class Knowledge < ActiveRecord::Base
 
   has_many :documents, as: :attachable, :dependent => :destroy
   accepts_nested_attributes_for :documents, :reject_if => :all_blank, :allow_destroy => true
-  has_many :ideas_knowledges
+  has_many :ideas_knowledges, :dependent => :destroy
   has_many :ideas, :through => :ideas_knowledges do
     def <<(new_item)
       super( Array(new_item) - proxy_association.owner.ideas)

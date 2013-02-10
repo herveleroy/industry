@@ -1,23 +1,45 @@
-%h3.letterpress Liste des savoirs
+- sort_mode = @sort_mode.blank? ? "" : pluralize(@count, " et trié par "," et triés par ").gsub(/^\d+\s/, "") + @sort_mode
+%h3.letterpress= pluralize(@count, "savoir trouvé","savoirs trouvés") + sort_mode
+.button-bar
+  %ul.button-group.selection_sorting
+    %li=link_to "Pertinence", "#" ,  :class => "tiny secondary button"
+    %li=link_to "Date création", "#",   :class => "tiny secondary button"
+.row
+  .two.columns
+    = form_tag( {:controller => 'knowledges', :action => 'index'}, :method => 'get') do
+      = text_field_tag :search, params[:search], :id => 'search_field', :placeholder => "Rechercher ..."
+      - @tags.each do |tag|
+        %label.tag
+          = check_box_tag 'tags[]', tag, @selected_tags.include?(tag.to_s), :id => "search_tags_#{tag}", :class => "clickable_tag", :style => "display:none;"
+          = Tag.find(tag).name
+      %hr
+      - @selected_tags.each do |tag|
+        - unless @tags.include?(tag.to_i)
+          = hidden_field_tag 'tags[]', tag, :id => "search_tags_#{tag}"
+      - sorting_default = params[:sorting].blank? ? "@relevance" : params[:sorting]
+      #button_sorting= hidden_field_tag 'sorting', "#{sorting_default}"
+      = submit_tag "Rechercher", :name => nil, :class => "radius button"
 
-%table
-  %tr
-    %th Titre
-    %th Description
-    %th Auteur
-    %th
-    %th
-    %th
+      %h6.letterpress
+        %i.general.foundicon-add-doc
+        = link_to 'Nouveau savoir', new_knowledge_path, :class => "letterpress"
 
-  - @knowledges.each do |knowledge|
-    %tr
-      %td= knowledge.title
-      %td= knowledge.description
-      %td= knowledge.author
-      %td= link_to 'Afficher', knowledge
-      %td= link_to 'Editer', edit_knowledge_path(knowledge)
-      %td= link_to 'Supprimer', knowledge, method: :delete, data: { confirm: 'Are you sure?' }
+  .ten.columns
+    #container
+      - @knowledges.each do |knowledge|
+        = render :partial => '/shared/knowledge', :object => knowledge
+    .clear
+    %br
+    .apple_pagination_b
+      = will_paginate @knowledges, { :previous_label => 'Avant', :next_label => 'Après'}
 
-%br
 
-= link_to 'Nouveau savoir', new_knowledge_path
+- @knowledges.each do |knowledge|
+  %div{:id => "description_knowledge_#{knowledge.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+    %h4.letterpress Idée:
+    %h6= link_to knowledge.title, knowledge
+    %h4.letterpress Auteur:
+    %h6= knowledge.author
+    %h4.letterpress Description
+    = knowledge.description
+    %a.close-reveal-modal &#215;

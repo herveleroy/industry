@@ -1,0 +1,10 @@
+.panel.radius.idea.element
+  .object_state
+    = link_to image_tag("knowledge_small.png"), knowledge
+    %span= knowledge.id
+
+  %h5.title.letterpress
+    = link_to truncate(knowledge.title, :length => 200), "#", "data-reveal-id" => "description_knowledge_#{knowledge.id}"
+  .description
+    = link_to truncate(knowledge.description, :length => 80), "#", "data-reveal-id" => "description_knowledge_#{knowledge.id}"
+

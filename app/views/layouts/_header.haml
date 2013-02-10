@@ -1,3 +1,7 @@
+- idea_icon = image_tag "eggs_small.png"
+- caterpillar_icon = image_tag "caterpillar_small.png"
+- chrysalis_icon = image_tag "chrysalis_small.png"
+- butterfly_icon = image_tag "butterfly_small.png"
 %header
   .one.columns
   .two.columns
@@ -13,10 +17,10 @@
           = link_to "Métamorphose", "#"
           = link_to "", "#", :class => "flyout-toggle"
           %ul.flyout
-            %li= link_to "Liste des oeufs", ideas_path
-            %li= link_to "Liste des chenilles", caterpillars_path
-            %li= link_to "Liste des chrysalides", "#"
-            %li= link_to "Liste des papillons", "#"
+            %li= link_to "#{idea_icon} Liste des oeufs".html_safe, ideas_path
+            %li= link_to "#{caterpillar_icon} Liste des chenilles".html_safe, caterpillars_path
+            %li= link_to "#{chrysalis_icon} Liste des chrysalides".html_safe, "#"
+            %li= link_to "#{butterfly_icon} Liste des papillons".html_safe, "#"
 
 
       %li

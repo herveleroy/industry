@@ -18,8 +18,6 @@
         - unless @tags.include?(tag.to_i)
           = hidden_field_tag 'tags[]', tag, :id => "search_tags_#{tag}"
       - sorting_default = params[:sorting].blank? ? "@relevance" : params[:sorting]
-      - state_default = params[:state].blank? ? "all" : params[:state]
-      #button_state= hidden_field_tag 'state', "#{state_default}"
       #button_sorting= hidden_field_tag 'sorting', "#{sorting_default}"
       = submit_tag "Rechercher", :name => nil, :class => "radius button"
 
