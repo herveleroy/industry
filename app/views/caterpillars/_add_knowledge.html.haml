@@ -4,7 +4,7 @@
   = link_to_function "Clear", "$('search_field').clear()"
 %p Résultats
 #search_results
-  = form_tag add_knowledges_caterpillars_path, :method => :post, :remote => true do
+  = form_tag add_knowledges_caterpillar_path, :method => :post, :remote => true do
     = hidden_field_tag("id", @caterpillar.id)
     %ul
     = submit_tag "Associer les savoir sélectionnés", :class => "radius button"

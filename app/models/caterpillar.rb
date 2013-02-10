@@ -44,21 +44,25 @@ class Caterpillar < ActiveRecord::Base
 
   state_machine :state, :initial => :pending do
 
-    state :pending
-    state :selected
-    state :validated
-    state :rejected
+    # state :pending
+    # state :selected
+    # state :validated
+    # state :rejected
 
     event :do_select do
-      transition [:pending , :rejected]=> :selected
+      transition all => :selected
     end
 
     event :do_validate do
-      transition [:pending, :selected] => :validated
+      transition all => :validated
     end
 
     event :do_reject do
-      transition [:pending] => :rejected
+      transition all => :rejected
+    end
+
+    event :do_pause do
+      transition all => :pending
     end
 
   end

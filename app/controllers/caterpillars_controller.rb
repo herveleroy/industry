@@ -134,4 +134,17 @@ class CaterpillarsController < ApplicationController
     @caterpillar = Caterpillar.find(params[:id])
     @caterpillar.ideas<< Idea.find(params[:idea_id])
   end
+
+  def event
+    @caterpillar = Caterpillar.find(params[:id])
+    event = params[:event]
+    case event
+      when "reject", @caterpillar.do_reject
+      when "select", @caterpillar.do_select
+      when "validate", @caterpillar.do_validate
+      when "pause", @caterpillar.do_pause
+    end
+    @event = @caterpillar.state
+
+  end
 end

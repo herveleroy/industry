@@ -7,11 +7,23 @@
         .object_state
           %span= image_tag "caterpillar_small.png"
           %span= "Chenille #{@caterpillar.id}"
+
+        #status{:class => "#{@caterpillar.state}"}
         .space
         %p= image_tag @caterpillar.user.avatar.url(:medium)
         %p
           %b Auteur:
           = @caterpillar.user.fullname
+        %hr
+
+        .button-bar
+          %ul.button-group
+            %li=link_to "❙ ❙", event_caterpillars_path(:id => @caterpillar.id, :event => "pause"), :method => :post, :remote => true,  :class => "tiny secondary button"
+            %li=link_to "▶", event_caterpillars_path(:id => @caterpillar.id, :event => "select"), :method => :post, :remote => true,  :class => "tiny secondary button"
+          %ul.button-group
+            %li=link_to "✖", event_caterpillars_path(:id => @caterpillar.id, :event => "reject"), :method => :post, :remote => true ,  :class => "tiny alert button"
+            %li=link_to "✔", event_caterpillars_path(:id => @caterpillar.id, :event => "validate"), :method => :post, :remote => true,   :class => "tiny success button"
+
       .seven.columns
         %h4.letterpress
           = @caterpillar.title

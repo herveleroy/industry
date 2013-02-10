@@ -2,6 +2,7 @@
   .object_state
     = link_to image_tag("caterpillar_small.png"), caterpillar
     %span= caterpillar.id
+    #status{:class => "#{caterpillar.state}"}
   %h5.title.letterpress
     = link_to truncate(caterpillar.title, :length => 200), "#", "data-reveal-id" => "description_caterpillar_#{caterpillar.id}"
     - like_class = current_user.voted_up_on?(caterpillar) ? "like" : ""
