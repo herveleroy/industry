@@ -4,7 +4,7 @@
       = text_field_tag :search, params[:search], :id => 'search_field'
     .three.columns
       = submit_tag "Rechercher", :name => nil, :class => "button expand postfix"
-  = link_to_function "Clear", "$('search_field').clear()"
+  = link_to_function "RAZ", "$('search_field').clear()"
 %p Résultats
 #search_results
   = form_tag add_caterpillars_idea_path, :method => :post, :remote => true do

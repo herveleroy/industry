@@ -14,7 +14,7 @@
         = hidden_field_tag("comment_id", comment.id)
         = hidden_field_tag("type", 2)
         = hidden_field_tag("id", idea.id)
-        = f.input :body, :label => false, :placeholder => "Votre message ..."
+        = f.input :body, :label => false, :placeholder => "✍ Votre message ..."
         .form-actions
           = f.submit 'Enregistrer', :class => "radius button"
 

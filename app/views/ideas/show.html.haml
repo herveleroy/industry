@@ -75,7 +75,7 @@
               = hidden_field_tag("commentable", @idea.class.name)
               = hidden_field_tag("type", 1)
               = hidden_field_tag("id", @idea.id)
-              = f.input :body, :label => false, :placeholder => "Votre message ..."
+              = f.input :body, :label => false, :placeholder => "✍ Votre message ..."
               .form-actions
                 = f.submit 'Enregistrer', :class => "radius button"
 
