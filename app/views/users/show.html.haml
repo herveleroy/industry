@@ -1,0 +1,19 @@
+.row
+  .two.columns
+  .eight.columns
+    .panel.radius
+      %h5.letterpress= @user.fullname
+      %p= image_tag @user.avatar.url(:thumb)
+      %b Entité :
+      %b= @user.entity.name
+      %hr
+      %ul.inline-list
+        %a{:style => "padding-left: 10px"}
+        %i.general.foundicon-edit
+        = link_to 'Modifier votre profil', edit_user_registration_path(@user)
+        %a{:style => "padding-left: 10px"}
+        %i.general.foundicon-remove
+        = link_to 'Pas satisfait ? Supprimer mon compte', registration_path(@user), :data => { :confirm => "Etes vous certain de vouloir supprimer votre compte ?" }, :method => :delete
+        %br
+
+  .two.columns

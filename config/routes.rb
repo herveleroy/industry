@@ -25,6 +25,9 @@ Ideotron::Application.routes.draw do
 
   devise_for :users
 
+  devise_for :users, :controllers => { :registrations => :registrations, :confirmations => :confirmations }
+  resources :users
+
 
   resources :ideas do
     get :like, on: :member
