@@ -1,6 +1,17 @@
 $ ->
-  for elem in $("input.clickable_tag:checked")
-    $(elem).parent().addClass("highlight")
+
+  highlight_tag = () ->
+    tags = []
+    for elem in $("input.clickable_tag:checked")
+      $(elem).parent().addClass("highlight")
+      tags.push $(elem).attr("data-filter")
+    tags_filter = tags.toString()
+    tags_filter = "*" if tags_filter.length == 0
+    $("#container").isotope
+      filter: tags_filter
+
+
+  highlight_tag()
 
 
   $("input.clickable_tag").change ->
@@ -9,6 +20,7 @@ $ ->
       label.removeClass("highlight")
     else
       label.addClass("highlight")
+    highlight_tag()
 
   $("input.clickable_box").change ->
     box = $(this).parent().parent()

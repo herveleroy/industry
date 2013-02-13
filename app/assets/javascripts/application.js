@@ -6,7 +6,7 @@
 //= require tag-it
 //= require gritter
 //= require cocoon
-//= require isotope
+//= require jquery.isotope
 //= require stickysidebar.jquery
 //= require_tree .
 

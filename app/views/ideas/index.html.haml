@@ -2,17 +2,18 @@
 %h3.letterpress= pluralize(@count, "oeuf trouvé","oeufs trouvés") + sort_mode
 .button-bar
   %ul.button-group.selection_sorting
-    %li=link_to "Pertinence", "#" ,  :class => "tiny secondary button"
-    %li=link_to "Score", "#",   :class => "tiny secondary button"
-    %li=link_to "Date création", "#",   :class => "tiny secondary button"
+    %li=link_to "Pertinence", "#the_id" ,  :class => "tiny secondary button"
+    %li=link_to "Score", "#score",   :class => "tiny secondary button"
+    %li=link_to "Date création", "#created_at",   :class => "tiny secondary button"
 .row
   .two.columns
     = form_tag( {:controller => 'ideas', :action => 'index'}, :method => 'get') do
       = text_field_tag :search, params[:search], :id => 'search_field', :placeholder => "Rechercher ..."
       - @tags.each do |tag|
+        - tag_name = Tag.find(tag).name
         %label.tag
-          = check_box_tag 'tags[]', tag, @selected_tags.include?(tag.to_s), :id => "search_tags_#{tag}", :class => "clickable_tag", :style => "display:none;"
-          = Tag.find(tag).name
+          = check_box_tag 'tags[]', tag, @selected_tags.include?(tag.to_s), :id => "search_tags_#{tag}", :class => "clickable_tag", :style => "display:none;", "data-filter" => ".#{tag_name}"
+          = tag_name
       %hr
       - @selected_tags.each do |tag|
         - unless @tags.include?(tag.to_i)
@@ -61,3 +62,4 @@
   %h4.letterpress Ajouter un mot clé à la sélection
   = render :partial => 'add_tags_modal'
   %a.close-reveal-modal &#215;
+

@@ -1,8 +1,12 @@
 $ ->
+
   $container = $("#container")
   $("#container").isotope
     itemSelector: ".element"
-    layoutMode: "masonry"
+    layoutMode: "cellsByRow"
+    getSortData:
+      score : (elem) ->
+        parseInt(elem.find('.the_id').text(), 10)
 
   before = $("#state").val()
   switch before
@@ -70,6 +74,11 @@ $ ->
     else
       $(this).css("background-color", "orange")
       $("#sorting").val(state)
+    sortName = $(this).attr('href').slice(1)
+
+    $("#container").isotope
+      sortBy: sortName
+      sortAscending: false
 
 
 

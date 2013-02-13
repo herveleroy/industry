@@ -7,7 +7,7 @@ gem 'rake', '10.0.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2', '>= 0.3.11'
-gem 'haml'
+gem 'haml', "3.1.8"
 gem "haml-rails"
 gem 'will_paginate'
 gem 'devise'
