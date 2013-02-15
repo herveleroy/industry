@@ -1,5 +1,6 @@
 Ideotron::Application.routes.draw do
 
+  get "/dendogram", to: 'reporting#dendogram', as: :dendogram
 
   resources :documents
 

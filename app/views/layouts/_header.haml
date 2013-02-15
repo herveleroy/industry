@@ -21,6 +21,11 @@
             %li= link_to "#{caterpillar_icon} Liste des chenilles".html_safe, caterpillars_path
             %li= link_to "#{chrysalis_icon} Liste des chrysalides".html_safe, "#"
             %li= link_to "#{butterfly_icon} Liste des papillons".html_safe, "#"
+        %li.has-flyout
+          = link_to "Reporting", "#"
+          = link_to "", "#", :class => "flyout-toggle"
+          %ul.flyout
+            %li= link_to "Dendogramme", dendogram_path
 
 
       %li

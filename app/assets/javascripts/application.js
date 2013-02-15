@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require foundation
+//= require d3.v3
 //= require autocomplete-rails
 //= require tag-it
 //= require gritter
