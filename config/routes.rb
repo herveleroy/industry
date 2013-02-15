@@ -2,6 +2,7 @@ Ideotron::Application.routes.draw do
 
   get "/dendogram", to: 'reporting#dendogram', as: :dendogram
   get "/sankey", to: 'reporting#sankey', as: :sankey
+  get "/dynamic_tree", to: 'reporting#dynamic_tree', as: :dynamic_tree
 
   resources :documents
 

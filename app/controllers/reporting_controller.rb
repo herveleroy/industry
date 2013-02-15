@@ -6,4 +6,7 @@ class ReportingController < ApplicationController
   def sankey
   end
 
+  def dynamic_tree
+  end
+
 end

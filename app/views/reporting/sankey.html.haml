@@ -1,8 +1,13 @@
-%h3.letterpress Diagramme de Sankey
+
 
 = content_tag :div, "", id: "sankey", data: {hits: sankey()}
 
-#chart
+.row
+  .one.columns
+  .ten.columns
+    %h3.letterpress Diagramme de Sankey
+    #chart.radius.panel
+  .one.columns
 
 :javascript
 

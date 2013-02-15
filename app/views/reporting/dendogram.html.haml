@@ -1,8 +1,12 @@
-%h3.letterpress Dendogramme de la métamorphose
 
 = content_tag :div, "", id: "dendogram", data: {hits: dendogram()}
 
-#chart.radius.panel
+.row
+  .one.columns
+  .ten.columns
+    %h3.letterpress Dendogramme de la métamorphose
+    #chart.radius.panel
+  .one.columns
 
 
 :javascript
@@ -23,9 +27,6 @@
 
     var nodes = cluster.nodes(graph),
           links = cluster.links(nodes);
-
-    console.log(nodes);
-    console.log(links);
 
     var svg = d3.select("#chart").append("svg")
         .attr("width", width)
