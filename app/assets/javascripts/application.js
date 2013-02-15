@@ -3,6 +3,7 @@
 //= require jquery-ui
 //= require foundation
 //= require d3.v3
+//= require sankey
 //= require autocomplete-rails
 //= require tag-it
 //= require gritter

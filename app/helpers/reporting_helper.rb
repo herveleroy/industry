@@ -1,6 +1,6 @@
 module ReportingHelper
 
-  def D3()
+  def dendogram()
     @dendogram = {}
     @ideas = []
     @caterpillars = []
@@ -38,6 +38,38 @@ module ReportingHelper
     end
 
     @dendogram = {  "name" => "root",  "id" => 0 , "children" => @root_children}
+
+  end
+
+  def sankey()
+
+    def create_node(name)
+      node =  @nodes.detect { |el| el["name" ] == name }
+      if node.nil?
+        node = {  "name" => name}
+        @nodes << node
+        index = @nodes.length - 1
+      else
+        index = @nodes.index(node)
+      end
+        return index
+    end
+
+    @nodes = []
+    @links = []
+
+    @caterpillars = Caterpillar.all
+    @caterpillars.each do |caterpillar|
+      target = create_node(caterpillar.title)
+      @ideas = caterpillar.ideas
+      @ideas.each do |idea|
+        source = create_node(idea.title)
+        link = {"source" => source, "target" => target, "value" =>1}
+        @links << link
+      end
+    end
+
+    @sankey =  {"nodes" => @nodes, "links" => @links}
 
   end
 

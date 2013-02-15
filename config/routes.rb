@@ -1,6 +1,7 @@
 Ideotron::Application.routes.draw do
 
   get "/dendogram", to: 'reporting#dendogram', as: :dendogram
+  get "/sankey", to: 'reporting#sankey', as: :sankey
 
   resources :documents
 
