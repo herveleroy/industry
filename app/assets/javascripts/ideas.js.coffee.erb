@@ -3,7 +3,8 @@ $ ->
     availableTags: <%= Tag.all.map(&:name).to_json.html_safe %> ,
     singleField: true,
     singleFieldNode: $('#tag_list'),
-    showAutocompleteOnFocus: true
+    showAutocompleteOnFocus: true,
+    allowSpaces: true
 
 
   $(".new_comment").hide()

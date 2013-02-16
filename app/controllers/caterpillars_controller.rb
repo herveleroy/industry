@@ -167,6 +167,14 @@ class CaterpillarsController < ApplicationController
         @caterpillar.do_pause
     end
     @event = @caterpillar.state
+  end
 
+  def add_tags
+    newtag = params[:tags].split(",")
+    @caterpillars = Caterpillar.find(params[:new_tag_id].split(","))
+    @caterpillars.each do |caterpillar|
+      caterpillar.tag_list.add(newtag)
+      caterpillar.save
+    end
   end
 end

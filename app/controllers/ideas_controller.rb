@@ -145,7 +145,7 @@ class IdeasController < ApplicationController
   end
 
   def add_tags
-    newtag = params[:newtag]
+    newtag = params[:tags].split(",")
     @ideas = Idea.find(params[:new_tag_id].split(","))
     @ideas.each do |idea|
       idea.tag_list.add(newtag)

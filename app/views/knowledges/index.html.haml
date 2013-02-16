@@ -36,18 +36,5 @@
 
 - @knowledges.each do |knowledge|
   %div{:id => "description_knowledge_#{knowledge.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
-    / %h4.object_state
-    /   %span= image_tag "knowledge_small.png"
-    /   %span.letterpress= "Savoir #{knowledge.id}"
-    / %h6= link_to knowledge.title, knowledge
-    / %h4.letterpress Auteur
-    / %h6= knowledge.author
-    / %h4.letterpress Description
-    / = knowledge.description
-    / %hr
-    / %ul.inline-list.letterpress
-    /   %a{:style => "padding-left: 10px"}
-    /   %i.accessibility.foundicon-glasses
-    /   = link_to "Voir la fiche", knowledge
     = render :partial => "shared/knowledge_modal", :locals => {:knowledge => knowledge}
     %a.close-reveal-modal &#215;

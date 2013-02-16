@@ -1,23 +1,42 @@
-- sort_mode = @sort_mode.blank? ? "" : pluralize(@count, " et trié par "," et triés par ").gsub(/^\d+\s/, "") + @sort_mode
-%h3.letterpress= pluralize(@count, "oeuf trouvé","oeufs trouvés") + sort_mode
-.button-bar
-  %ul.button-group.selection_sorting
-    %li=link_to "Pertinence", "#the_id" ,  :class => "tiny secondary button"
-    %li=link_to "Score", "#score",   :class => "tiny secondary button"
-    %li=link_to "Date création", "#created_at",   :class => "tiny secondary button"
 .row
-  .two.columns
-    = form_tag( {:controller => 'ideas', :action => 'index'}, :method => 'get') do
-      = text_field_tag :search, params[:search], :id => 'search_field', :placeholder => "Rechercher ..."
+  .eight.columns
+    - sort_mode = @sort_mode.blank? ? "" : pluralize(@count, ", trié par ",", triés par ").gsub(/^\d+\s/, "") + @sort_mode
+    - tags_array = []
+    - @selected_tags.each do |tag|
+      - tags_array << Tag.find(tag).name
+    - tags_string = tags_array.empty? ? "" : " contenant les mots clés : " + tags_array.join(",")
+    %h4.letterpress= pluralize(@count, "oeuf trouvé","oeufs trouvés")  + tags_string + sort_mode
+
+  .four.columns
+    .button-bar{:style => "float: right;"}
+      %ul.button-group.selection_sorting
+        %li=link_to "Pertinence", "#the_id" ,  :class => "tiny secondary button"
+        %li=link_to "Score", "#score",   :class => "tiny secondary button"
+        %li=link_to "Date création", "#created_at",   :class => "tiny secondary button"
+
+= form_tag( {:controller => 'ideas', :action => 'index'}, :method => 'get') do
+  .row
+    .one.columns
       - @tags.each do |tag|
         - tag_name = Tag.find(tag).name
         %label.tag
           = check_box_tag 'tags[]', tag, @selected_tags.include?(tag.to_s), :id => "search_tags_#{tag}", :class => "clickable_tag", :style => "display:none;", "data-filter" => ".#{tag_name}"
           = tag_name
-      %hr
       - @selected_tags.each do |tag|
         - unless @tags.include?(tag.to_i)
           = hidden_field_tag 'tags[]', tag, :id => "search_tags_#{tag}"
+
+    .nine.columns
+      #container
+        - @ideas.each do |idea|
+          = render :partial => '/shared/idea', :object => idea
+      .clear
+
+      %br
+      .apple_pagination_b
+        = will_paginate @ideas, { :previous_label => 'Avant', :next_label => 'Après'}
+    .two.columns
+      = text_field_tag :search, params[:search], :id => 'search_field', :placeholder => "Rechercher ..."
       - sorting_default = params[:sorting].blank? ? "@relevance" : params[:sorting]
       #button_sorting= hidden_field_tag 'sorting', "#{sorting_default}"
       = submit_tag "Rechercher", :name => nil, :class => "radius button"
@@ -32,15 +51,6 @@
         %i.general.foundicon-tools
         = link_to 'Muter la sélection en chenille', "#", :class => "letterpress"
 
-  .ten.columns
-    #container
-      - @ideas.each do |idea|
-        = render :partial => '/shared/idea', :object => idea
-    .clear
-
-    %br
-    .apple_pagination_b
-      = will_paginate @ideas, { :previous_label => 'Avant', :next_label => 'Après'}
 
 
 - @ideas.each do |idea|
