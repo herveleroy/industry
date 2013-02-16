@@ -38,6 +38,7 @@ Ideotron::Application.routes.draw do
     post :add_caterpillars, on: :member
     post :add_ideas, on: :member
     post :add_tags, on: :collection
+    post :transform_to_caterpillar, on: :collection
     resources :comments
   end
 

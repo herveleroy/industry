@@ -153,4 +153,17 @@ class IdeasController < ApplicationController
     end
   end
 
+  def transform_to_caterpillar
+    @caterpillar = Caterpillar.new
+    @caterpillar.title = params[:name]
+    @caterpillar.author_id = current_user.id
+    @caterpillar.description = ""
+    @ideas = Idea.find(params[:transform_id].split(","))
+    @ideas.each do |idea|
+      @caterpillar.description += "<-- " + idea.description + "-->"
+    end
+    @caterpillar.save
+    @caterpillar.ideas<< @ideas
+  end
+
 end

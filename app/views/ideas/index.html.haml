@@ -49,7 +49,7 @@
         = link_to 'Ajouter un mot clé à la sélection', "#", :class => "letterpress", "data-reveal-id" => "add_tags"
       %h6.letterpress
         %i.general.foundicon-tools
-        = link_to 'Muter la sélection en chenille', "#", :class => "letterpress"
+        = link_to 'Muter la sélection en chenille', "#", :class => "letterpress", "data-reveal-id" => "transform_to_caterpillar"
 
 
 
@@ -61,5 +61,10 @@
 #add_tags{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
   %h4.letterpress Ajouter un mot clé à la sélection
   = render :partial => 'add_tags_modal'
+  %a.close-reveal-modal &#215;
+
+#transform_to_caterpillar{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+  %h4.letterpress Muter la sélection en une nouvelle chenille
+  = render :partial => 'transform_to_caterpillar'
   %a.close-reveal-modal &#215;
 

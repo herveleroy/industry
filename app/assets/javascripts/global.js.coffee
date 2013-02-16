@@ -30,6 +30,7 @@ $ ->
       array.push $("#new_tag_id").val() unless $("#new_tag_id").val().length == 0
       array.push box.find(".the_id").text()
       $("#new_tag_id").val(array)
+      $("#transform_id").val(array)
 
     else
       box.css("background-color", "#F2F2F2")

@@ -1,0 +1,10 @@
+%p Nom de la nouvelle chenille
+#search_results
+  = form_tag transform_to_caterpillar_ideas_path, :method => :post, :remote => true do
+    = hidden_field_tag( "transform_id", "")
+    = text_field_tag :name
+    %ul
+    = submit_tag "Réaliser la mutation", :class => "small success radius button"
+
+
+
