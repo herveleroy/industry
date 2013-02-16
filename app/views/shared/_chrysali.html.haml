@@ -1,0 +1,22 @@
+- tags = chrysali.tag_list.to_s.gsub(","," ")
+.panel.radius.idea.element{:class => tags, "data-score" => chrysali.likes.size }
+  .object_state
+    = link_to image_tag("chrysalis_small.png"), chrysali
+    %span.the_id= chrysali.id
+    #status{:class => "#{chrysali.state}"}
+  %h5.title.letterpress
+    = link_to truncate(chrysali.title, :length => 200), "#", "data-reveal-id" => "description_chrysali_#{chrysali.id}"
+    - like_class = current_user.voted_up_on?(chrysali) ? "like" : ""
+  .like_button{:id => "chrysali_" + chrysali.id.to_s}
+    %span.count= chrysali.likes.size
+    %span= link_to "❤", like_chrysali_path(chrysali.id), :remote => true, :class => like_class
+  .description
+    = link_to truncate(chrysali.description, :length => 80), "#", "data-reveal-id" => "description_chrysali_#{chrysali.id}"
+  - @comments_count = chrysali.root_comments.size
+  .comments= pluralize(@comments_count, "commentaire", "commentaires")
+  .selected_box
+    = check_box_tag 'chrysali[]', chrysali, false, :id => "selected_chrysalis_#{chrysali.id}",  :class => "clickable_box"
+
+
+
+

@@ -1,0 +1,69 @@
+.row
+  .eight.columns
+    - sort_mode = @sort_mode.blank? ? "" : pluralize(@count, " et triée par "," et triées par ").gsub(/^\d+\s/, "") + @sort_mode
+    - tags_array = []
+    - @selected_tags.each do |tag|
+      - tags_array << Tag.find(tag).name
+    - tags_string = tags_array.empty? ? "" : " contenant les mots clés : " + tags_array.join(",")
+    %h4.letterpress= pluralize(@count, "chrysalide trouvée","chrysalides trouvées")  + tags_string + sort_mode
+  .four.columns
+    .button-bar{:style => "float: right;"}
+      %ul.button-group.selection_state
+        %li=link_to "❙ ❙", "#", :class => "tiny secondary button"
+        %li=link_to "▶", "#",  :class => "tiny secondary button"
+      %ul.button-group.selection_state
+        %li=link_to "✖", "#" ,  :class => "tiny secondary button"
+        %li=link_to "✔", "#",   :class => "tiny secondary button"
+      %ul.button-group.selection_sorting
+        %li=link_to "Pertinence", "#" ,  :class => "tiny secondary button"
+        %li=link_to "Score", "#",   :class => "tiny secondary button"
+        %li=link_to "Date création", "#",   :class => "tiny secondary button"
+= form_tag( {:controller => 'chrysalis', :action => 'index'}, :method => 'get') do
+  .row
+    .one.columns
+      - @tags.each do |tag|
+        - tag_name = Tag.find(tag).name
+        %label.tag
+          = check_box_tag 'tags[]', tag, @selected_tags.include?(tag.to_s), :id => "search_tags_#{tag}", :class => "clickable_tag", :style => "display:none;", "data-filter" => ".#{tag_name}"
+          = tag_name
+      - @selected_tags.each do |tag|
+        - unless @tags.include?(tag.to_i)
+          = hidden_field_tag 'tags[]', tag, :id => "search_tags_#{tag}"
+
+    .nine.columns
+      #container
+        - @chrysalis.each do |chrysali|
+          = render :partial => '/shared/chrysali', :object => chrysali
+      .clear
+      %br
+      .apple_pagination_b
+        = will_paginate @chrysalis, { :previous_label => 'Avant', :next_label => 'Après'}
+      %br
+    .two.columns
+      = text_field_tag :search, params[:search], :id => 'search_field', :placeholder => "Rechercher ..."
+      - sorting_default = params[:sorting].blank? ? "@relevance" : params[:sorting]
+      - state_default = params[:state].blank? ? "" : params[:state]
+      #button_state= hidden_field_tag 'state', "#{state_default}"
+      #button_sorting= hidden_field_tag 'sorting', "#{sorting_default}"
+      = submit_tag "Rechercher", :name => nil, :class => "radius button"
+
+      %h6.letterpress
+        %i.general.foundicon-add-doc
+        = link_to 'Nouvelle chrysalide', new_chrysali_path, :class => "letterpress"
+      %h6.letterpress
+        %i.accessibility.foundicon-key
+        = link_to 'Ajouter un mot clé à la sélection', "#", :class => "letterpress", "data-reveal-id" => "add_tags"
+      %h6.letterpress
+        %i.general.foundicon-tools
+        = link_to 'Muter la sélection en papillon', "#", :class => "letterpress"
+
+- @chrysalis.each do |chrysali|
+  %div{:id => "description_chrysali_#{chrysali.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+    = render :partial => "shared/chrysali_modal", :locals => {:chrysali => chrysali}
+    %a.close-reveal-modal &#215;
+
+#add_tags{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+  %h4.letterpress Ajouter un mot clé à la sélection
+  = render :partial => 'add_tags_modal'
+  %a.close-reveal-modal &#215;
+

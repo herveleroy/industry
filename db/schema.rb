@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130216095426) do
+ActiveRecord::Schema.define(:version => 20130216213235) do
 
   create_table "caterpillars", :force => true do |t|
     t.string   "title"
@@ -33,6 +33,16 @@ ActiveRecord::Schema.define(:version => 20130216095426) do
   add_index "caterpillars", ["cached_votes_total"], :name => "index_caterpillars_on_cached_votes_total"
   add_index "caterpillars", ["cached_votes_up"], :name => "index_caterpillars_on_cached_votes_up"
 
+  create_table "caterpillars_chrysalis", :force => true do |t|
+    t.integer  "caterpillar_id"
+    t.integer  "chrysali_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "caterpillars_chrysalis", ["caterpillar_id"], :name => "index_caterpillars_chrysalis_on_caterpillar_id"
+  add_index "caterpillars_chrysalis", ["chrysali_id"], :name => "index_caterpillars_chrysalis_on_chrysali_id"
+
   create_table "caterpillars_knowledges", :force => true do |t|
     t.integer  "caterpillar_id"
     t.integer  "knowledge_id"
@@ -42,6 +52,39 @@ ActiveRecord::Schema.define(:version => 20130216095426) do
 
   add_index "caterpillars_knowledges", ["caterpillar_id"], :name => "index_caterpillars_knowledges_on_caterpillar_id"
   add_index "caterpillars_knowledges", ["knowledge_id"], :name => "index_caterpillars_knowledges_on_knowledge_id"
+
+  create_table "chrysalis", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "author_id"
+    t.string   "state"
+    t.string   "value_proposal"
+    t.string   "application"
+    t.string   "conditions"
+    t.string   "obstacles"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.integer  "cached_votes_total", :default => 0
+    t.integer  "cached_votes_score", :default => 0
+    t.integer  "cached_votes_up",    :default => 0
+    t.integer  "cached_votes_down",  :default => 0
+    t.boolean  "delta",              :default => true, :null => false
+  end
+
+  add_index "chrysalis", ["cached_votes_down"], :name => "index_chrysalis_on_cached_votes_down"
+  add_index "chrysalis", ["cached_votes_score"], :name => "index_chrysalis_on_cached_votes_score"
+  add_index "chrysalis", ["cached_votes_total"], :name => "index_chrysalis_on_cached_votes_total"
+  add_index "chrysalis", ["cached_votes_up"], :name => "index_chrysalis_on_cached_votes_up"
+
+  create_table "chrysalis_knowledges", :force => true do |t|
+    t.integer  "chrysalis_id"
+    t.integer  "knowledge_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "chrysalis_knowledges", ["chrysalis_id"], :name => "index_chrysalis_knowledges_on_chrysalis_id"
+  add_index "chrysalis_knowledges", ["knowledge_id"], :name => "index_chrysalis_knowledges_on_knowledge_id"
 
   create_table "comments", :force => true do |t|
     t.integer  "commentable_id",   :default => 0

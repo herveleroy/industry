@@ -1,0 +1,21 @@
+.panel.radius
+  = simple_form_for @chrysali do |f|
+    - if @chrysali.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@chrysali.errors.count, "error")} prohibited this chrysali from being saved:"
+        %ul
+          - @chrysali.errors.full_messages.each do |msg|
+            %li= msg
+
+    = f.input :title, :label => 'Titre'
+    = f.input :description, :label => 'Description', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.input :application, :label => 'Application', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.input :value_proposal, :label => 'Proposition de valeur', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.input :conditions, :label => 'Conditions d\'application', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.input :obstacles, :label => 'Obstacles à lever', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.hidden_field :tag_list, id:"tag_list"
+    %label Mots clés
+    %ul.mytags
+    .form-actions
+      = f.submit 'Enregistrer', :class => "radius button"
+

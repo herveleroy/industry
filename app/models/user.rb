@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   acts_as_voter
   belongs_to :entity
   has_many :ideas, :dependent => :destroy
+  has_many :caterpillars, :dependent => :destroy
+  has_many :chrysalis, :dependent => :destroy
   validates_presence_of :firstname, :lastname, :email, :entity_id
   validates_attachment_size :avatar, :less_than => 2.megabytes
   validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/png', 'image/gif']

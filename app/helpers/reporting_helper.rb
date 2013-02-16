@@ -58,13 +58,20 @@ module ReportingHelper
     @nodes = []
     @links = []
 
-    @caterpillars = Caterpillar.all
-    @caterpillars.each do |caterpillar|
-      target = create_node(caterpillar.title)
-      @ideas = caterpillar.ideas
-      @ideas.each do |idea|
-        source = create_node(idea.title)
-        link = {"source" => source, "target" => target, "value" =>1}
+    @chrysalis = Chrysali.all
+    @chrysalis.each do |chrysali|
+      target_chrysali = create_node(chrysali.title)
+      @caterpillars = chrysali.caterpillars
+
+      @caterpillars.each do |caterpillar|
+        target_caterpillar = create_node(caterpillar.title)
+        @ideas = caterpillar.ideas
+        @ideas.each do |idea|
+          source_idea = create_node(idea.title)
+          link = {"source" => source_idea, "target" => target_caterpillar, "value" =>1}
+          @links << link
+        end
+        link = {"source" => target_caterpillar, "target" => target_chrysali, "value" =>1}
         @links << link
       end
     end

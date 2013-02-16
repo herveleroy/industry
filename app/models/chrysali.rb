@@ -1,29 +1,21 @@
-class Caterpillar < ActiveRecord::Base
-  attr_accessible :application, :author_id, :description, :title, :tag_list
+class Chrysali < ActiveRecord::Base
+  attr_accessible :application, :author_id, :conditions, :description, :obstacles, :state, :title, :value_proposal, :tag_list
   attr_accessible :state
   belongs_to :user, :foreign_key => 'author_id'
 
-  has_many :caterpillars_knowledges
-  has_many :knowledges, :through => :caterpillars_knowledges do
+  has_many :chrysalis_knowledges
+  has_many :knowledges, :through => :chrysalis_knowledges do
     def <<(new_item)
       super( Array(new_item) - proxy_association.owner.knowledges)
     end
   end
 
-  has_many :ideas_caterpillars
-  has_many :ideas, :through => :ideas_caterpillars do
-    def <<(new_item)
-      super( Array(new_item) - proxy_association.owner.ideas)
-    end
-  end
-
   has_many :caterpillars_chrysalis
-  has_many :chrysalis, :through => :caterpillars_chrysalis do
+  has_many :caterpillars, :through => :caterpillars_chrysalis do
     def <<(new_item)
-      super( Array(new_item) - proxy_association.owner.chrysalis)
+      super( Array(new_item) - proxy_association.owner.caterpillars)
     end
   end
-
 
   has_many :tasks, as: :taskable, :dependent => :destroy
 
@@ -35,6 +27,9 @@ class Caterpillar < ActiveRecord::Base
     indexes title
     indexes description
     indexes application
+    indexes conditions
+    indexes obstacles
+    indexes value_proposal
     indexes state
     indexes taggings.tag.name, as: :tag_names
     has taggings.tag_id, :facet => true, as: 'tags'
@@ -44,7 +39,10 @@ class Caterpillar < ActiveRecord::Base
     set_property field_weights: {
       title:             10,
       description:       2,
+      value_proposal: 2,
       application:       2,
+      conditions:   2,
+      obstacles: 2,
       tag_names:        10
     }
     set_property :delta => true
@@ -79,6 +77,5 @@ class Caterpillar < ActiveRecord::Base
     end
 
   end
-
 
 end

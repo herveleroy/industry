@@ -1,0 +1,9 @@
+$('#chrysali_<%= @chrysali.id %>').find("span.count").text("<%= @count.to_s %>");
+<% if @like %>
+  $('#chrysali_<%= @chrysali.id %> span a').addClass("like")
+<% else %>
+  $('#chrysali_<%= @chrysali.id %> span a').removeClass("like")
+<% end %>
+
+
+
