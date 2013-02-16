@@ -1,0 +1,14 @@
+%h4.object_state
+  %span= image_tag "caterpillar_small.png"
+  %span.letterpress= "Chenille N°#{caterpillar.id}"
+  %h6= link_to caterpillar.title, caterpillar
+  %h4.letterpress Description
+  = caterpillar.description
+  %h4.letterpress Application
+  = caterpillar.application
+  %hr
+  %ul.inline-list.letterpress
+    %a{:style => "padding-left: 10px"}
+    %i.accessibility.foundicon-glasses
+    = link_to "Voir la fiche et les commentaires", caterpillar
+

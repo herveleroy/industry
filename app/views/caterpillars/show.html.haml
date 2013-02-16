@@ -49,7 +49,7 @@
         - if @similar_caterpillars
           - @similar_caterpillars.each do |caterpillar|
             - unless caterpillar == @caterpillar
-              %li= link_to caterpillar.title,  "#", "data-reveal-id" => "description_caterpillar"
+              %li= link_to caterpillar.title,  "#", "data-reveal-id" => "description_caterpillar_#{caterpillar.id}"
         %hr
         %ul.accordion
           %li.active
@@ -58,7 +58,7 @@
             .content
               %ul.knowledge_entries
                 - @knowledges.each do |k|
-                  %li= link_to truncate(k.title, :length => 50), k
+                  %li= link_to truncate(k.title, :length => 50), "#", "data-reveal-id" => "description_knowledge_#{k.id}"
 
           %li
             .title
@@ -66,7 +66,7 @@
             .content
               %ul.ideas_entries
                 - @ideas.each do |k|
-                  %li= link_to truncate(k.title, :length => 50), k
+                  %li= link_to truncate(k.title, :length => 50), "#", "data-reveal-id" => "description_idea_#{k.id}"
 
           %li
             .title
@@ -76,8 +76,15 @@
                 - unless @documents.nil?
                   - @documents.each do |k|
                     %li
-                      / %span= image_tag(extension_of k.upload.url(:icon))
                       %span= link_to truncate(k.name, :length => 30), k.upload.url(:original, false)
+
+          %li
+            .title
+              %h5 Plan d'action
+            .content
+              %ul.tasks_entries
+                - @tasks.each do |k|
+                  %li= link_to truncate(k.name, :length => 50), "#", "data-reveal-id" => "description_task_#{k.id}"
 
 
       .row
@@ -120,6 +127,8 @@
             %a{:style => "padding-left: 10px"}
             %i.general.foundicon-plus
             = link_to 'Associer un oeuf', "#", "data-reveal-id" => "add_idea"
+            %i.general.foundicon-plus
+            = link_to 'Associer une action', "#", "data-reveal-id" => "add_task"
             \|
             %a{:style => "padding-left: 10px"}
             %i.social.foundicon-chat
@@ -135,14 +144,40 @@
   = render :partial => 'add_ideas_modal', :locals => { :caterpillar => @caterpillar }
   %a.close-reveal-modal &#215;
 
-#description_caterpillar{:class => "reveal-modal [expand, xlarge, large, medium, small]"}
-  %h4.letterpress Chenille:
-  %h6= link_to @caterpillar.title, @caterpillar
-  %h4.letterpress Description
-  = @caterpillar.description
-  %h4.letterpress Application
-  = @caterpillar.application
+#add_task{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+  %h4.letterpress Associer une action à cette chenille
+  = render 'shared/task_form', :entity => @entity,  :taskable_type => "caterpillar", :taskable => @caterpillar.id
   %a.close-reveal-modal &#215;
+
+- if @similar_caterpillars
+  - @similar_caterpillars.each do |caterpillar|
+    - unless caterpillar == @caterpillar
+      %div{:id => "description_caterpillar_#{caterpillar.id}", :class => "reveal-modal [expand, xlarge, large, medium, small]"}
+        = render :partial => "shared/caterpillar_modal", :locals => { :caterpillar => caterpillar }
+        %a.close-reveal-modal &#215;
+
+- @ideas.each do |k|
+  %div{:id => "description_idea_#{k.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+    = render :partial => "shared/idea_modal", :locals => {:idea => k}
+    %a.close-reveal-modal &#215;
+
+- @knowledges.each do |k|
+  %div{:id => "description_knowledge_#{k.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+    = render :partial => "shared/knowledge_modal", :locals => {:knowledge => k}
+    %a.close-reveal-modal &#215;
+
+- @tasks.each do |k|
+  %div{:id => "description_task_#{k.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+    = render :partial => "shared/task_modal", :locals => {:task => k}
+    %a.close-reveal-modal &#215;
+
+
+
+
+
+
+
+
 
 
 

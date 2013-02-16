@@ -1,8 +1,9 @@
-= simple_form_for(@task) do |f|
+= simple_form_for @task, :remote => true do |f|
   = f.error_notification
-
   .form-inputs
     .panel.radius
+      = f.input :taskable_id,  :as => :hidden, :input_html => { :value => taskable }
+      = f.input :taskable_type,  :as => :hidden, :input_html => { :value => taskable_type }
       = f.input :name, :label => "Titre"
       = f.input :description, :input_html => { :cols => 50, :rows => 4 }, :label => "Description"
 
@@ -18,4 +19,3 @@
   %br
   .actions
     = f.submit 'Enregistrer', :class => "radius button"
-

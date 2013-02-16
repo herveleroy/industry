@@ -17,6 +17,8 @@ class Caterpillar < ActiveRecord::Base
     end
   end
 
+  has_many :tasks, as: :taskable, :dependent => :destroy
+
   acts_as_votable
   acts_as_taggable
   acts_as_commentable

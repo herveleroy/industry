@@ -19,8 +19,7 @@ class CaterpillarsController < ApplicationController
     search_string = params[:search].blank? ? "" : params[:search]
     with[:tags] = params[:tags] if params[:tags]
     conditions[:object_state] = params[:state] if !params[:state].blank?
-    logger.debug "=================== #{with}"
-    logger.debug "=================== #{conditions}"
+
     if conditions.blank?
       @caterpillars = Caterpillar.search search_string, :with => with,  :page => params[:page], :per_page => 42, :order => sort_mode
     else
@@ -57,6 +56,8 @@ class CaterpillarsController < ApplicationController
       @documents = @documents.nil? ? k.documents : @documents << k.documents
     end
     @ideas = @caterpillar.ideas
+    @tasks = @caterpillar.tasks
+    @task = Task.new
 
     respond_to do |format|
       format.html # show.html.erb

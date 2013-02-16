@@ -45,17 +45,7 @@
 
 - @ideas.each do |idea|
   %div{:id => "description_idea_#{idea.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
-    %h4.object_state
-      %span= image_tag "eggs_small.png"
-      %span.letterpress= "Oeuf #{idea.id}"
-    %h6= link_to idea.title, idea
-    %h4.letterpress Description
-    = idea.description
-    %hr
-    %ul.inline-list.letterpress
-      %a{:style => "padding-left: 10px"}
-      %i.accessibility.foundicon-glasses
-      = link_to "Voir la fiche et les commentaires", idea
+    = render :partial => "shared/idea_modal", :locals => {:idea => idea}
     %a.close-reveal-modal &#215;
 
 #add_tags{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}

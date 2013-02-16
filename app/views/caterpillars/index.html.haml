@@ -46,18 +46,6 @@
 
 - @caterpillars.each do |caterpillar|
   %div{:id => "description_caterpillar_#{caterpillar.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
-    %h4.object_state
-      %span= image_tag "caterpillar_small.png"
-      %span.letterpress= "Chenille #{caterpillar.id}"
-    %h6= link_to caterpillar.title, caterpillar
-    %h4.letterpress Description
-    = caterpillar.description
-    %h4.letterpress Application
-    = caterpillar.application
-    %hr
-    %ul.inline-list.letterpress
-      %a{:style => "padding-left: 10px"}
-      %i.accessibility.foundicon-glasses
-      = link_to "Voir la fiche et les commentaires", caterpillar
+    = render :partial => "shared/caterpillar_modal", :locals => {:caterpillar => caterpillar}
     %a.close-reveal-modal &#215;
 
