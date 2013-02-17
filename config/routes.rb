@@ -5,6 +5,7 @@ Ideotron::Application.routes.draw do
   get "/dynamic_tree", to: 'reporting#dynamic_tree', as: :dynamic_tree
   get "/bubble_chart", to: 'reporting#bubble_chart', as: :bubble_chart
   get "/pack_hierarchy", to: 'reporting#pack_hierarchy', as: :pack_hierarchy
+  get "/flower_graph", to: 'reporting#flower_graph', as: :flower_graph
 
 
   resources :documents

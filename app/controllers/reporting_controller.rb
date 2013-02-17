@@ -15,4 +15,7 @@ class ReportingController < ApplicationController
   def pack_hierarchy
   end
 
+  def flower_graph
+  end
+
 end
