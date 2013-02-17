@@ -11,7 +11,42 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130216213235) do
+ActiveRecord::Schema.define(:version => 20130217093821) do
+
+  create_table "butterflies", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "author_id"
+    t.string   "customer_segments"
+    t.string   "value_proposal"
+    t.string   "channels"
+    t.string   "customer_relationship"
+    t.string   "key_resources"
+    t.string   "key_activities"
+    t.string   "key_partnerships"
+    t.string   "revenue_streams"
+    t.string   "cost_structure"
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+    t.integer  "cached_votes_total",    :default => 0
+    t.integer  "cached_votes_score",    :default => 0
+    t.integer  "cached_votes_up",       :default => 0
+    t.integer  "cached_votes_down",     :default => 0
+    t.boolean  "delta",                 :default => true, :null => false
+    t.string   "state"
+  end
+
+  add_index "butterflies", ["cached_votes_down"], :name => "index_butterflies_on_cached_votes_down"
+  add_index "butterflies", ["cached_votes_score"], :name => "index_butterflies_on_cached_votes_score"
+  add_index "butterflies", ["cached_votes_total"], :name => "index_butterflies_on_cached_votes_total"
+  add_index "butterflies", ["cached_votes_up"], :name => "index_butterflies_on_cached_votes_up"
+
+  create_table "butterflies_knowledges", :force => true do |t|
+    t.integer  "butterfly_id"
+    t.integer  "knowledge_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "caterpillars", :force => true do |t|
     t.string   "title"
@@ -76,14 +111,21 @@ ActiveRecord::Schema.define(:version => 20130216213235) do
   add_index "chrysalis", ["cached_votes_total"], :name => "index_chrysalis_on_cached_votes_total"
   add_index "chrysalis", ["cached_votes_up"], :name => "index_chrysalis_on_cached_votes_up"
 
+  create_table "chrysalis_butterflies", :force => true do |t|
+    t.integer  "butterfly_id"
+    t.integer  "chrysali_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "chrysalis_knowledges", :force => true do |t|
-    t.integer  "chrysalis_id"
+    t.integer  "chrysali_id"
     t.integer  "knowledge_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
 
-  add_index "chrysalis_knowledges", ["chrysalis_id"], :name => "index_chrysalis_knowledges_on_chrysalis_id"
+  add_index "chrysalis_knowledges", ["chrysali_id"], :name => "index_chrysalis_knowledges_on_chrysalis_id"
   add_index "chrysalis_knowledges", ["knowledge_id"], :name => "index_chrysalis_knowledges_on_knowledge_id"
 
   create_table "comments", :force => true do |t|

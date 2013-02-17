@@ -58,23 +58,31 @@ module ReportingHelper
     @nodes = []
     @links = []
 
-    @chrysalis = Chrysali.all
-    @chrysalis.each do |chrysali|
-      target_chrysali = create_node(chrysali.title)
-      @caterpillars = chrysali.caterpillars
+    @butterflies = Butterfly.all
+    @butterflies.each do |butterfly|
+      target_butterfly = create_node(butterfly.title)
 
-      @caterpillars.each do |caterpillar|
-        target_caterpillar = create_node(caterpillar.title)
-        @ideas = caterpillar.ideas
-        @ideas.each do |idea|
-          source_idea = create_node(idea.title)
-          link = {"source" => source_idea, "target" => target_caterpillar, "value" =>1}
+      @chrysalis = butterfly.chrysalis
+      @chrysalis.each do |chrysali|
+        target_chrysali = create_node(chrysali.title)
+        @caterpillars = chrysali.caterpillars
+
+        @caterpillars.each do |caterpillar|
+          target_caterpillar = create_node(caterpillar.title)
+          @ideas = caterpillar.ideas
+          @ideas.each do |idea|
+            source_idea = create_node(idea.title)
+            link = {"source" => source_idea, "target" => target_caterpillar, "value" =>1}
+            @links << link
+          end
+          link = {"source" => target_caterpillar, "target" => target_chrysali, "value" =>1}
           @links << link
         end
-        link = {"source" => target_caterpillar, "target" => target_chrysali, "value" =>1}
+        link = {"source" => target_chrysali, "target" => target_butterfly, "value" =>1}
         @links << link
       end
     end
+
 
     @sankey =  {"nodes" => @nodes, "links" => @links}
 

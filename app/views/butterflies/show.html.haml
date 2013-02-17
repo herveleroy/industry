@@ -1,55 +1,75 @@
 %p#notice= notice
-
 .row
   .twelve.columns
     .panel.radius.idea
       .two.columns
         .object_state
-          %span= image_tag "caterpillar_small.png"
-          %span= "Chenille #{@caterpillar.id}"
+          %span= image_tag "butterfly_small.png"
+          %span= "Papillon #{@butterfly.id}"
 
-        #status{:class => "#{@caterpillar.state}"}
+        #status{:class => "#{@butterfly.state}"}
         .space
-        %p= image_tag @caterpillar.user.avatar.url(:medium)
+        %p= image_tag @butterfly.user.avatar.url(:medium)
         %p
-          %b.letterpress= @caterpillar.user.fullname
+          %b.letterpress= @butterfly.user.fullname
         %hr
 
         .button-bar
           %ul.button-group
-            %li=link_to "❙ ❙", event_caterpillars_path(:id => @caterpillar.id, :event => "pause"), :method => :post, :remote => true,  :class => "tiny secondary button"
-            %li=link_to "▶", event_caterpillars_path(:id => @caterpillar.id, :event => "select"), :method => :post, :remote => true,  :class => "tiny secondary button"
+            %li=link_to "❙ ❙", event_butterflies_path(:id => @butterfly.id, :event => "pause"), :method => :post, :remote => true,  :class => "tiny secondary button"
+            %li=link_to "▶", event_butterflies_path(:id => @butterfly.id, :event => "select"), :method => :post, :remote => true,  :class => "tiny secondary button"
           %ul.button-group
-            %li=link_to "✖", event_caterpillars_path(:id => @caterpillar.id, :event => "reject"), :method => :post, :remote => true ,  :class => "tiny alert button"
-            %li=link_to "✔", event_caterpillars_path(:id => @caterpillar.id, :event => "validate"), :method => :post, :remote => true,   :class => "tiny success button"
+            %li=link_to "✖", event_butterflies_path(:id => @butterfly.id, :event => "reject"), :method => :post, :remote => true ,  :class => "tiny alert button"
+            %li=link_to "✔", event_butterflies_path(:id => @butterfly.id, :event => "validate"), :method => :post, :remote => true,   :class => "tiny success button"
 
       .seven.columns
         %h4.letterpress
-          = @caterpillar.title
-        %p= I18n.l @caterpillar.created_at
+          = @butterfly.title
+        %p= I18n.l @butterfly.created_at
         %hr
         %p
           %b Description:
-          = @caterpillar.description
+          = @butterfly.description
         %p
-          %b Application:
-          = @caterpillar.application
+          %b Proposition de valeur:
+          = @butterfly.value_proposal
+        %p
+          %b Segments de marché:
+          = @butterfly.customer_segments
+        %p
+          %b Relation client:
+          = @butterfly.customer_relationship
+        %p
+          %b Canaux de distribution:
+          = @butterfly.channels
+        %p
+          %b Ressources clés:
+          = @butterfly.key_resources
+        %p
+          %b Partnariats clés:
+          = @butterfly.key_partnerships
+        %p
+          %b Flux de revenu:
+          = @butterfly.revenue_streams
+        %p
+          %b Structure de coût:
+          = @butterfly.cost_structure
         %hr
 
         %ul.tagit
-          - @caterpillar.tag_list.each do |tag|
+          - @butterfly.tag_list.each do |tag|
             %li.tag= link_to tag, "#"
       .three.columns
-        - like_class = current_user.voted_up_on?(@caterpillar) ? "like" : ""
-        .like_button{:id => "caterpillar_" + @caterpillar.id.to_s}
-          %span.count= @caterpillar.likes.size
-          %span= link_to "❤", like_caterpillar_path(@caterpillar.id), :remote => true, :class => like_class
+        - like_class = current_user.voted_up_on?(@butterfly) ? "like" : ""
+        .like_button{:id => "butterfly_" + @butterfly.id.to_s}
+          %span.count= @butterfly.likes.size
+          %span= link_to "❤", like_butterfly_path(@butterfly.id), :remote => true, :class => like_class
         %p.letterpress
-          %b Chenilles cousines
-        - if @similar_caterpillars
-          - @similar_caterpillars.each do |caterpillar|
-            - unless caterpillar == @caterpillar
-              %li= link_to caterpillar.title,  "#", "data-reveal-id" => "description_caterpillar_#{caterpillar.id}"
+          %b Papillons cousins
+        - if @similar_butterflies
+          - @similar_butterflies.each do |butterfly|
+            - unless butterfly == @butterfly
+              %li= link_to butterfly.title,  "#", "data-reveal-id" => "description_butterfly_#{butterfly.id}"
         %hr
         %ul.accordion
           %li.active
@@ -60,13 +80,6 @@
                 - @knowledges.each do |k|
                   %li= link_to truncate(k.title, :length => 50), "#", "data-reveal-id" => "description_knowledge_#{k.id}"
 
-          %li
-            .title
-              %h5 Oeufs
-            .content
-              %ul.ideas_entries
-                - @ideas.each do |k|
-                  %li= link_to truncate(k.title, :length => 50), "#", "data-reveal-id" => "description_idea_#{k.id}"
           %li
             .title
               %h5 Chrysalides
@@ -98,12 +111,12 @@
         .twelve.columns
           %p= link_to "✄ Déplier les #{pluralize(@comments_count, "commentaire", "commentaires")}", "#", :class => "unfold_comments"
           #comments
-            .caterpillar
+            .butterfly
             - @comment = Comment.new
             = simple_form_for @comment, :html => {:class => "new_comment"}, :remote => true do |f|
-              = hidden_field_tag("commentable", @caterpillar.class.name)
+              = hidden_field_tag("commentable", @butterfly.class.name)
               = hidden_field_tag("type", 1)
-              = hidden_field_tag("id", @caterpillar.id)
+              = hidden_field_tag("id", @butterfly.id)
               = f.input :body, :label => false, :placeholder => "✍ Votre message ..."
               .form-actions
                 = f.submit 'Enregistrer', :class => "radius button"
@@ -111,21 +124,21 @@
 
             - @all_comments.each do |node|
               %ul.comment
-                = render node, :idea => @caterpillar
+                = render node, :idea => @butterfly
           %hr
           %ul.inline-list
             %a{:style => "padding-left: 10px"}
             %i.general.foundicon-edit
-            = link_to 'Editer', edit_caterpillar_path(@caterpillar)
+            = link_to 'Editer', edit_butterfly_path(@butterfly)
             %a{:style => "padding-left: 10px"}
             %i.general.foundicon-add-doc
-            = link_to 'Nouvelle chenille', new_caterpillar_path
+            = link_to 'Nouveau papillon', new_butterfly_path
             %a{:style => "padding-left: 10px"}
             %i.general.foundicon-remove
-            = link_to 'Supprimer la chenille', @caterpillar, method: :delete, data: { confirm: 'Etes-vous certain de vouloir supprimer cette chenille ?' }
+            = link_to 'Supprimer le papillon', @butterfly, method: :delete, data: { confirm: 'Etes-vous certain de vouloir supprimer ce papillon ?' }
             %a{:style => "padding-left: 10px"}
             %i.general.foundicon-left-arrow
-            = link_to 'Retour à la liste', caterpillars_path
+            = link_to 'Retour à la liste', butterflies_path
             %a{:style => "padding-left: 10px"}
             \|
             %a{:style => "padding-left: 10px"}
@@ -133,7 +146,7 @@
             = link_to 'Associer un savoir', "#", "data-reveal-id" => "add_knowledge"
             %a{:style => "padding-left: 10px"}
             %i.general.foundicon-plus
-            = link_to 'Associer un oeuf', "#", "data-reveal-id" => "add_idea"
+            = link_to 'Associer une chrysalide', "#", "data-reveal-id" => "add_chrysali"
             %i.general.foundicon-plus
             = link_to 'Associer une action', "#", "data-reveal-id" => "add_task"
             \|
@@ -142,31 +155,26 @@
             = link_to 'Ajouter un commentaire', "#", :class => "toggle_comment"
 
 #add_knowledge{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
-  %h4.letterpress Associer un savoir à cette chenille
-  = render :partial => 'add_knowledge', :locals => { :caterpillar => @caterpillar }
+  %h4.letterpress Associer un savoir à ce papillon
+  = render :partial => 'add_knowledge', :locals => { :butterfly => @butterfly }
   %a.close-reveal-modal &#215;
 
-#add_idea{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
-  %h4.letterpress Associer un oeuf à cette chenille
-  = render :partial => 'add_ideas_modal', :locals => { :caterpillar => @caterpillar }
+#add_chrysali{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+  %h4.letterpress Associer une chrysalide à ce papillon
+  = render :partial => 'add_chrysalis_modal', :locals => { :butterfly => @butterfly }
   %a.close-reveal-modal &#215;
 
 #add_task{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
-  %h4.letterpress Associer une action à cette chenille
-  = render 'shared/task_form', :entity => @entity,  :taskable_type => "caterpillar", :taskable => @caterpillar.id
+  %h4.letterpress Associer une action à ce papillon
+  = render 'shared/task_form', :entity => @entity,  :taskable_type => "butterfly", :taskable => @butterfly.id
   %a.close-reveal-modal &#215;
 
-- if @similar_caterpillars
-  - @similar_caterpillars.each do |caterpillar|
-    - unless caterpillar == @caterpillar
-      %div{:id => "description_caterpillar_#{caterpillar.id}", :class => "reveal-modal [expand, xlarge, large, medium, small]"}
-        = render :partial => "shared/caterpillar_modal", :locals => { :caterpillar => caterpillar }
+- if @similar_butterflies
+  - @similar_butterflies.each do |butterfly|
+    - unless butterfly == @butterfly
+      %div{:id => "description_butterfly_#{butterfly.id}", :class => "reveal-modal [expand, xlarge, large, medium, small]"}
+        = render :partial => "shared/butterfly_modal", :locals => { :butterfly => butterfly }
         %a.close-reveal-modal &#215;
-
-- @ideas.each do |k|
-  %div{:id => "description_idea_#{k.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
-    = render :partial => "shared/idea_modal", :locals => {:idea => k}
-    %a.close-reveal-modal &#215;
 
 - @chrysalis.each do |k|
   %div{:id => "description_chrysali_#{k.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}

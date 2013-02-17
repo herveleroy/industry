@@ -57,6 +57,7 @@ class ChrysalisController < ApplicationController
     @caterpillars = @chrysali.caterpillars
     @tasks = @chrysali.tasks
     @task = Task.new
+    @butterflies = @chrysali.butterflies
 
     respond_to do |format|
       format.html # show.html.erb
@@ -175,6 +176,21 @@ class ChrysalisController < ApplicationController
       chrysali.tag_list.add(newtag)
       chrysali.save
     end
+  end
+
+  def transform_to_butterfly
+    @butterfly = Butterfly.new
+    @butterfly.title = params[:name]
+    @butterfly.author_id = current_user.id
+    @butterfly.description = ""
+    @butterfly.value_proposal = ""
+    @chrysalis = Chrysali.find(params[:transform_id].split(","))
+    @chrysalis.each do |chrysali|
+      @butterfly.description += "<-- " + chrysali.description + "-->" if chrysali.description
+      @butterfly.value_proposal += "<-- " + chrysali.value_proposal + "-->" if chrysali.value_proposal
+    end
+    @butterfly.save
+    @butterfly.chrysalis<< @chrysalis
   end
 
 end

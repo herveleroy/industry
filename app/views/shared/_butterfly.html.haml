@@ -1,0 +1,23 @@
+- tags = butterfly.tag_list.to_s.gsub(","," ")
+.panel.radius.idea.element{:class => tags, "data-score" => butterfly.likes.size }
+  .object_state
+    = link_to image_tag("butterfly_small.png"), butterfly
+    %span N°
+    %span.the_id= butterfly.id
+    #status{:class => "#{butterfly.state}"}
+  %h5.title.letterpress
+    = link_to truncate(butterfly.title, :length => 200), "#", "data-reveal-id" => "description_butterfly_#{butterfly.id}"
+    - like_class = current_user.voted_up_on?(butterfly) ? "like" : ""
+  .like_button{:id => "butterfly_" + butterfly.id.to_s}
+    %span.count= butterfly.likes.size
+    %span= link_to "❤", like_butterfly_path(butterfly.id), :remote => true, :class => like_class
+  .description
+    = link_to truncate(butterfly.description, :length => 80), "#", "data-reveal-id" => "description_butterfly_#{butterfly.id}"
+  - @comments_count = butterfly.root_comments.size
+  .comments= pluralize(@comments_count, "commentaire", "commentaires")
+  .selected_box
+    = check_box_tag 'butterfly[]', butterfly, false, :id => "selected_butterflies_#{butterfly.id}",  :class => "clickable_box"
+
+
+
+

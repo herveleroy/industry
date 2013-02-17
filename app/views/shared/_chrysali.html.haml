@@ -2,6 +2,7 @@
 .panel.radius.idea.element{:class => tags, "data-score" => chrysali.likes.size }
   .object_state
     = link_to image_tag("chrysalis_small.png"), chrysali
+    %span N°
     %span.the_id= chrysali.id
     #status{:class => "#{chrysali.state}"}
   %h5.title.letterpress

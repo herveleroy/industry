@@ -55,7 +55,7 @@
         = link_to 'Ajouter un mot clé à la sélection', "#", :class => "letterpress", "data-reveal-id" => "add_tags"
       %h6.letterpress
         %i.general.foundicon-tools
-        = link_to 'Muter la sélection en papillon', "#", :class => "letterpress"
+        = link_to 'Muter la sélection en papillon', "#", :class => "letterpress", "data-reveal-id" => "transform_to_butterfly"
 
 - @chrysalis.each do |chrysali|
   %div{:id => "description_chrysali_#{chrysali.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
@@ -65,5 +65,10 @@
 #add_tags{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
   %h4.letterpress Ajouter un mot clé à la sélection
   = render :partial => 'add_tags_modal'
+  %a.close-reveal-modal &#215;
+
+#transform_to_butterfly{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+  %h4.letterpress Muter la sélection en un nouveau papillon
+  = render :partial => 'transform_to_butterfly'
   %a.close-reveal-modal &#215;
 

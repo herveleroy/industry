@@ -1,24 +1,17 @@
-class Chrysali < ActiveRecord::Base
-  attr_accessible :application, :author_id, :conditions, :description, :obstacles, :state, :title, :value_proposal, :tag_list
-  attr_accessible :state
+class Butterfly < ActiveRecord::Base
+  attr_accessible :author_id, :channels, :cost_structure, :customer_relationship, :customer_segments, :description, :key_activities, :key_partnerships, :key_resources, :revenue_streams, :title, :value_proposal
+  attr_accessible :state, :tag_list
   belongs_to :user, :foreign_key => 'author_id'
 
-  has_many :chrysalis_knowledges
-  has_many :knowledges, :through => :chrysalis_knowledges do
+  has_many :butterflies_knowledges
+  has_many :knowledges, :through => :butterflies_knowledges do
     def <<(new_item)
       super( Array(new_item) - proxy_association.owner.knowledges)
     end
   end
 
-  has_many :caterpillars_chrysalis
-  has_many :caterpillars, :through => :caterpillars_chrysalis do
-    def <<(new_item)
-      super( Array(new_item) - proxy_association.owner.caterpillars)
-    end
-  end
-
   has_many :chrysalis_butterflies
-  has_many :butterflies, :through => :chrysalis_butterflies do
+  has_many :chrysalis, :through => :chrysalis_butterflies do
     def <<(new_item)
       super( Array(new_item) - proxy_association.owner.chrysalis)
     end
@@ -33,10 +26,15 @@ class Chrysali < ActiveRecord::Base
   define_index do
     indexes title
     indexes description
-    indexes application
-    indexes conditions
-    indexes obstacles
+    indexes channels
+    indexes customer_segments
+    indexes key_activities
+    indexes key_partnerships
+    indexes key_resources
+    indexes customer_relationship
     indexes value_proposal
+    indexes revenue_streams
+    indexes cost_structure
     indexes state
     indexes taggings.tag.name, as: :tag_names
     has taggings.tag_id, :facet => true, as: 'tags'
@@ -47,9 +45,14 @@ class Chrysali < ActiveRecord::Base
       title:             10,
       description:       2,
       value_proposal: 2,
-      application:       2,
-      conditions:   2,
-      obstacles: 2,
+      channels:       2,
+      customer_segments:   2,
+      key_activities: 2,
+      key_partnerships: 2,
+      key_resources: 2,
+      customer_relationship: 2,
+      revenue_streams: 2,
+      cost_structure: 2,
       tag_names:        10
     }
     set_property :delta => true

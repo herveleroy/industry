@@ -1,0 +1,9 @@
+$('#butterfly_<%= @butterfly.id %>').find("span.count").text("<%= @count.to_s %>");
+<% if @like %>
+  $('#butterfly_<%= @butterfly.id %> span a').addClass("like")
+<% else %>
+  $('#butterfly_<%= @butterfly.id %> span a').removeClass("like")
+<% end %>
+
+
+

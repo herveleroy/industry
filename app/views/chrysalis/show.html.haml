@@ -81,6 +81,14 @@
 
           %li
             .title
+              %h5 Papillons
+            .content
+              %ul.butterflies_entries
+                - @butterflies.each do |k|
+                  %li= link_to truncate(k.title, :length => 50), "#", "data-reveal-id" => "description_butterfly_#{k.id}"
+
+          %li
+            .title
               %h5 Documents
             .content
               %ul.documents_entries
@@ -102,7 +110,7 @@
         .twelve.columns
           %p= link_to "✄ Déplier les #{pluralize(@comments_count, "commentaire", "commentaires")}", "#", :class => "unfold_comments"
           #comments
-            .caterpillar
+            .chrysali
             - @comment = Comment.new
             = simple_form_for @comment, :html => {:class => "new_comment"}, :remote => true do |f|
               = hidden_field_tag("commentable", @chrysali.class.name)
@@ -170,6 +178,11 @@
 - @caterpillars.each do |k|
   %div{:id => "description_caterpillar_#{k.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
     = render :partial => "shared/caterpillar_modal", :locals => {:caterpillar => k}
+    %a.close-reveal-modal &#215;
+
+- @butterflies.each do |k|
+  %div{:id => "description_butterfly_#{k.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+    = render :partial => "shared/butterfly_modal", :locals => {:butterfly => k}
     %a.close-reveal-modal &#215;
 
 - @knowledges.each do |k|

@@ -1,11 +1,11 @@
 .row
   .eight.columns
-    - sort_mode = @sort_mode.blank? ? "" : pluralize(@count, " et triée par "," et triées par ").gsub(/^\d+\s/, "") + @sort_mode
+    - sort_mode = @sort_mode.blank? ? "" : pluralize(@count, " et trié par "," et triés par ").gsub(/^\d+\s/, "") + @sort_mode
     - tags_array = []
     - @selected_tags.each do |tag|
       - tags_array << Tag.find(tag).name
     - tags_string = tags_array.empty? ? "" : " contenant les mots clés : " + tags_array.join(",")
-    %h4.letterpress= pluralize(@count, "chenille trouvée","chenilles trouvées")  + tags_string + sort_mode
+    %h4.letterpress= pluralize(@count, "papaillon trouvé","papillons trouvés")  + tags_string + sort_mode
   .four.columns
     .button-bar{:style => "float: right;"}
       %ul.button-group.selection_state
@@ -18,7 +18,7 @@
         %li=link_to "Pertinence", "#" ,  :class => "tiny secondary button"
         %li=link_to "Score", "#",   :class => "tiny secondary button"
         %li=link_to "Date création", "#",   :class => "tiny secondary button"
-= form_tag( {:controller => 'caterpillars', :action => 'index'}, :method => 'get') do
+= form_tag( {:controller => 'butterflies', :action => 'index'}, :method => 'get') do
   .row
     .one.columns
       - @tags.each do |tag|
@@ -32,12 +32,12 @@
 
     .nine.columns
       #container
-        - @caterpillars.each do |caterpillar|
-          = render :partial => '/shared/caterpillar', :object => caterpillar
+        - @butterflies.each do |butterfly|
+          = render :partial => '/shared/butterfly', :object => butterfly
       .clear
       %br
       .apple_pagination_b
-        = will_paginate @caterpillars, { :previous_label => 'Avant', :next_label => 'Après'}
+        = will_paginate @butterflies, { :previous_label => 'Avant', :next_label => 'Après'}
       %br
     .two.columns
       = text_field_tag :search, params[:search], :id => 'search_field', :placeholder => "Rechercher ..."
@@ -49,26 +49,21 @@
 
       %h6.letterpress
         %i.general.foundicon-add-doc
-        = link_to 'Nouvelle chenille', new_caterpillar_path, :class => "letterpress"
+        = link_to 'Nouveau papillon', new_butterfly_path, :class => "letterpress"
       %h6.letterpress
         %i.accessibility.foundicon-key
         = link_to 'Ajouter un mot clé à la sélection', "#", :class => "letterpress", "data-reveal-id" => "add_tags"
       %h6.letterpress
         %i.general.foundicon-tools
-        = link_to 'Muter la sélection en chrysalide', "#", :class => "letterpress", "data-reveal-id" => "transform_to_chrysali"
+        = link_to 'Muter la sélection en papillon', "#", :class => "letterpress"
 
-- @caterpillars.each do |caterpillar|
-  %div{:id => "description_caterpillar_#{caterpillar.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
-    = render :partial => "shared/caterpillar_modal", :locals => {:caterpillar => caterpillar}
+- @butterflies.each do |butterfly|
+  %div{:id => "description_butterfly_#{butterfly.id}", :class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+    = render :partial => "shared/butterfly_modal", :locals => {:butterfly => butterfly}
     %a.close-reveal-modal &#215;
 
 #add_tags{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
   %h4.letterpress Ajouter un mot clé à la sélection
   = render :partial => 'add_tags_modal'
-  %a.close-reveal-modal &#215;
-
-#transform_to_chrysali{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
-  %h4.letterpress Muter la sélection en une nouvelle chrysalide
-  = render :partial => 'transform_to_chrysali'
   %a.close-reveal-modal &#215;
 

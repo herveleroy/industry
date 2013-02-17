@@ -1,0 +1,25 @@
+.panel.radius
+  = simple_form_for @butterfly do |f|
+    - if @butterfly.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@butterfly.errors.count, "error")} prohibited this butterfly from being saved:"
+        %ul
+          - @butterfly.errors.full_messages.each do |msg|
+            %li= msg
+
+    = f.input :title, :label => 'Titre'
+    = f.input :description, :label => 'Description', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.input :value_proposal, :label => 'Proposition de valeur', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.input :customer_segments, :label => 'Segments de marché', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.input :channels, :label => 'Canaux de distribution', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.input :customer_relationship, :label => 'Relation client', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.input :key_resources, :label => 'Ressources clés', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.input :key_partnerships, :label => 'Partenariats clés', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.input :revenue_streams, :label => 'Flux de revenues', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.input :cost_structure, :label => 'Structure de coût', :as => :text, :input_html => { :cols => 50, :rows => 3 }
+    = f.hidden_field :tag_list, id:"tag_list"
+    %label Mots clés
+    %ul.mytags
+    .form-actions
+      = f.submit 'Enregistrer', :class => "radius button"
+

@@ -1,0 +1,16 @@
+= form_tag( {:controller => 'knowledges', :action => 'search'}, :method => 'get', :remote => true) do
+  .row.collapse
+    .nine.columns
+      = text_field_tag :search, params[:search], :id => 'search_field'
+    .three.columns
+      = submit_tag "Rechercher", :name => nil, :class => "button expand postfix"
+
+  = link_to_function "RAZ", "$('#search_field').clear()"
+%p Résultats
+#search_results
+  = form_tag add_knowledges_butterfly_path, :method => :post, :remote => true do
+    = hidden_field_tag("id", @butterfly.id)
+    %ul
+    = submit_tag "Associer les savoir sélectionnés", :class => "small radius success button"
+
+

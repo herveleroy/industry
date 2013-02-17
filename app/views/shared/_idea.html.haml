@@ -2,6 +2,7 @@
 .panel.radius.idea.element{:class => tags, "data-score" => idea.likes.size }
   .object_state
     = link_to image_tag("eggs_small.png"), idea
+    %span N°
     %span.the_id= idea.id
   %h5.title.letterpress
     = link_to truncate(idea.title, :length => 100), "#", "data-reveal-id" => "description_idea_#{idea.id}"

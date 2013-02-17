@@ -56,6 +56,7 @@ class CaterpillarsController < ApplicationController
       @documents = @documents.nil? ? k.documents : @documents << k.documents
     end
     @ideas = @caterpillar.ideas
+    @chrysalis = @caterpillar.chrysalis
     @tasks = @caterpillar.tasks
     @task = Task.new
 
@@ -176,5 +177,20 @@ class CaterpillarsController < ApplicationController
       caterpillar.tag_list.add(newtag)
       caterpillar.save
     end
+  end
+
+  def transform_to_chrysali
+    @chrysali = Chrysali.new
+    @chrysali.title = params[:name]
+    @chrysali.author_id = current_user.id
+    @chrysali.description = ""
+    @chrysali.application = ""
+    @caterpillars = Caterpillar.find(params[:transform_id].split(","))
+    @caterpillars.each do |caterpillar|
+      @chrysali.description += "<-- " + caterpillar.description + "-->" if caterpillar.description
+      @chrysali.application += "<-- " + caterpillar.application + "-->" if caterpillar.application
+    end
+    @chrysali.save
+    @chrysali.caterpillars<< @caterpillars
   end
 end

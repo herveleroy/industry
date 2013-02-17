@@ -1,0 +1,14 @@
+%h4.object_state
+  %span= image_tag "butterfly_small.png"
+  %span.letterpress= "Papillon N°#{butterfly.id}"
+  %h6= link_to butterfly.title, butterfly
+  %h4.letterpress Description
+  = butterfly.description
+  %h4.letterpress Proposition de valeur
+  = butterfly.value_proposal
+  %hr
+  %ul.inline-list.letterpress
+    %a{:style => "padding-left: 10px"}
+    %i.accessibility.foundicon-glasses
+    = link_to "Voir la fiche et les commentaires", butterfly
+
