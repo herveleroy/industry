@@ -5,7 +5,7 @@
     - @selected_tags.each do |tag|
       - tags_array << Tag.find(tag).name
     - tags_string = tags_array.empty? ? "" : " contenant les mots clés : " + tags_array.join(",")
-    %h4.letterpress= pluralize(@count, "papaillon trouvé","papillons trouvés")  + tags_string + sort_mode
+    %h4.letterpress= pluralize(@count, "papillon trouvé","papillons trouvés")  + tags_string + sort_mode
   .four.columns
     .button-bar{:style => "float: right;"}
       %ul.button-group.selection_state
