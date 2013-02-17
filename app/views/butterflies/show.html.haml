@@ -30,30 +30,52 @@
         %p
           %b Description:
           = @butterfly.description
-        %p
-          %b Proposition de valeur:
-          = @butterfly.value_proposal
-        %p
-          %b Segments de marché:
-          = @butterfly.customer_segments
-        %p
-          %b Relation client:
-          = @butterfly.customer_relationship
-        %p
-          %b Canaux de distribution:
-          = @butterfly.channels
-        %p
-          %b Ressources clés:
-          = @butterfly.key_resources
-        %p
-          %b Partnariats clés:
-          = @butterfly.key_partnerships
-        %p
-          %b Flux de revenu:
-          = @butterfly.revenue_streams
-        %p
-          %b Structure de coût:
-          = @butterfly.cost_structure
+
+        %table.butterfly
+          %tr
+            %th
+              %b Partenariats clés
+            %th
+              %b Activités clés
+            %th{:colspan => 2}
+              %b Proposition de valeur
+            %th
+              %b Relation client:
+            %th
+              %b Segments de marché
+          %tr
+            %td{:rowspan => 3}
+              %li= @butterfly.key_partnerships
+            %td
+              %li= @butterfly.key_activities
+            %td{:colspan => 2, :rowspan => 3}
+              %li= @butterfly.value_proposal
+            %td
+              %li= @butterfly.customer_relationship
+            %td{:rowspan => 3}
+              %li= @butterfly.customer_segments
+          %tr
+            %th
+              %b Ressources clés
+            %th
+              %b Canaux de distribution
+          %tr
+            %td
+              = @butterfly.key_resources
+            %td
+              = @butterfly.channels
+          %tr
+            %th{:colspan => 3}
+              %b Structure de coût:
+            %th{:colspan => 3}
+              %b Flux de revenu:
+          %tr
+            %td{:colspan => 3}
+              %li= @butterfly.cost_structure
+            %td{:colspan => 3}
+              %li= @butterfly.revenue_streams
+
+
         %hr
 
         %ul.tagit
