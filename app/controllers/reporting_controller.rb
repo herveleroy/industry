@@ -9,4 +9,10 @@ class ReportingController < ApplicationController
   def dynamic_tree
   end
 
+  def bubble_chart
+  end
+
+  def pack_hierarchy
+  end
+
 end
