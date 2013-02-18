@@ -3,21 +3,21 @@ class Caterpillar < ActiveRecord::Base
   attr_accessible :state
   belongs_to :user, :foreign_key => 'author_id'
 
-  has_many :caterpillars_knowledges
+  has_many :caterpillars_knowledges, :dependent => :destroy
   has_many :knowledges, :through => :caterpillars_knowledges do
     def <<(new_item)
       super( Array(new_item) - proxy_association.owner.knowledges)
     end
   end
 
-  has_many :ideas_caterpillars
+  has_many :ideas_caterpillars, :dependent => :destroy
   has_many :ideas, :through => :ideas_caterpillars do
     def <<(new_item)
       super( Array(new_item) - proxy_association.owner.ideas)
     end
   end
 
-  has_many :caterpillars_chrysalis
+  has_many :caterpillars_chrysalis, :dependent => :destroy
   has_many :chrysalis, :through => :caterpillars_chrysalis do
     def <<(new_item)
       super( Array(new_item) - proxy_association.owner.chrysalis)

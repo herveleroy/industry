@@ -3,14 +3,14 @@ class Butterfly < ActiveRecord::Base
   attr_accessible :state, :tag_list
   belongs_to :user, :foreign_key => 'author_id'
 
-  has_many :butterflies_knowledges
+  has_many :butterflies_knowledges, :dependent => :destroy
   has_many :knowledges, :through => :butterflies_knowledges do
     def <<(new_item)
       super( Array(new_item) - proxy_association.owner.knowledges)
     end
   end
 
-  has_many :chrysalis_butterflies
+  has_many :chrysalis_butterflies, :dependent => :destroy
   has_many :chrysalis, :through => :chrysalis_butterflies do
     def <<(new_item)
       super( Array(new_item) - proxy_association.owner.chrysalis)

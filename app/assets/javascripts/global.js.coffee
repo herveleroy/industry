@@ -13,7 +13,6 @@ $ ->
 
   highlight_tag()
 
-
   $("input.clickable_tag").change ->
     label = $(this).parent()
     if  label.hasClass("highlight")
