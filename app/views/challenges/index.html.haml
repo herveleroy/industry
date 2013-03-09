@@ -1,0 +1,12 @@
+%h3.letterpress
+  = "Choisissez votre défi créatif !"
+
+- @challenges.each do |challenge|
+
+  .panel.radius
+    = challenge.name
+    = challenge.description
+
+%br
+
+= link_to 'Nouveau défi', new_challenge_path

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130217093821) do
+ActiveRecord::Schema.define(:version => 20130309163543) do
 
   create_table "butterflies", :force => true do |t|
     t.string   "title"
@@ -87,6 +87,17 @@ ActiveRecord::Schema.define(:version => 20130217093821) do
 
   add_index "caterpillars_knowledges", ["caterpillar_id"], :name => "index_caterpillars_knowledges_on_caterpillar_id"
   add_index "caterpillars_knowledges", ["knowledge_id"], :name => "index_caterpillars_knowledges_on_knowledge_id"
+
+  create_table "challenges", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.date     "start_at"
+    t.date     "end_at"
+    t.integer  "owner"
+    t.string   "state"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "chrysalis", :force => true do |t|
     t.string   "title"

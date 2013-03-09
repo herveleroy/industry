@@ -1,0 +1,13 @@
+= simple_form_for(@challenge) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :description
+    = f.input :start_at
+    = f.input :end_at
+    = f.input :owner
+    = f.input :state
+
+  .form-actions
+    = f.button :submit

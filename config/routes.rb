@@ -1,5 +1,7 @@
 Ideotron::Application.routes.draw do
 
+  resources :challenges
+
   get "/dendogram", to: 'reporting#dendogram', as: :dendogram
   get "/sankey", to: 'reporting#sankey', as: :sankey
   get "/dynamic_tree", to: 'reporting#dynamic_tree', as: :dynamic_tree
@@ -77,5 +79,9 @@ Ideotron::Application.routes.draw do
   resources :comments
 
   root :to => 'welcome#index'
+
+  namespace :user do
+    root :to => "challenges#index"
+  end
 
 end
