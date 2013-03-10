@@ -5,7 +5,7 @@ class CreateChallenges < ActiveRecord::Migration
       t.text :description
       t.date :start_at
       t.date :end_at
-      t.integer :owner
+      t.integer :owner_id
       t.string :state
 
       t.timestamps

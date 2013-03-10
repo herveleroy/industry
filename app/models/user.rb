@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   acts_as_voter
   belongs_to :entity
   has_many :ideas, :dependent => :destroy
+  has_many :challenges, :dependent => :destroy
   has_many :caterpillars, :dependent => :destroy
   has_many :chrysalis, :dependent => :destroy
   validates_presence_of :firstname, :lastname, :email, :entity_id

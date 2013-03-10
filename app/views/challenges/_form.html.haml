@@ -2,12 +2,23 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :name
-    = f.input :description
-    = f.input :start_at
-    = f.input :end_at
-    = f.input :owner
-    = f.input :state
+    .panel.radius
 
-  .form-actions
-    = f.button :submit
+      .form-inputs
+        .row
+        .twelve.columns
+          = f.input :name, :label => "Titre"
+          = f.input :description, :label => "Description"
+        .row
+          .six.columns
+            = f.input :start_at, :as => :string, :input_html => { :class => 'jquery-ui-date'},  :label => "Date de début"
+          .six.columns
+            = f.input :end_at,  :as => :string, :input_html => { :class => 'jquery-ui-date'},  :label => "Date de fin"
+        .row
+          .six.columns
+            = f.association :user, label_method: :fullname, :label => 'Rédacteur'
+          .six.columns
+            = f.input :state
+
+      .form-actions
+        = f.submit "Créer un défi", :class => "radius button"

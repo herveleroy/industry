@@ -1,10 +1,10 @@
-%h1 Listing tasks
+%h4.letterpress Liste des actions
 
 %table
   %tr
-    %th Name
-    %th Owner
-    %th Due date
+    %th Nom
+    %th Responsable
+    %th Date
     %th
     %th
     %th
@@ -14,10 +14,11 @@
       %td= task.name
       %td= task.owner_id
       %td= task.due_date
-      %td= link_to 'Show', task
-      %td= link_to 'Edit', edit_task_path(task)
-      %td= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to 'Voir', task
+      %td= link_to 'Editer', edit_task_path(task)
+      %td= link_to 'Supprimer', task, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
-
-= link_to 'New Task', new_task_path
+%h5
+  %i.general.foundicon-add-doc
+  = link_to 'Nouvelle action', new_task_path, :class => "letterpress"
