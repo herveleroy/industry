@@ -7,4 +7,13 @@ class UsersController < ApplicationController
     end
 
   end
+
+  def set_challenge
+    if params[:challenge]
+      @user = current_user
+      @user.current_challenge = params[:challenge]
+      @user.save
+      redirect_to ideas_path
+    end
+  end
 end

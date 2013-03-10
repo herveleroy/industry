@@ -43,6 +43,7 @@ class Chrysali < ActiveRecord::Base
     has created_at, :sort => true
     has cached_votes_score
     has state, :as => :object_state
+    has challenge
     set_property field_weights: {
       title:             10,
       description:       2,

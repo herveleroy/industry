@@ -12,8 +12,9 @@ class CaterpillarsController < ApplicationController
   # GET /caterpillars
   # GET /caterpillars.json
   def index
-
+    @challenge = Challenge.find(current_user.current_challenge)
     with = {}
+    with[:challenge] = @challenge.id
     conditions = {}
     sort_mode = params[:sorting].blank? ? "@relevance DESC" : "#{params[:sorting]} DESC"
     search_string = params[:search].blank? ? "" : params[:search]
@@ -87,6 +88,7 @@ class CaterpillarsController < ApplicationController
   def create
     @caterpillar = Caterpillar.new(params[:caterpillar])
     @caterpillar.author_id = current_user.id
+    @caterpillar.challenge = current_user.current_challenge
 
     respond_to do |format|
       if @caterpillar.save

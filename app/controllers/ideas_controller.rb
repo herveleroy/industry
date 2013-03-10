@@ -12,7 +12,9 @@ class IdeasController < ApplicationController
   # GET /ideas
   # GET /ideas.json
   def index
+    @challenge = Challenge.find(current_user.current_challenge)
     with = {}
+    with[:challenge] = @challenge.id
     sort_mode = params[:sorting].blank? ? "@relevance DESC" : "#{params[:sorting]} DESC"
     search_string = params[:search].blank? ? "" : params[:search]
     with[:tags] = params[:tags] if params[:tags]
@@ -77,6 +79,7 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new(params[:idea])
     @idea.author_id = current_user.id
+    @idea.challenge = current_user.current_challenge
 
     respond_to do |format|
       if @idea.save

@@ -10,7 +10,12 @@
     %ul{:class => "nav-bar right"}
       %li= link_to "Accueil", root_path
       - if current_user
-        %li= link_to "Mon profil", current_user
+        %li.has-flyout
+          = link_to "Paramètres", "#"
+          = link_to "", "#", :class => "flyout-toggle"
+          %ul.flyout
+            %li= link_to "Mon profil", current_user
+            %li= link_to "Mes défis", challenges_path
         %li= link_to "Savoirs", knowledges_path
         %li= link_to "Actions", "#"
         %li.has-flyout

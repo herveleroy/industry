@@ -68,7 +68,7 @@ module ReportingHelper
     end
 
 
-    butterflies = Butterfly.all
+    butterflies = Butterfly.where(:challenge => @challenge.id)
     @root_children =[]
     butterflies.each do |butterfly|
       size = butterfly.likes.size.to_i + 1
@@ -76,22 +76,6 @@ module ReportingHelper
       @root_children << child
     end
 
-
-    # caterpillars= Caterpillar.all
-    # @root_children =[]
-    # caterpillars.each do |caterpillar|
-    #   size = caterpillar.likes.size.to_i + 1
-    #   child = create_caterpillar(caterpillar.title, caterpillar.id, size)
-    #   @root_children << child
-    # end
-
-    # chrysalis = Chrysali.all
-    # @root_children =[]
-    # chrysalis.each do |chrysali|
-    #   size = chrysali.likes.size.to_i + 1
-    #   child = create_chrysali(chrysali.title, chrysali.id, size)
-    #   @root_children << child
-    # end
 
     @dendogram = {  "name" => "root",  "id" => 0 , "children" => @root_children}
 
@@ -114,7 +98,7 @@ module ReportingHelper
     @nodes = []
     @links = []
 
-    @butterflies = Butterfly.all
+    @butterflies = Butterfly.where(:challenge => @challenge.id)
     @butterflies.each do |butterfly|
       size = butterfly.likes.size
       target_butterfly = create_node(butterfly.title, size)

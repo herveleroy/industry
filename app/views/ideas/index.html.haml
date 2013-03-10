@@ -1,5 +1,6 @@
 .row
   .eight.columns
+    %h4.letterpress= @challenge.name
     - sort_mode = @sort_mode.blank? ? "" : pluralize(@count, ", trié par ",", triés par ").gsub(/^\d+\s/, "") + @sort_mode
     - tags_array = []
     - @selected_tags.each do |tag|

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130309163543) do
+ActiveRecord::Schema.define(:version => 20130310112608) do
 
   create_table "butterflies", :force => true do |t|
     t.string   "title"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20130309163543) do
     t.integer  "cached_votes_down",     :default => 0
     t.boolean  "delta",                 :default => true, :null => false
     t.string   "state"
+    t.integer  "challenge"
   end
 
   add_index "butterflies", ["cached_votes_down"], :name => "index_butterflies_on_cached_votes_down"
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20130309163543) do
     t.integer  "cached_votes_score", :default => 0
     t.integer  "cached_votes_up",    :default => 0
     t.integer  "cached_votes_down",  :default => 0
+    t.integer  "challenge"
   end
 
   add_index "caterpillars", ["cached_votes_down"], :name => "index_caterpillars_on_cached_votes_down"
@@ -115,6 +117,7 @@ ActiveRecord::Schema.define(:version => 20130309163543) do
     t.integer  "cached_votes_up",    :default => 0
     t.integer  "cached_votes_down",  :default => 0
     t.boolean  "delta",              :default => true, :null => false
+    t.integer  "challenge"
   end
 
   add_index "chrysalis", ["cached_votes_down"], :name => "index_chrysalis_on_cached_votes_down"
@@ -185,6 +188,7 @@ ActiveRecord::Schema.define(:version => 20130309163543) do
     t.integer  "cached_votes_up",    :default => 0
     t.integer  "cached_votes_down",  :default => 0
     t.boolean  "delta",              :default => true, :null => false
+    t.integer  "challenge"
   end
 
   add_index "ideas", ["cached_votes_down"], :name => "index_ideas_on_cached_votes_down"
@@ -284,6 +288,7 @@ ActiveRecord::Schema.define(:version => 20130309163543) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "current_challenge"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

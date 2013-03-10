@@ -3,8 +3,9 @@
 
 - @challenges.each do |challenge|
 
-  .panel.radius
-    = challenge.name
+  .challenge.panel.radius
+    = link_to "", set_challenge_path(challenge.id), :class => :door
+    %h3.letterpress= challenge.name
     = challenge.description
 
 %br

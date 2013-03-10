@@ -7,6 +7,8 @@ Ideotron::Application.routes.draw do
   get "/dynamic_tree", to: 'reporting#dynamic_tree', as: :dynamic_tree
   get "/pack_hierarchy", to: 'reporting#pack_hierarchy', as: :pack_hierarchy
 
+  match "/set_challenge/:challenge", to: 'users#set_challenge', as: :set_challenge
+
 
   resources :documents
 

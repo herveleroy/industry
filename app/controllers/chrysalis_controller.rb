@@ -12,7 +12,9 @@ class ChrysalisController < ApplicationController
   # GET /chrysalis
   # GET /chrysalis.json
   def index
+    @challenge = Challenge.find(current_user.current_challenge)
     with = {}
+    with[:challenge] = @challenge.id
     conditions = {}
     sort_mode = params[:sorting].blank? ? "@relevance DESC" : "#{params[:sorting]} DESC"
     search_string = params[:search].blank? ? "" : params[:search]
@@ -86,6 +88,7 @@ class ChrysalisController < ApplicationController
   def create
     @chrysali = Chrysali.new(params[:chrysali])
     @chrysali.author_id = current_user.id
+    @chrysali.challenge = current_user.current_challenge
 
     respond_to do |format|
       if @chrysali.save
