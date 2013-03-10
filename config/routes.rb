@@ -82,8 +82,8 @@ Ideotron::Application.routes.draw do
 
   root :to => 'welcome#index'
 
-  namespace :user do
-    root :to => "challenges#index"
-  end
+  # namespace :user do
+  #   root :to => "challenges#index"
+  # end
 
 end
