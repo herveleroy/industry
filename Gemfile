@@ -29,6 +29,8 @@ gem 'uglifier', ">= 1.0.3"
 gem "cocoon"
 gem  "i18n"
 gem 'd3_rails'
+gem 'rserve-client'
+gem 'rserve-simpler'
 
 
 # Gems used only for assets and not required

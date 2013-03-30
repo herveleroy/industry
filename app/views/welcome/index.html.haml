@@ -1,6 +1,20 @@
+- require 'rserve/simpler'
+- r = Rserve::Simpler.new
+/ - r.command("library(RMySQL)")
+/ - r.command("library(FactoMineR)")
+/ - r.command("drv = dbDriver ('MySQL')")
+/ - r.command("con = dbConnect (drv, dbname = 'mmae', user = 'root',password = 'nextone', host = 'localhost')")
+/ - r.command( "sql <- \"SELECT * FROM mmae_full WHERE type = 'ALOUETTE' OR type = 'ALOUETTE M' OR type = 'ATL2' OR type = 'Mirage 2000' OR type = 'Mirage F1' OR type = 'C 135' OR type = 'SEM' OR type = 'N262' OR type = 'Mystere 20';\" ")
+/ - r.command("res <- dbSendQuery (con, sql)")
+/ - r.command("db <- fetch(res, n = -1)")
+/ - r.command("fit <- lm(data=db, RCS_unit~taille+complexite+niveau_ext+disponibilite)")
+
+
 .row
   .two.columns
   .eight.columns
+    = r.converse "mean(c(1,2,3))"
+
     = image_tag "creuset_innovation.png"
   .two.columns
 
