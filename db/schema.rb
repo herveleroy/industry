@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130310112608) do
+ActiveRecord::Schema.define(:version => 20130401162647) do
 
   create_table "butterflies", :force => true do |t|
     t.string   "title"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(:version => 20130310112608) do
     t.text     "description"
     t.date     "start_at"
     t.date     "end_at"
-    t.integer  "owner"
+    t.integer  "owner_id"
     t.string   "state"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -240,7 +240,8 @@ ActiveRecord::Schema.define(:version => 20130310112608) do
   add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
 
   create_table "tags", :force => true do |t|
-    t.string "name"
+    t.string  "name"
+    t.boolean "taxon", :default => false
   end
 
   create_table "tasks", :force => true do |t|
@@ -255,6 +256,22 @@ ActiveRecord::Schema.define(:version => 20130310112608) do
     t.text     "description"
     t.integer  "importance"
     t.integer  "accessibility"
+  end
+
+  create_table "taxinomies", :force => true do |t|
+    t.string   "dimension"
+    t.integer  "tag_id"
+    t.integer  "position"
+    t.integer  "weight"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "taxon_rules", :force => true do |t|
+    t.text     "tags"
+    t.string   "taxon"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "uploads", :force => true do |t|

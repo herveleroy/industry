@@ -1,0 +1,5 @@
+<% if @result %>
+  <%= add_gritter("Le taxon #{@taxon_name} regroupe les mots-clés: #{@tags_list}" , :image => :success, :title => "Création de taxon") %>
+<% else %>
+  <%= add_gritter("La règle n'a pas pu être crée, veuillez recommencez" , :image => :error, :title => "Création de taxon") %>
+<% end %>

@@ -1,0 +1,25 @@
+%h1 Listing taxinomies
+
+%table
+  %tr
+    %th Dimension
+    %th Taxon
+    %th Position
+    %th Weight
+    %th
+    %th
+    %th
+
+  - @taxinomies.each do |taxinomy|
+    %tr
+      %td= taxinomy.dimension
+      %td= taxinomy.taxon_id
+      %td= taxinomy.position
+      %td= taxinomy.weight
+      %td= link_to 'Show', taxinomy
+      %td= link_to 'Edit', edit_taxinomy_path(taxinomy)
+      %td= link_to 'Destroy', taxinomy, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Taxinomy', new_taxinomy_path

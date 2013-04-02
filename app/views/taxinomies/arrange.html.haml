@@ -1,0 +1,31 @@
+%h2.letterpress Organisation de la taxinomie
+.row
+  .eight.columns
+    .six.columns
+      = text_field(:dimension, :title, :size => 20, :placeholder => "Entrez un nom SVP")
+    .six.columns
+      %p#add_dimension= link_to "Nouvelle dimension", "#"
+    %hr
+    #dimension_store
+      - @taxinomies.each do |taxinomy, taxons|
+        .dimension_drop.droppable
+          %a.close
+          = taxinomy
+          %ul{:id => "#{taxinomy.tr(" ", "_")}"}
+            - taxons.each do |taxon|
+              %li
+                = link_to  "☒", "#", :class => "trash"
+                = link_to taxon.tag.name, taxon.tag if taxon.tag
+                = hidden_field(:tag, :id, :value => taxon.tag.id)
+
+  #store.four.columns
+    %p= link_to "Nouveau taxon", "#"
+    %hr
+    - @taxons.each do |taxon|
+      .element_small.draggable
+        - @taxon = taxon
+        = link_to taxon.name, taxon
+        = hidden_field(:taxon, :id)
+
+  .row
+    .twelve.columns

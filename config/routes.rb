@@ -1,5 +1,14 @@
 Ideotron::Application.routes.draw do
 
+  resources :taxon_rules
+
+  resources :taxinomies
+
+  match 'arrange_taxinomy' => 'taxinomies#arrange', :as => :arrange_taxinomy
+  match 'add_tag_to_dimension' => 'taxinomies#add_tag_to_dimension', :as => :add_tag_to_dimension
+  match 'remove_tag_from_dimension' =>'taxinomies#remove_tag_from_dimension', :as => :remove_tag_from_dimension
+
+
   resources :challenges
 
   get "/dendogram", to: 'reporting#dendogram', as: :dendogram
@@ -36,6 +45,10 @@ Ideotron::Application.routes.draw do
   post "/butterflies/:id/event/:event", to: 'butterflies#event', as: :event_butterflies
 
   resources :entities
+
+  resources :tags do
+    get 'autocomplete_tag_name', :on => :collection
+  end
 
   devise_for :users
 
@@ -79,6 +92,11 @@ Ideotron::Application.routes.draw do
   end
 
   resources :comments
+
+  match 'maintenance_tag/index' => 'maintenance_tag#index', :as => :maintenance_tag
+  match 'maintenance_tag/search_tag' => 'maintenance_tag#search_tag', :as => :search_tag
+  match 'maintenance_tag/add_taxon_rule' => 'maintenance_tag#add_taxon_rule', :as => :add_taxon_rule
+
 
   root :to => 'welcome#index'
 

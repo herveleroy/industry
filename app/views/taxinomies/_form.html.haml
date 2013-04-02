@@ -1,0 +1,11 @@
+= simple_form_for(@taxinomy) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :dimension
+    = f.input :taxon_id
+    = f.input :position
+    = f.input :weight
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,9 @@
+= simple_form_for(@taxon_rule) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :tags
+    = f.input :taxon
+
+  .form-actions
+    = f.button :submit

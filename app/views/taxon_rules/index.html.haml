@@ -1,0 +1,24 @@
+%h3.letterpress Liste des règles de création de taxon
+
+%table
+  %tr
+    %th Mots clés
+    %th Taxon
+    %th Dimension
+    %th
+    %th
+    %th
+
+  - @taxon_rules.each do |taxon_rule|
+    %tr
+      %td= Tag.find(taxon_rule.tags).map{|tag| tag.name}
+      - @taxon = Tag.find(taxon_rule.taxon)
+      %td= @taxon.name
+      %td= @taxon.taxinomy.nil? ? "Non définie" : @taxon.taxinomy.dimension
+      %td= link_to 'Show', taxon_rule
+      %td= link_to 'Edit', edit_taxon_rule_path(taxon_rule)
+      %td= link_to 'Destroy', taxon_rule, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'Nouvelle règle', maintenance_tag_path

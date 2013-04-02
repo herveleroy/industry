@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Tags:
+  = @taxon_rule.tags
+%p
+  %b Taxon:
+  = @taxon_rule.taxon
+
+= link_to 'Edit', edit_taxon_rule_path(@taxon_rule)
+\|
+= link_to 'Back', taxon_rules_path

@@ -24,6 +24,9 @@
         %ul.tagit
           - @idea.tag_list.each do |tag|
             %li.tag= link_to tag, "#"
+        %ul.tagit
+          - @idea.taxon_list.each do |tag|
+            %li.taxon= link_to tag, "#"
       .four.columns
         - like_class = current_user.voted_up_on?(@idea) ? "like" : ""
         .like_button{:id => "idea_" + @idea.id.to_s}

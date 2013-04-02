@@ -1,19 +1,22 @@
-- require 'rserve/simpler'
-- r = Rserve::Simpler.new
-- r.command("library(RMySQL)")
-- r.command("library(FactoMineR)")
-- r.command("drv = dbDriver ('MySQL')")
-- r.command("con = dbConnect (drv, dbname = 'ideotron_production', user = 'root', password = 'nextone', host = 'localhost')")
-- r.command( "sql <- \"SELECT * FROM ideas;\" ")
-- r.command("res <- dbSendQuery (con, sql)")
-- r.command("db <- fetch(res, n = -1)")
+/ - require 'rserve/simpler'
+/ - r = Rserve::Simpler.new
+/ - r.command("library(RMySQL)")
+/ - r.command("library(FactoMineR)")
+/ - r.command("drv = dbDriver ('MySQL')")
+/ - r.command("con = dbConnect (drv, dbname = 'ideotron_development', user = 'root', password = 'nextone', host = 'localhost')")
+/ - r.command( "sql <- \"SELECT * FROM ideas;\" ")
+/ - r.command("res <- dbSendQuery (con, sql)")
+/ - r.command("db <- fetch(res, n = -1)")
+/ - r.command("data(decathlon)")
 / - r.command("fit <- lm(data=db, RCS_unit~taille+complexite+niveau_ext+disponibilite)")
 
 
 .row
   .two.columns
   .eight.columns
-    = r.converse "summary(db)"
+    / - r.command "pca = PCA(decathlon[,1:10], scale.unit=TRUE, ncp=2, graph=F)"
+    / - r.command "matrix = pca$var$coord"
+    / = r.to_ruby.methods
 
     = image_tag "creuset_innovation.png"
   .two.columns

@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Dimension:
+  = @taxinomy.dimension
+%p
+  %b Taxon:
+  = @taxinomy.taxon_id
+%p
+  %b Position:
+  = @taxinomy.position
+%p
+  %b Weight:
+  = @taxinomy.weight
+
+= link_to 'Edit', edit_taxinomy_path(@taxinomy)
+\|
+= link_to 'Back', taxinomies_path

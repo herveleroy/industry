@@ -17,7 +17,8 @@ class Idea < ActiveRecord::Base
   end
 
   acts_as_votable
-  acts_as_taggable
+  # acts_as_taggable
+  acts_as_taggable_on :tags, :taxons
   acts_as_commentable
 
   define_index do
@@ -25,6 +26,7 @@ class Idea < ActiveRecord::Base
     indexes description
     indexes taggings.tag.name, as: :tag_names
     has taggings.tag_id, :facet => true, as: 'tags'
+    has taggings.tag_id, :facet => true, as: 'taxons'
     has created_at, :sort => true
     has challenge
     has cached_votes_score

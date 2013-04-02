@@ -1,0 +1,42 @@
+.row
+  .one.columns
+    %label.right.inline Recherche:
+  .ten.columns
+    .row.collapse
+      = form_tag search_tag_path, :method => :get, :remote => true do
+        .eight.columns
+          = autocomplete_field_tag 'tag', '', '/tags/autocomplete_tag_name', :size => 75, :placeholder => "Taper les premières lettres"
+        .four.columns
+          = submit_tag "rechercher", :class => "postfix button expand"
+  .one.columns
+    #raz.button RAZ
+.row
+  .one.columns
+  .five.columns#from_box
+    %h5 Mots clés similaires
+    %ul.tags
+  .five.columns#to_box
+    %h5 Mots clés à regrouper
+    %ul.tags
+  .one.columns
+.row
+  = form_tag add_taxon_rule_path, :method => :get, :remote => true do
+    .four.columns
+      = hidden_field_tag 'group_id'
+    .two.columns
+      = hidden_field_tag 'target_id', ''
+    .three.columns
+      %label Taxon (Mot clé cible)
+      = autocomplete_field_tag 'tag', '', '/tags/autocomplete_tag_name', :size => 75, :placeholder => "Taper les premières lettres", :update_elements => {:id => '#target_id'}
+    .two.columns
+      %label="Cette opération est irréversible"
+      = submit_tag "Appliquer", :class => "postfix button expand", :width => "30%"
+    .one.columns
+.row
+  .twelve.columns
+    %br
+
+    = link_to 'Retour à la liste des règles', taxon_rules_path
+
+
+
