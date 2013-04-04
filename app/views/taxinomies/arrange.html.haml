@@ -19,7 +19,9 @@
                 = hidden_field(:tag, :id, :value => taxon.tag.id)
 
   #store.four.columns
-    %p= link_to "Nouveau taxon", "#"
+    %i.accessibility.foundicon-key
+      = link_to 'Nouveau taxon', "#", :class => "letterpress", "data-reveal-id" => "new_taxon"
+
     %hr
     - @taxons.each do |taxon|
       .element_small.draggable
@@ -29,3 +31,8 @@
 
   .row
     .twelve.columns
+
+#new_taxon{:class =>"reveal-modal [expand, xlarge, large, medium, small]"}
+  %h4.letterpress Ajouter un taxon
+  = render :partial => 'new_taxon'
+  %a.close-reveal-modal &#215;
