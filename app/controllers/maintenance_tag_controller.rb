@@ -27,27 +27,5 @@ class MaintenanceTagController < ApplicationController
   end
 
 
-  def merge_tags
-
-    if params[:target_id]
-      @ids = params[:group_id].split(",")
-      @target_tag = Tag.find(params[:target_id])
-      @target_tag_name = @target_tag.name
-      @target_tag.taxon = true
-      @target_tag.save
-
-      @tags = Tag.find(@ids).map{|t| t.name}
-      @ideas = Idea.tagged_with([@tags], :on => :tags, :any => true)
-
-      unless @ideas.nil?
-        @ideas.each do |idea|
-          idea.taxon_list = ["#{@target_tag_name}"]
-          idea.save
-        end
-      end
-
-    end
-
-  end
 
 end
