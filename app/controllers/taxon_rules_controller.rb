@@ -80,4 +80,25 @@ class TaxonRulesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+   def apply_rules
+    @taxons = Tagging.where(:context => "taxons")
+    @taxons.each do |tagging|
+      tagging.destroy
+    end
+    @taxon_rules = TaxonRule.all
+    @taxon_rules.each do |rule|
+      @taxon = Tag.find(rule.taxon).name
+      @tags = Tag.find(rule.tags).map{|tag| tag.name}
+      @ideas = Idea.tagged_with([@tags], :on => :tags, :any => true)
+
+      unless @ideas.nil?
+        @ideas.each do |idea|
+          idea.taxon_list = ["#{@taxon}"]
+          idea.save
+        end
+      end
+    end
+  end
+
 end

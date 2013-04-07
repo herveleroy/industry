@@ -21,4 +21,9 @@
 
 %br
 
-= link_to 'Nouvelle règle', maintenance_tag_path
+%ul.inline-list
+  %i.general.foundicon-add-doc
+  = link_to '  Nouvelle règle', maintenance_tag_path
+  %i.general.foundicon-inbox
+  = link_to '  Appliquer les règles', apply_rules_path, :remote => true
+

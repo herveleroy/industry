@@ -2,6 +2,8 @@ Ideotron::Application.routes.draw do
 
   resources :taxon_rules
 
+  match 'apply_rules' => 'taxon_rules#apply_rules', :as => :apply_rules
+
   resources :taxinomies
 
   match 'arrange_taxinomy' => 'taxinomies#arrange', :as => :arrange_taxinomy
@@ -15,6 +17,7 @@ Ideotron::Application.routes.draw do
   get "/sankey", to: 'reporting#sankey', as: :sankey
   get "/dynamic_tree", to: 'reporting#dynamic_tree', as: :dynamic_tree
   get "/pack_hierarchy", to: 'reporting#pack_hierarchy', as: :pack_hierarchy
+  get "/afm", to: 'reporting#afm', as: :afm
 
   match "/set_challenge/:challenge", to: 'users#set_challenge', as: :set_challenge
 

@@ -26,6 +26,7 @@ class MaintenanceTagController < ApplicationController
     end
   end
 
+
   def merge_tags
 
     if params[:target_id]
