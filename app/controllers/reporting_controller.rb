@@ -32,7 +32,9 @@ class ReportingController < ApplicationController
     @structs = []
     @ideas = Idea.all
     @ideas.each do |idea|
+      logger.debug "--------------------------------- #{idea.title}"
       object = DataRow.new
+      logger.debug "--------------------------------- #{object.to_a}"
       object.id = idea.id
       object.title = idea.title
       dimension.each do |d|
