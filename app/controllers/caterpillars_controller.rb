@@ -192,6 +192,7 @@ class CaterpillarsController < ApplicationController
       @chrysali.description += "<-- " + caterpillar.description + "-->" if caterpillar.description
       @chrysali.application += "<-- " + caterpillar.application + "-->" if caterpillar.application
     end
+    @chrysali.challenge = current_user.current_challenge
     @chrysali.save
     @chrysali.caterpillars<< @caterpillars
   end

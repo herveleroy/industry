@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
-gem 'rake', '10.0.3'
+gem 'rake', '10.0.4'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -31,6 +31,7 @@ gem  "i18n"
 gem 'd3_rails'
 gem 'rserve-client'
 gem 'rserve-simpler'
+gem "jquery-ui-rails"
 
 
 # Gems used only for assets and not required

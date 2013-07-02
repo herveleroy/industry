@@ -23,7 +23,7 @@ $ ->
 
   $("input.clickable_box").change ->
     box = $(this).parent().parent()
-    if $(this).attr('checked')
+    if $(this).prop('checked')
       box.css("background-color", "PaleTurquoise")
       array = []
       array.push $("#new_tag_id").val() unless $("#new_tag_id").val().length == 0

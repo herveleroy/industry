@@ -1,11 +1,14 @@
 class ReportingController < ApplicationController
 
   dimension_sym = []
-  @dimensions = Taxinomy.all.group_by(&:dimension)
-  @dimensions.each do |dim, rule|
-    dimension_sym << dim.to_sym
-  end
+    @dimensions = Taxinomy.all.group_by(&:dimension)
+    @dimensions.each do |dim, rule|
+      dimension_sym << dim.to_sym
+    end
   DataRow = Struct.new(:id, :title, *dimension_sym)
+
+
+
 
   def dendogram
      @challenge = Challenge.find(current_user.current_challenge)

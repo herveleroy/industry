@@ -165,6 +165,7 @@ class IdeasController < ApplicationController
     @ideas.each do |idea|
       @caterpillar.description += "<-- " + idea.description + "-->"
     end
+    @caterpillar.challenge = current_user.current_challenge
     @caterpillar.save
     @caterpillar.ideas<< @ideas
   end

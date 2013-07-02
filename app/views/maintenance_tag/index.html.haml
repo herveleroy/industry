@@ -1,4 +1,4 @@
-.row
+.row#maintenance_tag
   .one.columns
     %label.right.inline Recherche:
   .ten.columns
@@ -27,7 +27,10 @@
       = hidden_field_tag 'target_id', ''
     .three.columns
       %label Taxon (Mot clé cible)
-      = autocomplete_field_tag 'tag', '', '/tags/autocomplete_tag_name', :size => 75, :placeholder => "Taper les premières lettres", :update_elements => {:id => '#target_id'}
+      = select_tag(:target_id, options_from_collection_for_select(Tag.where(:taxon => true), :id, :name))
+      / = options_from_collection_for_select(Tag.where(:taxon => true), :id, :name)
+      / = collection_select(:tag, :target_id, Tag.where(:taxon => true), :id, :name)
+      / = autocomplete_field_tag 'tag', '', '/tags/autocomplete_tag_name', :size => 75, :placeholder => "Taper les premières lettres", :update_elements => {:id => '#target_id'}
     .two.columns
       %label="Cette opération est irréversible"
       = submit_tag "Appliquer", :class => "postfix button expand", :width => "30%"

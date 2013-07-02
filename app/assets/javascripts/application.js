@@ -1,6 +1,6 @@
 //= require jquery
+//= require jquery.ui.all
 //= require jquery_ujs
-//= require jquery-ui
 //= require foundation
 //= require d3.v3
 //= require sankey

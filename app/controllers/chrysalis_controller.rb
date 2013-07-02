@@ -192,6 +192,7 @@ class ChrysalisController < ApplicationController
       @butterfly.description += "<-- " + chrysali.description + "-->" if chrysali.description
       @butterfly.value_proposal += "<-- " + chrysali.value_proposal + "-->" if chrysali.value_proposal
     end
+    @butterfly.challenge = current_user.current_challenge
     @butterfly.save
     @butterfly.chrysalis<< @chrysalis
   end
