@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails'
 gem 'rake', '10.0.4'
 
 # Bundle edge Rails instead:
@@ -32,6 +32,11 @@ gem 'd3_rails'
 gem 'rserve-client'
 gem 'rserve-simpler'
 gem "jquery-ui-rails"
+gem 'forem', :github => 'radar/forem'
+# gem 'forem-theme-base', :github => 'radar/forem-theme-base'
+
+gem 'forem-theme-twist', :git => "git://github.com/radar/forem-theme-twist.git"
+# gem 'forem-theme-orange', :git => "git://github.com/radar/forem-theme-orange.git"
 
 
 # Gems used only for assets and not required
@@ -42,6 +47,7 @@ group :assets do
   gem 'zurb-foundation', '~> 3.0.9'
   gem 'foundation-icons-sass-rails'
   gem 'sassy-buttons'
+
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby

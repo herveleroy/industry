@@ -1,0 +1,40 @@
+%header
+  .row
+    .two.columns
+      %h1= link_to image_tag("home/ecdys.png"), main_app.root_path
+    .ten.columns
+      %ul{:class => "nav-bar right"}
+        %li= link_to "Accueil", main_app.root_path
+        %li= link_to "Forum", root_path
+        - if current_user
+          %li.has-flyout
+            = link_to "Paramètres", "#"
+            = link_to "", "#", :class => "flyout-toggle"
+            %ul.flyout
+              %li= link_to " editer mon profil", main_app.edit_user_registration_path
+              %li= link_to "Sign out", main_app.destroy_user_session_path, :method => :delete
+              - if current_user.forem_admin
+                %li= link_to "Administrate", forem.admin_root_url
+
+        - else
+          %li= link_to "Sign up", main_app.new_user_registration_path
+          %li= link_to "Sign in", main_app.new_user_session_path
+
+
+/ %header
+/   .one.columns
+/   .two.columns
+/     %h1= link_to image_tag("home/ecdys.png"), root_path
+/   .nine.columns
+/     %ul{:class => "nav-bar right"}
+/       %li= link_to "Accueil", root_path
+/       - if current_user
+/         %li.has-flyout
+/           = link_to "Paramètres", "#"
+/           = link_to "", "#", :class => "flyout-toggle"
+/           %ul.flyout
+/             %li= link_to "Mon profil", current_user
+/             %li= link_to "Mes défis", challenges_path
+/             %li= link_to "Gestion des taxons", taxon_rules_path
+/             %li= link_to "Gestion de la taxinomie", arrange_taxinomy_path
+

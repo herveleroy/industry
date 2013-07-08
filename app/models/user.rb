@@ -28,4 +28,9 @@ class User < ActiveRecord::Base
   def fullname
     "#{firstname} #{lastname}"
   end
+
+  def to_s
+    "#{firstname} #{lastname}"
+  end
+
 end
